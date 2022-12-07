@@ -7,30 +7,21 @@ class Config {
   List<String>? changeKeys;
 
   Config({
-    required this.images,
+    this.images,
     required this.changeKeys,
   });
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
+  Config.fromJson(Map<String, dynamic> json) {
+    images = json['images'] != null ? Images.fromJson(json['images']) : null;
+    changeKeys = json['change_keys'].cast<String>();
+  }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (images != null) {
-      result.addAll({'images': images!.toMap()});
+      data['images'] = images!.toJson();
     }
-    if (changeKeys != null) {
-      result.addAll({'changeKeys': changeKeys});
-    }
-
-    return result;
+    data['change_keys'] = changeKeys;
+    return data;
   }
-
-  factory Config.fromMap(Map<String, dynamic> map) {
-    return Config(
-      images: map['images'] != null ? Images.fromMap(map['images']) : null,
-      changeKeys: List<String>.from(map['changeKeys']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-  factory Config.fromJson(String source) => Config.fromMap(json.decode(source));
 }

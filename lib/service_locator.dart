@@ -3,9 +3,9 @@ import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/business_logic/usecases/get_api_request.dart';
 import 'package:movies_api/business_logic/usecases/get_popular_movies.dart';
-import 'package:movies_api/data/models/config.dart';
 import 'package:movies_api/data/models/images.dart';
 import 'package:movies_api/data/models/movie.dart';
+import 'package:movies_api/data/models/results.dart';
 import 'package:movies_api/data/repositories/api_repository.dart';
 import 'package:movies_api/data/repositories/api_repository_impl.dart';
 import 'package:injectable/injectable.dart';
@@ -44,9 +44,22 @@ Future<void> setupLocator(GetIt sl) async {
         profileSizes: sl(),
         stillSizes: sl(),
       ));
-  sl.registerFactory<Config>(() => Config(
-        changeKeys: sl(),
-        images: sl(),
+  sl.registerFactory<Results>(() => Results(
+        adult: sl(),
+        backdropPath: sl(),
+        id: sl(),
+        title: sl(),
+        originalLanguage: sl(),
+        originalTitle: sl(),
+        overview: sl(),
+        posterPath: sl(),
+        mediaType: sl(),
+        genreIds: sl(),
+        popularity: sl(),
+        releaseDate: sl(),
+        video: sl(),
+        voteAverage: sl(),
+        voteCount: sl(),
       ));
 
   //Repository
