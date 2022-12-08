@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/business_logic/usecases/get_api_request.dart';
+import 'package:movies_api/business_logic/usecases/get_configuration_api.dart';
 import 'package:movies_api/business_logic/usecases/get_popular_movies.dart';
 import 'package:movies_api/data/models/images.dart';
 import 'package:movies_api/data/models/movie.dart';
@@ -19,7 +19,7 @@ Future<void> setupLocator(GetIt sl) async {
   //Bloc
   sl.registerFactory<ConfigurateApiBloc>(
     () => ConfigurateApiBloc(
-      getApiRequest: sl<GetApiRequest>(),
+      getConfigurationApi: sl<GetConfigurationApi>(),
     ),
   );
   sl.registerFactory(
@@ -70,6 +70,7 @@ Future<void> setupLocator(GetIt sl) async {
     () => ApiRepositoryImpl(),
   );
   //UseCase
-  sl.registerLazySingleton<GetApiRequest>(() => GetApiRequest(sl()));
+  sl.registerLazySingleton<GetConfigurationApi>(
+      () => GetConfigurationApi(sl()));
   sl.registerLazySingleton<GetPopularMovies>(() => GetPopularMovies(sl()));
 }

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:movies_api/business_logic/usecases/get_api_request.dart';
+import 'package:movies_api/business_logic/usecases/get_configuration_api.dart';
 import 'package:movies_api/core/utils/use_case.dart';
 import 'package:movies_api/data/models/config.dart';
 
@@ -8,15 +8,15 @@ part 'configurate_api_state.dart';
 
 class ConfigurateApiBloc
     extends Bloc<ConfigurateApiEvent, ConfigurateApiState> {
-  final GetApiRequest getApiRequest;
+  final GetConfigurationApi getConfigurationApi;
 
-  ConfigurateApiBloc({required this.getApiRequest})
+  ConfigurateApiBloc({required this.getConfigurationApi})
       : super(ConfigurateApiLoading()) {
     on<ConfigurateApiLoad>(_onLoad);
   }
   _onLoad(ConfigurateApiEvent event, Emitter<ConfigurateApiState> emit) async {
     emit(ConfigurateApiLoading());
-    final errorOrConfig = await getApiRequest(NoParams());
+    final errorOrConfig = await getConfigurationApi(NoParams());
 
     errorOrConfig.fold((error) {
       emit(ConfigurateApiError(error.toString()));

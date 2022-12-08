@@ -13,7 +13,7 @@ class ApiRepositoryImpl implements ApiRepository {
   final String key = dotenv.get("apiKey");
 
   @override
-  Future<Either<NoParams, Config>> getApiRequest() async {
+  Future<Either<NoParams, Config>> getConfigurationApi() async {
     //? https://developers.themoviedb.org/3/configuration/get-api-configuration
 
     try {
