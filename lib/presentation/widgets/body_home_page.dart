@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
 
 class BodyHomePage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
 
     // }
     getLength();
-    print(widget.state.movie.page);
+    print(widget.state.movie.page); //1
 
     // for (var e in widget.state.movie.results!) {
     //   print(e.id);
@@ -52,18 +54,31 @@ class _BodyHomePageState extends State<BodyHomePage> {
   }
 
   @override
-  void initState() {
-    getPopularMovies();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // CarouselSlider(
-        //   children: getPopularMovies(widget.state.movie.totalResults!),
-        // ),
+        BlocConsumer<ConfigurateApiBloc, ConfigurateApiState>(
+          listener: (context, state) {
+            if (state is ConfigurateApiError) {
+              print(state.error);
+            }
+          },
+          builder: (context, state) {
+            if (state is ConfigurateApiLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is ConfigurateApiLoaded) {
+              print(state.config.images!.baseUrl!);
+              // return CarouselSlider(
+              //   children: [Image.network(state.config.images!.baseUrl!)],
+              //   // children: getPopularMovies(widget.state.movie.totalResults!),
+              // );
+            }
+            return Container();
+          },
+        ),
         SizedBox(
           height: 250,
           width: double.infinity,
@@ -104,4 +119,8 @@ class _BodyHomePageState extends State<BodyHomePage> {
       ],
     );
   }
+
+  // getApiImages(ConfigurateApiLoaded state) {
+  //   print(state.config.images);
+  // }
 }

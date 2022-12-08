@@ -12,8 +12,6 @@ class PopularApiLoaded extends PopularApiState {
   });
 }
 
-class PopularApiEmpty extends PopularApiState {}
-
 class PopularApiError extends PopularApiState {
   String error;
 

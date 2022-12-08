@@ -18,47 +18,25 @@ class Images {
       this.profileSizes,
       this.stillSizes});
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (baseUrl != null) {
-      result.addAll({'baseUrl': baseUrl});
-    }
-    if (secureBaseUrl != null) {
-      result.addAll({'secureBaseUrl': secureBaseUrl});
-    }
-    if (backdropSizes != null) {
-      result.addAll({'backdropSizes': backdropSizes});
-    }
-    if (logoSizes != null) {
-      result.addAll({'logoSizes': logoSizes});
-    }
-    if (posterSizes != null) {
-      result.addAll({'posterSizes': posterSizes});
-    }
-    if (profileSizes != null) {
-      result.addAll({'profileSizes': profileSizes});
-    }
-    if (stillSizes != null) {
-      result.addAll({'stillSizes': stillSizes});
-    }
-
-    return result;
+  Images.fromJson(Map<String, dynamic> json) {
+    baseUrl = json['base_url'];
+    secureBaseUrl = json['secure_base_url'];
+    backdropSizes = json['backdrop_sizes'].cast<String>();
+    logoSizes = json['logo_sizes'].cast<String>();
+    posterSizes = json['poster_sizes'].cast<String>();
+    profileSizes = json['profile_sizes'].cast<String>();
+    stillSizes = json['still_sizes'].cast<String>();
   }
 
-  factory Images.fromMap(Map<String, dynamic> map) {
-    return Images(
-      baseUrl: map['baseUrl'],
-      secureBaseUrl: map['secureBaseUrl'],
-      backdropSizes: List<String>.from(map['backdropSizes']),
-      logoSizes: List<String>.from(map['logoSizes']),
-      posterSizes: List<String>.from(map['posterSizes']),
-      profileSizes: List<String>.from(map['profileSizes']),
-      stillSizes: List<String>.from(map['stillSizes']),
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['base_url'] = baseUrl;
+    data['secure_base_url'] = secureBaseUrl;
+    data['backdrop_sizes'] = backdropSizes;
+    data['logo_sizes'] = logoSizes;
+    data['poster_sizes'] = posterSizes;
+    data['profile_sizes'] = profileSizes;
+    data['still_sizes'] = stillSizes;
+    return data;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Images.fromJson(String source) => Images.fromMap(json.decode(source));
 }
