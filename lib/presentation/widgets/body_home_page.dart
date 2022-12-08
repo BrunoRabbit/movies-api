@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
 
 class BodyHomePage extends StatefulWidget {
   final PopularApiLoaded state;
@@ -57,20 +57,20 @@ class _BodyHomePageState extends State<BodyHomePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocConsumer<ConfigurateApiBloc, ConfigurateApiState>(
+        BlocConsumer<TrendingApiBloc, TrendingApiState>(
           listener: (context, state) {
-            if (state is ConfigurateApiError) {
+            if (state is TrendingApiError) {
               print(state.error);
             }
           },
           builder: (context, state) {
-            if (state is ConfigurateApiLoading) {
+            if (state is TrendingApiLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is ConfigurateApiLoaded) {
-              print(state.config.images!.baseUrl!);
+            if (state is TrendingApiLoaded) {
+              print(state.trending.page);
               // return CarouselSlider(
               //   children: [Image.network(state.config.images!.baseUrl!)],
               //   // children: getPopularMovies(widget.state.movie.totalResults!),
@@ -120,7 +120,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
     );
   }
 
-  // getApiImages(ConfigurateApiLoaded state) {
+  // getApiImages(TrendingApiLoaded state) {
   //   print(state.config.images);
   // }
 }

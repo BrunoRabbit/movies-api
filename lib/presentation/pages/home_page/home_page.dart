@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
 
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/presentation/widgets/body_home_page.dart';
 import 'package:movies_api/presentation/widgets/gradient_scaffold.dart';
 
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getConfigurateApi();
     getPopularApi();
+    getTrendingApi();
   }
 
   void getConfigurateApi() {
@@ -32,6 +34,10 @@ class _HomePageState extends State<HomePage> {
 
   void getPopularApi() {
     BlocProvider.of<PopularApiBloc>(context).add(PopularApiLoad());
+  }
+
+  void getTrendingApi() {
+    BlocProvider.of<TrendingApiBloc>(context).add(TrendingApiLoad());
   }
 
   @override
