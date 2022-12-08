@@ -62,9 +62,6 @@ class _BodyHomePageState extends State<BodyHomePage> {
             if (state is ConfigurateApiError) {
               print(state.error);
             }
-            // if (state is ConfigurateApiLoaded) {
-            //   getApiImages(state);
-            // }
           },
           builder: (context, state) {
             if (state is ConfigurateApiLoading) {

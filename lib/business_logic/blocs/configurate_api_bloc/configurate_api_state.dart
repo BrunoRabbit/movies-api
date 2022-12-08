@@ -12,8 +12,6 @@ class ConfigurateApiLoaded extends ConfigurateApiState {
   });
 }
 
-class ConfigurateApiEmpty extends ConfigurateApiState {}
-
 class ConfigurateApiError extends ConfigurateApiState {
   String error;
 
