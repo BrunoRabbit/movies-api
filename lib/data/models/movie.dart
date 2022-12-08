@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:movies_api/data/models/results.dart';
 
-//https://api.themoviedb.org/3/movie/550/recommendations?api_key=9ac406a66ef45207fe6d7dc478792ca4&language=en-US&page=1
 class Movie {
   //? POPULAR MOVIE
   int? page;
