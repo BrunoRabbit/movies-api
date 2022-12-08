@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:movies_api/core/utils/use_case.dart';
 import 'package:movies_api/data/models/config.dart';
 import 'package:movies_api/data/models/movie.dart';
+import 'package:movies_api/data/models/trending.dart';
 
 import 'package:movies_api/data/repositories/api_repository.dart';
 
@@ -43,6 +44,23 @@ class ApiRepositoryImpl implements ApiRepository {
       Map<String, dynamic> activity = json.decode(response.body);
 
       return Right(Movie.fromMap(activity));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Either<NoParams, Trending>> getTrendingApi() async {
+    try {
+      http.Response response;
+      final String _url =
+          'https://api.themoviedb.org/3/trending/all/day?api_key=$key';
+
+      response = await http.get(Uri.parse(_url));
+
+      Map<String, dynamic> activity = json.decode(response.body);
+
+      return Right(Trending.fromJson(activity));
     } catch (e) {
       rethrow;
     }
