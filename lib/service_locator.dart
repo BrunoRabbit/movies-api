@@ -104,4 +104,5 @@ Future<void> setupLocator(GetIt sl) async {
   sl.registerLazySingleton<GetConfigurationApi>(
       () => GetConfigurationApi(sl()));
   sl.registerLazySingleton<GetPopularMovies>(() => GetPopularMovies(sl()));
+  sl.registerLazySingleton<GetTrendingApi>(() => GetTrendingApi(sl()));
 }

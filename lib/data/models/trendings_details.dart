@@ -1,63 +1,67 @@
 class TrendingsDetails {
-  bool? adult;
-  String? backdropPath;
-  List<int>? genreIds;
   int? id;
+  int? voteCount;
+  bool? adult;
+  bool? video;
+  double? voteAverage;
+  double? popularity;
+  String? backdropPath;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
   String? posterPath;
   String? releaseDate;
   String? title;
-  bool? video;
-  double? voteAverage;
-  int? voteCount;
-  double? popularity;
   String? firstAirDate;
   String? name;
-  List<String>? originCountry;
   String? originalName;
+  List<int>? genreIds;
+  List<String>? originCountry;
 
-  TrendingsDetails(
-      {this.adult,
-      this.backdropPath,
-      this.genreIds,
-      this.id,
-      this.originalLanguage,
-      this.originalTitle,
-      this.overview,
-      this.posterPath,
-      this.releaseDate,
-      this.title,
-      this.video,
-      this.voteAverage,
-      this.voteCount,
-      this.popularity,
-      this.firstAirDate,
-      this.name,
-      this.originCountry,
-      this.originalName});
+  TrendingsDetails({
+    this.id,
+    this.voteCount,
+    this.adult,
+    this.video,
+    this.voteAverage,
+    this.popularity,
+    this.backdropPath,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.firstAirDate,
+    this.name,
+    this.originalName,
+    this.genreIds,
+    this.originCountry,
+  });
 
-  TrendingsDetails.fromJson(Map<String, dynamic> json) {
-    adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    genreIds = json['genre_ids'].cast<int>();
-    id = json['id'];
-    originalLanguage = json['original_language'];
-    originalTitle = json['original_title'];
-    overview = json['overview'];
-    posterPath = json['poster_path'];
-    releaseDate = json['release_date'];
-    title = json['title'];
-    video = json['video'];
-    voteAverage = json['vote_average'];
-    voteCount = json['vote_count'];
-    popularity = json['popularity'];
-    firstAirDate = json['first_air_date'];
-    name = json['name'];
-    originCountry = json['origin_country'].cast<String>();
-    originalName = json['original_name'];
-  }
+  factory TrendingsDetails.fromJson(Map<String, dynamic> json) =>
+      TrendingsDetails(
+        adult: json["adult"],
+        backdropPath: json["backdrop_path"],
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        id: json["id"],
+        originalLanguage: json["original_language"],
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        posterPath: json["poster_path"],
+        releaseDate: json["release_date"],
+        title: json["title"],
+        video: json["video"],
+        voteAverage: json["vote_average"].toDouble(),
+        voteCount: json["vote_count"],
+        popularity: json["popularity"].toDouble(),
+        firstAirDate: json["first_air_date"],
+        name: json["name"],
+        originCountry: json["origin_country"] == null
+            ? null
+            : List<String>.from(json["origin_country"].map((x) => x)),
+        originalName: json["original_name"],
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

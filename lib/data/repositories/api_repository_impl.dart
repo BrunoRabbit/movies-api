@@ -58,7 +58,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
       response = await http.get(Uri.parse(_url));
 
-      Map<String, dynamic> activity = json.decode(response.body);
+      Map<String, dynamic> activity = jsonDecode(response.body);
 
       return Right(Trending.fromJson(activity));
     } catch (e) {

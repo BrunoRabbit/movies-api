@@ -8,26 +8,22 @@ class Trending {
 
   Trending({this.page, this.results, this.totalPages, this.totalResults});
 
-  Trending.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
-    if (json['results'] != null) {
-      results = <TrendingsDetails>[];
-      json['results'].forEach((v) {
-        results!.add(TrendingsDetails.fromJson(v));
-      });
-    }
-    totalPages = json['total_pages'];
-    totalResults = json['total_results'];
-  }
+  factory Trending.fromJson(Map<String, dynamic> json) => Trending(
+        page: json["page"],
+        results: List<TrendingsDetails>.from(
+            json["results"].map((x) => TrendingsDetails.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['page'] = page;
     if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+      data['results'] = results!.map((e) => e.toJson());
     }
-    data['total_pages'] = totalPages;
-    data['total_results'] = totalResults;
+    data['totalPages'] = totalPages;
+    data['totalResults'] = totalResults;
     return data;
   }
 }
