@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/presentation/widgets/carousel_slider_widget.dart';
 
 class BodyHomePage extends StatefulWidget {
   final PopularApiLoaded state;
@@ -23,62 +22,20 @@ class _BodyHomePageState extends State<BodyHomePage> {
     print(widget.state.movie.results!.length); //20
   }
 
-  getPopularMovies() {
-    int index = widget.state.movie.totalResults ?? 0;
-    String img = widget.state.movie.results![index].posterPath!;
-    final url = 'https://api.themoviedb.org/3/movie/popular?api_key=$key&/$img';
+  // getPopularMovies() {
+  //   int index = widget.state.movie.totalResults ?? 0;
+  //   String img = widget.state.movie.results![index].posterPath!;
+  //   final url = 'https://api.themoviedb.org/3/movie/popular?api_key=$key&/$img';
 
-    // for (var i = 0; i < index; i++) {
-
-    // }
-    getLength();
-    print(widget.state.movie.page); //1
-
-    // for (var e in widget.state.movie.results!) {
-    //   print(e.id);
-    // }
-
-    // return Builder(
-    //   builder: (context) => Container(
-    //     width: MediaQuery.of(context).size.width,
-    //     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-    //     decoration: BoxDecoration(
-    //       image: DecorationImage(
-    //         image: NetworkImage(
-    //           images ?? '',
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
-  }
+  //   getLength();
+  //   print(widget.state.movie.page); //1
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocConsumer<TrendingApiBloc, TrendingApiState>(
-          listener: (context, state) {
-            if (state is TrendingApiError) {
-              print(state.error);
-            }
-          },
-          builder: (context, state) {
-            if (state is TrendingApiLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is TrendingApiLoaded) {
-              print(state.trending.page);
-              // return CarouselSlider(
-              //   children: [Image.network(state.config.images!.baseUrl!)],
-              //   // children: getPopularMovies(widget.state.movie.totalResults!),
-              // );
-            }
-            return Container();
-          },
-        ),
+        const CarouselSliderWidget(),
         SizedBox(
           height: 250,
           width: double.infinity,

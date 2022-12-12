@@ -17,10 +17,10 @@ dependencies:
   get_it: ^7.2.0
   flutter_dotenv: ^5.0.2
   equatable: ^2.0.5
-  flutter_carousel_slider: ^1.0.9
   injectable: ^1.5.4
   dartz: ^0.10.1
-  carousel_slider: ^4.1.1
+  carousel_slider: ^4.2.0
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
