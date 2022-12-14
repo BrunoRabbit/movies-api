@@ -1,4 +1,4 @@
-import 'package:movies_api/data/models/trendings_details.dart';
+import 'package:movies_api/app/data/models/trendings_details.dart';
 
 class Trending {
   int? page;

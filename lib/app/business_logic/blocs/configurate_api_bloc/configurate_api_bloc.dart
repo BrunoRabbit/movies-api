@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:movies_api/business_logic/usecases/get_configuration_api.dart';
+import 'package:movies_api/app/business_logic/usecases/get_configuration_api.dart';
+import 'package:movies_api/app/data/models/config.dart';
 import 'package:movies_api/core/utils/use_case.dart';
-import 'package:movies_api/data/models/config.dart';
 
 part 'configurate_api_event.dart';
 part 'configurate_api_state.dart';

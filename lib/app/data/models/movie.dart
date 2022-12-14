@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:movies_api/data/models/results.dart';
+import 'package:movies_api/app/data/models/results.dart';
 
 class Movie {
   //? POPULAR MOVIE

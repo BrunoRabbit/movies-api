@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/presentation/widgets/carousel_slider_widget.dart';
+import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/app/ui/widgets/carousel_slider_widget.dart';
 
 class BodyHomePage extends StatefulWidget {
   final PopularApiLoaded state;

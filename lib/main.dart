@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/app/ui/pages/home_page/home_page.dart';
 import 'package:movies_api/core/themes/app_themes.dart';
-import 'package:movies_api/presentation/pages/home_page/home_page.dart';
 import 'package:movies_api/service_locator.dart';
 
 GetIt sl = GetIt.instance;

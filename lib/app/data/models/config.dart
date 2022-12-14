@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:movies_api/data/models/images.dart';
+import 'package:movies_api/app/data/models/images.dart';
 
 class Config {
   Images? images;

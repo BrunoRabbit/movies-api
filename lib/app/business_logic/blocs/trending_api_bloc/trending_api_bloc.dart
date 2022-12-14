@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movies_api/business_logic/usecases/get_trending_api.dart';
+import 'package:movies_api/app/business_logic/usecases/get_trending_api.dart';
+import 'package:movies_api/app/data/models/trending.dart';
 import 'package:movies_api/core/utils/use_case.dart';
-import 'package:movies_api/data/models/trending.dart';
 
 part 'trending_api_event.dart';
 part 'trending_api_state.dart';

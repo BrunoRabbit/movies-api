@@ -1,18 +1,18 @@
 import 'package:get_it/get_it.dart';
-import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
-import 'package:movies_api/business_logic/usecases/get_configuration_api.dart';
-import 'package:movies_api/business_logic/usecases/get_popular_movies.dart';
-import 'package:movies_api/business_logic/usecases/get_trending_api.dart';
-import 'package:movies_api/data/models/images.dart';
-import 'package:movies_api/data/models/movie.dart';
-import 'package:movies_api/data/models/results.dart';
-import 'package:movies_api/data/models/trending.dart';
-import 'package:movies_api/data/models/trendings_details.dart';
-import 'package:movies_api/data/repositories/api_repository.dart';
-import 'package:movies_api/data/repositories/api_repository_impl.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movies_api/app/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/app/business_logic/usecases/get_configuration_api.dart';
+import 'package:movies_api/app/business_logic/usecases/get_popular_movies.dart';
+import 'package:movies_api/app/business_logic/usecases/get_trending_api.dart';
+import 'package:movies_api/app/data/models/images.dart';
+import 'package:movies_api/app/data/models/movie.dart';
+import 'package:movies_api/app/data/models/results.dart';
+import 'package:movies_api/app/data/models/trending.dart';
+import 'package:movies_api/app/data/models/trendings_details.dart';
+import 'package:movies_api/app/data/repositories/api_repository.dart';
+import 'package:movies_api/app/data/repositories/api_repository_impl.dart';
 
 @InjectableInit(
   initializerName: r'$setupLocator',

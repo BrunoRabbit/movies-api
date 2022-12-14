@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:movies_api/business_logic/usecases/get_popular_movies.dart';
+import 'package:movies_api/app/business_logic/usecases/get_popular_movies.dart';
+import 'package:movies_api/app/data/models/movie.dart';
 import 'package:movies_api/core/utils/use_case.dart';
-import 'package:movies_api/data/models/movie.dart';
 
 part 'popular_api_event.dart';
 part 'popular_api_state.dart';

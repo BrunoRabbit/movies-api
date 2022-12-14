@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
-
-import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
-import 'package:movies_api/presentation/widgets/body_home_page.dart';
-import 'package:movies_api/presentation/widgets/gradient_circular_progress.dart';
-import 'package:movies_api/presentation/widgets/gradient_scaffold.dart';
+import 'package:movies_api/app/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/app/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/app/ui/widgets/body_home_page.dart';
+import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
+import 'package:movies_api/core/widgets/gradient_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   final BuildContext context;

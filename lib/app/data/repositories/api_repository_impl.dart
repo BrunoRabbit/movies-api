@@ -3,12 +3,11 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:movies_api/app/data/models/config.dart';
+import 'package:movies_api/app/data/models/movie.dart';
+import 'package:movies_api/app/data/models/trending.dart';
+import 'package:movies_api/app/data/repositories/api_repository.dart';
 import 'package:movies_api/core/utils/use_case.dart';
-import 'package:movies_api/data/models/config.dart';
-import 'package:movies_api/data/models/movie.dart';
-import 'package:movies_api/data/models/trending.dart';
-
-import 'package:movies_api/data/repositories/api_repository.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
   final String key = dotenv.get("apiKey");

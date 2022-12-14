@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:movies_api/app/data/models/config.dart';
+import 'package:movies_api/app/data/repositories/api_repository.dart';
 import 'package:movies_api/core/utils/use_case.dart';
-import 'package:movies_api/data/models/config.dart';
-import 'package:movies_api/data/repositories/api_repository.dart';
 
 class GetConfigurationApi implements UseCase<Config, NoParams> {
   final ApiRepository repository;
