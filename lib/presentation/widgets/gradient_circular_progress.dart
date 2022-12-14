@@ -42,7 +42,7 @@ class _GradientCircularProgressState extends State<GradientCircularProgress>
         height: 50,
         width: 50,
         child: CustomPaint(
-          painter: GradientCircularProgressIndicator(
+          painter: GradientCircularProgressPainter(
             // currentProgress: _animation.value,
             gradient: SweepGradient(
               colors: [Colors.transparent, Colors.blue[300]!],
@@ -56,11 +56,11 @@ class _GradientCircularProgressState extends State<GradientCircularProgress>
   // }
 }
 
-class GradientCircularProgressIndicator extends CustomPainter {
+class GradientCircularProgressPainter extends CustomPainter {
   Gradient gradient;
   // double currentProgress;
 
-  GradientCircularProgressIndicator({
+  GradientCircularProgressPainter({
     required this.gradient,
     // required this.currentProgress,
   });
@@ -79,5 +79,5 @@ class GradientCircularProgressIndicator extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(GradientCircularProgressIndicator oldDelegate) => false;
+  bool shouldRepaint(GradientCircularProgressPainter oldDelegate) => false;
 }
