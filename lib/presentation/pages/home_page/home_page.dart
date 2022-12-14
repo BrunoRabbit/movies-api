@@ -5,6 +5,7 @@ import 'package:movies_api/business_logic/blocs/configurate_api_bloc/configurate
 import 'package:movies_api/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/presentation/widgets/body_home_page.dart';
+import 'package:movies_api/presentation/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/presentation/widgets/gradient_scaffold.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,13 +51,15 @@ class _HomePageState extends State<HomePage> {
               state: state,
             );
           }
-
+          if (state is PopularApiLoading) {
+            return const Center(
+              child: GradientCircularProgress(),
+            );
+          }
           if (state is PopularApiError) {
             return Text("error: " + state.error);
           }
-          return const Center(
-            child: LinearProgressIndicator(),
-          );
+          return Container();
         },
       ),
     );
