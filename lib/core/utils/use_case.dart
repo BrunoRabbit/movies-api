@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movies_api/core/utils/failure.dart';
 
-abstract class UseCase<T, P> {
-  Future<Either<P, T>> call(P params);
+abstract class UseCase<Type, Params> {
+  Future<Either<Failure, Type>> call(Params params);
 }
 
 class NoParams extends Equatable {
