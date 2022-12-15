@@ -7,13 +7,13 @@ import 'package:movies_api/app/data/models/config.dart';
 import 'package:movies_api/app/data/models/movie.dart';
 import 'package:movies_api/app/data/models/trending.dart';
 import 'package:movies_api/app/data/repositories/api_repository.dart';
-import 'package:movies_api/core/utils/use_case.dart';
+import 'package:movies_api/core/utils/failure.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
   final String key = dotenv.get("apiKey");
 
   @override
-  Future<Either<NoParams, Config>> getConfigurationApi() async {
+  Future<Either<Failure, Config>> getConfigurationApi() async {
     //? https://developers.themoviedb.org/3/configuration/get-api-configuration
 
     try {
@@ -32,7 +32,7 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  Future<Either<NoParams, Movie>> getPopularMovies() async {
+  Future<Either<Failure, Movie>> getPopularMovies() async {
     try {
       http.Response response;
       final String _url =
@@ -49,7 +49,7 @@ class ApiRepositoryImpl implements ApiRepository {
   }
 
   @override
-  Future<Either<NoParams, Trending>> getTrendingApi() async {
+  Future<Either<Failure, Trending>> getTrendingApi() async {
     try {
       http.Response response;
       final String _url =

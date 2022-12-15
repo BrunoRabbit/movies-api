@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:movies_api/app/data/models/config.dart';
-import 'package:movies_api/app/data/repositories/api_repository.dart';
-import 'package:movies_api/core/utils/use_case.dart';
+import 'package:movies_api/core/utils/exports.dart';
 
 class GetConfigurationApi implements UseCase<Config, NoParams> {
   final ApiRepository repository;
@@ -9,7 +7,7 @@ class GetConfigurationApi implements UseCase<Config, NoParams> {
   GetConfigurationApi(this.repository);
 
   @override
-  Future<Either<NoParams, Config>> call(NoParams noParams) async {
+  Future<Either<Failure, Config>> call(NoParams noParams) async {
     return await repository.getConfigurationApi();
   }
 }
