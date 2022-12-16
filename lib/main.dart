@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get_it/get_it.dart';
-import 'package:movies_api/app/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/app/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
-import 'package:movies_api/app/ui/pages/home_page/home_page.dart';
+import 'service_locator.dart' as di;
+import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/pages/home_page.dart';
 import 'package:movies_api/core/themes/app_themes.dart';
 import 'package:movies_api/service_locator.dart';
-
-GetIt sl = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: ".env");
-  await setupLocator(sl);
+  await di.setupLocator();
 
   runApp(const Application());
 }
@@ -27,8 +25,6 @@ class Application extends StatefulWidget {
   State<Application> createState() => _ApplicationState();
 }
 
-// api key =
-// https://api.themoviedb.org/3/movie/550?api_key=9ac406a66ef45207fe6d7dc478792ca4
 class _ApplicationState extends State<Application> with WidgetsBindingObserver {
   @override
   void initState() {
