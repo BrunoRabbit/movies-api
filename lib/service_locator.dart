@@ -1,108 +1,68 @@
 import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
-import 'package:movies_api/app/business_logic/blocs/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/app/business_logic/blocs/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/app/business_logic/blocs/trending_api_bloc/trending_api_bloc.dart';
-import 'package:movies_api/app/business_logic/usecases/get_configuration_api.dart';
-import 'package:movies_api/app/business_logic/usecases/get_popular_movies.dart';
-import 'package:movies_api/app/business_logic/usecases/get_trending_api.dart';
-import 'package:movies_api/app/data/models/images.dart';
-import 'package:movies_api/app/data/models/movie.dart';
-import 'package:movies_api/app/data/models/results.dart';
-import 'package:movies_api/app/data/models/trending.dart';
-import 'package:movies_api/app/data/models/trendings_details.dart';
-import 'package:movies_api/app/data/repositories/api_repository.dart';
-import 'package:movies_api/app/data/repositories/api_repository_impl.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:movies_api/core/network/network_status.dart';
+import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart';
+import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
+import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_configuration_api.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_popular_movies.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_trending_api.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-@InjectableInit(
-  initializerName: r'$setupLocator',
-  preferRelativeImports: true,
-  asExtension: false,
-)
-Future<void> setupLocator(GetIt sl) async {
-  //Bloc
-  sl.registerFactory<ConfigurateApiBloc>(
+import 'package:http/http.dart' as http;
+
+final sl = GetIt.instance;
+
+Future<void> setupLocator() async {
+  //! Feature - HomePage
+  // Bloc
+  sl.registerFactory(
     () => ConfigurateApiBloc(
-      getConfigurationApi: sl<GetConfigurationApi>(),
+      getConfigurationApi: sl(),
     ),
   );
   sl.registerFactory(
     () => PopularApiBloc(
-      getPopularMovies: sl<GetPopularMovies>(),
+      getPopularMovies: sl(),
     ),
   );
   sl.registerFactory(
     () => TrendingApiBloc(
-      getTrendingApi: sl<GetTrendingApi>(),
+      getTrendingApi: sl(),
     ),
   );
 
-  //Model
-  sl.registerFactory<Movie>(() => Movie(
-        page: sl(),
-        results: sl(),
-        totalPages: sl(),
-        totalResults: sl(),
-      ));
-  sl.registerFactory<Images>(() => Images(
-        backdropSizes: sl(),
-        baseUrl: sl(),
-        secureBaseUrl: sl(),
-        logoSizes: sl(),
-        posterSizes: sl(),
-        profileSizes: sl(),
-        stillSizes: sl(),
-      ));
-  sl.registerFactory<Results>(() => Results(
-        adult: sl(),
-        backdropPath: sl(),
-        id: sl(),
-        title: sl(),
-        originalLanguage: sl(),
-        originalTitle: sl(),
-        overview: sl(),
-        posterPath: sl(),
-        mediaType: sl(),
-        genreIds: sl(),
-        popularity: sl(),
-        releaseDate: sl(),
-        video: sl(),
-        voteAverage: sl(),
-        voteCount: sl(),
-      ));
-  sl.registerFactory<Trending>(() => Trending(
-        page: sl(),
-        results: sl(),
-        totalPages: sl(),
-        totalResults: sl(),
-      ));
-  sl.registerFactory<TrendingsDetails>(() => TrendingsDetails(
-        adult: sl(),
-        backdropPath: sl(),
-        id: sl(),
-        title: sl(),
-        originalLanguage: sl(),
-        originalTitle: sl(),
-        overview: sl(),
-        posterPath: sl(),
-        genreIds: sl(),
-        popularity: sl(),
-        releaseDate: sl(),
-        video: sl(),
-        voteAverage: sl(),
-        voteCount: sl(),
-      ));
-
-  //Repository
-  // sl.registerLazySingleton<ApiRepositoryImpl>(
-  //   () => ApiRepositoryImpl(),
-  // );
-  sl.registerLazySingleton<ApiRepository>(
-    () => ApiRepositoryImpl(),
-  );
-  //UseCase
+  // Use Cases
   sl.registerLazySingleton<GetConfigurationApi>(
       () => GetConfigurationApi(sl()));
   sl.registerLazySingleton<GetPopularMovies>(() => GetPopularMovies(sl()));
   sl.registerLazySingleton<GetTrendingApi>(() => GetTrendingApi(sl()));
+
+  // Repository
+  sl.registerLazySingleton<ApiRepository>(
+    () => ApiRepositoryImpl(
+      networkStatus: sl(),
+      remoteApiRepository: sl(),
+    ),
+  );
+
+  // Data sources
+  sl.registerLazySingleton<ApiRepositoryRemoteDataSource>(
+    () => ApiRepositoryRemoteDataSourceImpl(),
+  );
+
+  // Core
+  sl.registerLazySingleton<NetworkStatus>(
+    () => NetworkStatusImpl(sl()),
+  );
+
+  //! External
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton(() => InternetConnectionChecker());
 }

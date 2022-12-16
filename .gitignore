@@ -11,7 +11,8 @@
 .svn/
 .env
 .txt
-usecase_notes.txt
+generated_plugin_registrant.dart
+
 
 # IntelliJ related
 *.iml
