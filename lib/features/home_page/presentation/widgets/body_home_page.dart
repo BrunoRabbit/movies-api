@@ -16,7 +16,7 @@ class BodyHomePage extends StatefulWidget {
 
 class _BodyHomePageState extends State<BodyHomePage> {
   // List<String> movieImages = [];
-  final String key = dotenv.get("apiKey");
+  final String key = dotenv.get("API_KEY");
 
   getLength() {
     print(widget.state.movie.results!.length); //20

@@ -16,7 +16,7 @@ abstract class ApiRepositoryRemoteDataSource {
 
 class ApiRepositoryRemoteDataSourceImpl
     implements ApiRepositoryRemoteDataSource {
-  final String key = dotenv.get("apiKey");
+  final String key = dotenv.get("API_KEY");
   late http.Response response;
 
   @override
