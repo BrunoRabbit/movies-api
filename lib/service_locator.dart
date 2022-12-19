@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:movies_api/core/network/network_status.dart';
+import 'package:movies_api/features/home_page/data/datasources/api_repository_local_data_source.dart';
 import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart';
 import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
@@ -46,12 +47,16 @@ Future<void> setupLocator() async {
     () => ApiRepositoryImpl(
       networkStatus: sl(),
       remoteApiRepository: sl(),
+      localApiRepository: sl(),
     ),
   );
 
   // Data sources
   sl.registerLazySingleton<ApiRepositoryRemoteDataSource>(
     () => ApiRepositoryRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<ApiRepositoryLocalDataSource>(
+    () => ApiRepositoryLocalDataSourceImpl(),
   );
 
   // Core

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:movies_api/core/utils/graphql_service.dart';
 import 'service_locator.dart' as di;
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
@@ -56,7 +58,10 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
         // home: HomePage(),
-        builder: (context, child) => HomePage(context),
+        builder: (context, child) => GraphQLProvider(
+          client: GraphqlService.graphClient,
+          child: HomePage(context),
+        ),
       ),
     );
   }
