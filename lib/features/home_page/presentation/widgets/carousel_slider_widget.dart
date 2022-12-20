@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -100,8 +99,6 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
     String? _path = trendState.trending.results![index].backdropPath;
 
     String? _url = _baseUrl! + _size + _path!;
-
-    // pref.setStringList('LIST_IMAGES', <String>[_url]);
 
     listImages.add(SizedBox(
       height: 160,
