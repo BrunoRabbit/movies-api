@@ -12,6 +12,7 @@
 .env
 .txt
 generated_plugin_registrant.dart
+codes.dart
 
 
 # IntelliJ related
