@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
@@ -14,25 +14,6 @@ class Trending extends Equatable {
     required this.totalPages,
     required this.totalResults,
   });
-
-  // factory Trending.fromJson(Map<String, dynamic> json) => Trending(
-  //       page: json["page"],
-  //       results: List<TrendingsDetails>.from(
-  //           json["results"].map((x) => TrendingsDetails.fromJson(x))),
-  //       totalPages: json["total_pages"],
-  //       totalResults: json["total_results"],
-  //     );
-
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = <String, dynamic>{};
-  //   data['page'] = page;
-  //   if (results != null) {
-  //     data['results'] = results!.map((e) => e.toJson());
-  //   }
-  //   data['totalPages'] = totalPages;
-  //   data['totalResults'] = totalResults;
-  //   return data;
-  // }
 
   @override
   List<Object?> get props => [
@@ -64,70 +45,112 @@ class TrendingsDetails {
   List<String>? originCountry;
 
   TrendingsDetails({
-    this.id,
-    this.voteCount,
-    this.adult,
-    this.video,
-    this.voteAverage,
-    this.popularity,
-    this.backdropPath,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.firstAirDate,
-    this.name,
-    this.originalName,
-    this.genreIds,
-    this.originCountry,
+    required this.id,
+    required this.voteCount,
+    required this.adult,
+    required this.video,
+    required this.voteAverage,
+    required this.popularity,
+    required this.backdropPath,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.overview,
+    required this.posterPath,
+    required this.releaseDate,
+    required this.title,
+    required this.firstAirDate,
+    required this.name,
+    required this.originalName,
+    required this.genreIds,
+    required this.originCountry,
   });
 
-  factory TrendingsDetails.fromJson(Map<String, dynamic> json) =>
-      TrendingsDetails(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-        id: json["id"],
-        originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
-        overview: json["overview"],
-        posterPath: json["poster_path"],
-        releaseDate: json["release_date"],
-        title: json["title"],
-        video: json["video"],
-        voteAverage: json["vote_average"].toDouble(),
-        voteCount: json["vote_count"],
-        popularity: json["popularity"].toDouble(),
-        firstAirDate: json["first_air_date"],
-        name: json["name"],
-        originCountry: json["origin_country"] == null
-            ? null
-            : List<String>.from(json["origin_country"].map((x) => x)),
-        originalName: json["original_name"],
-      );
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['adult'] = adult;
-    data['backdrop_path'] = backdropPath;
-    data['genre_ids'] = genreIds;
-    data['id'] = id;
-    data['original_language'] = originalLanguage;
-    data['original_title'] = originalTitle;
-    data['overview'] = overview;
-    data['poster_path'] = posterPath;
-    data['release_date'] = releaseDate;
-    data['title'] = title;
-    data['video'] = video;
-    data['vote_average'] = voteAverage;
-    data['vote_count'] = voteCount;
-    data['popularity'] = popularity;
-    data['first_air_date'] = firstAirDate;
-    data['name'] = name;
-    data['origin_country'] = originCountry;
-    data['original_name'] = originalName;
-    return data;
+    if (id != null) {
+      result.addAll({'id': id});
+    }
+    if (voteCount != null) {
+      result.addAll({'voteCount': voteCount});
+    }
+    if (adult != null) {
+      result.addAll({'adult': adult});
+    }
+    if (video != null) {
+      result.addAll({'video': video});
+    }
+    if (voteAverage != null) {
+      result.addAll({'voteAverage': voteAverage});
+    }
+    if (popularity != null) {
+      result.addAll({'popularity': popularity});
+    }
+    if (backdropPath != null) {
+      result.addAll({'backdropPath': backdropPath});
+    }
+    if (originalLanguage != null) {
+      result.addAll({'originalLanguage': originalLanguage});
+    }
+    if (originalTitle != null) {
+      result.addAll({'originalTitle': originalTitle});
+    }
+    if (overview != null) {
+      result.addAll({'overview': overview});
+    }
+    if (posterPath != null) {
+      result.addAll({'posterPath': posterPath});
+    }
+    if (releaseDate != null) {
+      result.addAll({'releaseDate': releaseDate});
+    }
+    if (title != null) {
+      result.addAll({'title': title});
+    }
+    if (firstAirDate != null) {
+      result.addAll({'firstAirDate': firstAirDate});
+    }
+    if (name != null) {
+      result.addAll({'name': name});
+    }
+    if (originalName != null) {
+      result.addAll({'originalName': originalName});
+    }
+    if (genreIds != null) {
+      result.addAll({'genreIds': genreIds});
+    }
+    if (originCountry != null) {
+      result.addAll({'originCountry': originCountry});
+    }
+
+    return result;
   }
+
+  factory TrendingsDetails.fromMap(Map<String, dynamic> map) {
+    return TrendingsDetails(
+      id: map['id']?.toInt(),
+      voteCount: map['voteCount']?.toInt(),
+      adult: map['adult'],
+      video: map['video'],
+      voteAverage: map['voteAverage']?.toDouble(),
+      popularity: map['popularity']?.toDouble(),
+      backdropPath: map['backdropPath'],
+      originalLanguage: map['originalLanguage'],
+      originalTitle: map['originalTitle'],
+      overview: map['overview'],
+      posterPath: map['posterPath'],
+      releaseDate: map['releaseDate'],
+      title: map['title'],
+      firstAirDate: map['firstAirDate'],
+      name: map['name'],
+      originalName: map['originalName'],
+      genreIds: List<int>.from(map['genreIds']),
+      originCountry: List<String>.from(map['originCountry']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TrendingsDetails.fromJson(String source) =>
+      TrendingsDetails.fromMap(json.decode(source));
 }

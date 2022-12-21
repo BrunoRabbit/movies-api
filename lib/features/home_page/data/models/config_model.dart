@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 
 class ConfigModel extends Config {
@@ -9,22 +11,33 @@ class ConfigModel extends Config {
           changeKeys: changeKeys,
         );
 
-  factory ConfigModel.fromJson(Map<String, dynamic> json) {
+  factory ConfigModel.fromMap(Map<String, dynamic> map) {
     return ConfigModel(
-      images:
-          (json['images'] != null ? Images.fromJson(json['images']) : null)!,
-      changeKeys: json['change_keys'].cast<String>(),
+      images: (map['images'] != null ? Images.fromMap(map['images']) : null)!,
+      changeKeys: List<String>.from(map['change_keys']),
     );
   }
+  factory ConfigModel.fromJson(String source) =>
+      ConfigModel.fromMap(json.decode(source));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+
     if (images != null) {
-      data['images'] = images!.toJson();
+      result.addAll({'images': images});
     }
+
     if (changeKeys != null) {
-      data['change_keys'] = changeKeys;
+      result.addAll({'change_keys': changeKeys});
     }
-    return data;
+
+    return result;
   }
+
+  String toJson() => json.encode(toMap());
+
+  ConfigModel wrapperFromMap(Map<String, dynamic> map) =>
+      ConfigModel.fromMap(map);
+
+  ConfigModel wrapperFromJson(String source) => ConfigModel.fromJson(source);
 }

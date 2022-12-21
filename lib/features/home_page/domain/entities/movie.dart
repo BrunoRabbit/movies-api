@@ -1,7 +1,3 @@
-// ignore_for_file: must_be_immutable
-
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
@@ -18,40 +14,6 @@ class Movie extends Equatable {
     required this.results,
   });
 
-  // Map<String, dynamic> toMap() {
-  //   final result = <String, dynamic>{};
-
-  //   if (page != null) {
-  //     result.addAll({'page': page});
-  //   }
-  //   if (results != null) {
-  //     result.addAll({'results': results!.map((x) => x.toMap()).toList()});
-  //   }
-  //   if (totalPages != null) {
-  //     result.addAll({'totalPages': totalPages});
-  //   }
-  //   if (totalResults != null) {
-  //     result.addAll({'totalResults': totalResults});
-  //   }
-
-  //   return result;
-  // }
-
-  // factory Movie.fromMap(Map<String, dynamic> map) {
-  //   return Movie(
-  //     page: map['page']?.toInt(),
-  //     results: map['results'] != null
-  //         ? List<Results>.from(map['results']?.map((x) => Results.fromMap(x)))
-  //         : null,
-  //     totalPages: map['totalPages']?.toInt(),
-  //     totalResults: map['totalResults']?.toInt(),
-  //   );
-  // }
-
-  // String toJson() => json.encode(toMap());
-
-  // factory Movie.fromJson(String source) => Movie.fromMap(json.decode(source));
-
   @override
   List<Object?> get props => [
         if (page != null) page,
@@ -61,40 +23,63 @@ class Movie extends Equatable {
       ];
 }
 
-class Results {
-  bool? adult;
-  String? backdropPath;
-  int? id;
-  String? title;
-  String? originalLanguage;
-  String? originalTitle;
-  String? overview;
-  String? posterPath;
-  String? mediaType;
-  List<int>? genreIds;
-  double? popularity;
-  String? releaseDate;
-  bool? video;
-  double? voteAverage;
-  int? voteCount;
+class Results extends Equatable {
+  final int? id;
+  final int? voteCount;
+  final double? popularity;
+  final double? voteAverage;
+  final String? backdropPath;
+  final String? title;
+  final String? originalLanguage;
+  final String? originalTitle;
+  final String? overview;
+  final String? posterPath;
+  final String? mediaType;
+  final String? releaseDate;
+  final bool? adult;
+  final bool? video;
+  final List<int>? genreIds;
 
-  Results({
-    required this.adult,
-    required this.backdropPath,
+  const Results({
     required this.id,
+    required this.voteCount,
+    required this.popularity,
+    required this.voteAverage,
+    required this.backdropPath,
     required this.title,
     required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
     required this.posterPath,
     required this.mediaType,
-    required this.genreIds,
-    required this.popularity,
     required this.releaseDate,
+    required this.adult,
     required this.video,
-    required this.voteAverage,
-    required this.voteCount,
+    required this.genreIds,
   });
+
+  factory Results.fromMap(Map<String, dynamic> map) {
+    return Results(
+      adult: map['adult'] ?? false,
+      backdropPath: map['backdropPath'] ?? '' ?? '',
+      id: map['id']?.toInt() ?? 0,
+      title: map['title'] ?? '',
+      originalLanguage: map['originalLanguage'] ?? '',
+      originalTitle: map['originalTitle'] ?? '',
+      overview: map['overview'] ?? '',
+      posterPath: map['posterPath'] ?? '',
+      mediaType: map['mediaType'] ?? '',
+      genreIds: map['genreIds'] != null
+          ? List<int>.from(map['genreIds'])
+          : [], // TODO- POSSIVEL CHANGE
+      // genreIds: List<int>.from(map['genreIds']) ?? [],
+      popularity: map['popularity']?.toDouble() ?? 0.0,
+      releaseDate: map['releaseDate'] ?? '',
+      video: map['video'] ?? false,
+      voteAverage: map['voteAverage']?.toDouble() ?? 0.0,
+      voteCount: map['voteCount']?.toInt() ?? 0,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -148,31 +133,22 @@ class Results {
     return result;
   }
 
-  factory Results.fromMap(Map<String, dynamic> map) {
-    return Results(
-      adult: map['adult'] ?? false,
-      backdropPath: map['backdropPath'] ?? '' ?? '',
-      id: map['id']?.toInt() ?? 0,
-      title: map['title'] ?? '',
-      originalLanguage: map['originalLanguage'] ?? '',
-      originalTitle: map['originalTitle'] ?? '',
-      overview: map['overview'] ?? '',
-      posterPath: map['posterPath'] ?? '',
-      mediaType: map['mediaType'] ?? '',
-      genreIds: map['genreIds'] != null
-          ? List<int>.from(map['genreIds'])
-          : [], // TODO- POSSIVEL CHANGE
-      // genreIds: List<int>.from(map['genreIds']) ?? [],
-      popularity: map['popularity']?.toDouble() ?? 0.0,
-      releaseDate: map['releaseDate'] ?? '',
-      video: map['video'] ?? false,
-      voteAverage: map['voteAverage']?.toDouble() ?? 0.0,
-      voteCount: map['voteCount']?.toInt() ?? 0,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Results.fromJson(String source) =>
-      Results.fromMap(json.decode(source));
+  @override
+  List<Object?> get props => [
+        if (id != null) id,
+        if (voteCount != null) voteCount,
+        if (popularity != null) popularity,
+        if (voteAverage != null) voteAverage,
+        if (backdropPath != null) backdropPath,
+        if (title != null) title,
+        if (originalLanguage != null) originalLanguage,
+        if (originalTitle != null) originalTitle,
+        if (overview != null) overview,
+        if (posterPath != null) posterPath,
+        if (mediaType != null) mediaType,
+        if (releaseDate != null) releaseDate,
+        if (adult != null) adult,
+        if (video != null) video,
+        if (genreIds != null) genreIds,
+      ];
 }

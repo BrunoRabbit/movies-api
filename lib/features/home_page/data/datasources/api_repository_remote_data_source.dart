@@ -29,7 +29,7 @@ class ApiRepositoryRemoteDataSourceImpl
     Map<String, dynamic> activity = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      return ConfigModel.fromJson(activity);
+      return ConfigModel.fromMap(activity);
     } else {
       throw ServerException();
     }
@@ -61,7 +61,7 @@ class ApiRepositoryRemoteDataSourceImpl
     Map<String, dynamic> activity = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      return TrendingModel.fromJson(activity);
+      return TrendingModel.fromMap(activity);
     } else {
       throw ServerException();
     }

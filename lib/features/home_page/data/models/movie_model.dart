@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'dart:convert';
 
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
@@ -16,6 +14,20 @@ class MovieModel extends Movie {
           totalPages: totalPages,
           totalResults: totalResults,
         );
+
+  factory MovieModel.fromMap(Map<String, dynamic> map) {
+    return MovieModel(
+      page: map['page']?.toInt(),
+      results: map['results'] != null
+          ? List<Results>.from(map['results']?.map((x) => Results.fromMap(x)))
+          : null,
+      totalPages: map['totalPages']?.toInt(),
+      totalResults: map['totalResults']?.toInt(),
+    );
+  }
+
+  factory MovieModel.fromJson(String source) =>
+      MovieModel.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -36,19 +48,10 @@ class MovieModel extends Movie {
     return result;
   }
 
-  factory MovieModel.fromMap(Map<String, dynamic> map) {
-    return MovieModel(
-      page: map['page']?.toInt(),
-      results: map['results'] != null
-          ? List<Results>.from(map['results']?.map((x) => Results.fromMap(x)))
-          : null,
-      totalPages: map['totalPages']?.toInt(),
-      totalResults: map['totalResults']?.toInt(),
-    );
-  }
-
   String toJson() => json.encode(toMap());
 
-  factory MovieModel.fromJson(String source) =>
-      MovieModel.fromMap(json.decode(source));
+  MovieModel wrapperFromMap(Map<String, dynamic> map) =>
+      MovieModel.fromMap(map);
+
+  MovieModel wrapperFromJson(String source) => MovieModel.fromJson(source);
 }
