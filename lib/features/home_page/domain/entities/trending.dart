@@ -72,7 +72,7 @@ class TrendingsDetails {
       result.addAll({'id': id});
     }
     if (voteCount != null) {
-      result.addAll({'voteCount': voteCount});
+      result.addAll({'vote_count': voteCount});
     }
     if (adult != null) {
       result.addAll({'adult': adult});
@@ -81,46 +81,46 @@ class TrendingsDetails {
       result.addAll({'video': video});
     }
     if (voteAverage != null) {
-      result.addAll({'voteAverage': voteAverage});
+      result.addAll({'vote_average': voteAverage});
     }
     if (popularity != null) {
       result.addAll({'popularity': popularity});
     }
     if (backdropPath != null) {
-      result.addAll({'backdropPath': backdropPath});
+      result.addAll({'backdrop_path': backdropPath});
     }
     if (originalLanguage != null) {
-      result.addAll({'originalLanguage': originalLanguage});
+      result.addAll({'original_language': originalLanguage});
     }
     if (originalTitle != null) {
-      result.addAll({'originalTitle': originalTitle});
+      result.addAll({'original_title': originalTitle});
     }
     if (overview != null) {
       result.addAll({'overview': overview});
     }
     if (posterPath != null) {
-      result.addAll({'posterPath': posterPath});
+      result.addAll({'poster_path': posterPath});
     }
     if (releaseDate != null) {
-      result.addAll({'releaseDate': releaseDate});
+      result.addAll({'release_date': releaseDate});
     }
     if (title != null) {
       result.addAll({'title': title});
     }
     if (firstAirDate != null) {
-      result.addAll({'firstAirDate': firstAirDate});
+      result.addAll({'first_air_date': firstAirDate});
     }
     if (name != null) {
       result.addAll({'name': name});
     }
     if (originalName != null) {
-      result.addAll({'originalName': originalName});
+      result.addAll({'original_name': originalName});
     }
     if (genreIds != null) {
-      result.addAll({'genreIds': genreIds});
+      result.addAll({'genre_ids': genreIds});
     }
     if (originCountry != null) {
-      result.addAll({'originCountry': originCountry});
+      result.addAll({'origin_country': originCountry});
     }
 
     return result;
@@ -129,23 +129,25 @@ class TrendingsDetails {
   factory TrendingsDetails.fromMap(Map<String, dynamic> map) {
     return TrendingsDetails(
       id: map['id']?.toInt(),
-      voteCount: map['voteCount']?.toInt(),
+      voteCount: map['vote_count']?.toInt(),
       adult: map['adult'],
       video: map['video'],
-      voteAverage: map['voteAverage']?.toDouble(),
+      voteAverage: map['vote_average']?.toDouble(),
       popularity: map['popularity']?.toDouble(),
-      backdropPath: map['backdropPath'],
-      originalLanguage: map['originalLanguage'],
-      originalTitle: map['originalTitle'],
+      backdropPath: map['backdrop_path'],
+      originalLanguage: map['original_language'],
+      originalTitle: map['original_title'],
       overview: map['overview'],
-      posterPath: map['posterPath'],
-      releaseDate: map['releaseDate'],
+      posterPath: map['poster_path'],
+      releaseDate: map['release_date'],
       title: map['title'],
-      firstAirDate: map['firstAirDate'],
+      firstAirDate: map['first_air_date'],
       name: map['name'],
-      originalName: map['originalName'],
-      genreIds: List<int>.from(map['genreIds']),
-      originCountry: List<String>.from(map['originCountry']),
+      originalName: map['original_name'],
+      genreIds: List<int>.from(map['genre_ids']),
+      originCountry: map["origin_country"] == null
+          ? null
+          : List<String>.from(map["origin_country"].map((x) => x)),
     );
   }
 
