@@ -16,7 +16,7 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 `API_KEY`
 
-`URL_CONF`
+`URL_CONFIG`
 
 `URL_TRENDING`
 
