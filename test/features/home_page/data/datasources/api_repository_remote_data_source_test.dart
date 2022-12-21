@@ -7,22 +7,17 @@ import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 
+import '../models/.models_generator.mocks.dart';
 import 'api_repository_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([ApiRepositoryRemoteDataSourceImpl])
-class FakeConfigModel extends Fake implements ConfigModel {}
-
-class FakeMovieModel extends Fake implements MovieModel {}
-
-class FakeTrendingModel extends Fake implements TrendingModel {}
-
 void main() {
   MockApiRepositoryRemoteDataSourceImpl mockApiRepository =
       MockApiRepositoryRemoteDataSourceImpl();
 
-  final configModel = FakeConfigModel();
-  final movieModel = FakeMovieModel();
-  final trendingModel = FakeTrendingModel();
+  final configModel = MockConfigModel();
+  final movieModel = MockMovieModel();
+  final trendingModel = MockTrendingModel();
 
   group(
     'grouped getConfigurationApi',
