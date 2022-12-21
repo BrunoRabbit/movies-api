@@ -16,8 +16,15 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 `API_KEY`
 
-`URL`
+`URL_CONF`
 
+`URL_TRENDING`
+
+`URL_MOVIES`
+
+Onde: 
+- `API_KEY` é a KEY gerada pelo [site Themoviedb](https://developers.themoviedb.org/3/getting-started/introduction).
+- `URL` é a URL de determinada API, exemplo: Configuration API, Discover API..
 
 ## Link da API
 Consulte a
