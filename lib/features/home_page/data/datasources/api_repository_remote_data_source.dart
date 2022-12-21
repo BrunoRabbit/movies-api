@@ -21,8 +21,9 @@ class ApiRepositoryRemoteDataSourceImpl
 
   @override
   Future<ConfigModel> getConfigurationApi() async {
-    final String _url =
-        'https://api.themoviedb.org/3/configuration?api_key=$key';
+    final String url = dotenv.get("URL_CONFIG");
+
+    final String _url = url + key;
 
     response = await http.get(Uri.parse(_url));
 
@@ -37,8 +38,8 @@ class ApiRepositoryRemoteDataSourceImpl
 
   @override
   Future<MovieModel> getPopularMovies() async {
-    final String _url =
-        'https://api.themoviedb.org/3/movie/popular?api_key=$key&language=pt-BR&page=1';
+    final String url = dotenv.get("URL_MOVIE");
+    final String _url = '$url$key&language=pt-BR&page=1';
 
     response = await http.get(Uri.parse(_url));
 
@@ -53,8 +54,8 @@ class ApiRepositoryRemoteDataSourceImpl
 
   @override
   Future<TrendingModel> getTrendingApi() async {
-    final String _url =
-        'https://api.themoviedb.org/3/trending/all/day?api_key=$key';
+    final String url = dotenv.get("URL_TRENDING");
+    final String _url = url + key;
 
     response = await http.get(Uri.parse(_url));
 
