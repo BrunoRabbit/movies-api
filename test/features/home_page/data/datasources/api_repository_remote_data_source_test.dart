@@ -1,16 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/error/exceptions.dart';
-import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 
 import '../models/.models_generator.mocks.dart';
-import 'api_repository_remote_data_source_test.mocks.dart';
+import '.data_source_generator.mocks.dart';
 
-@GenerateMocks([ApiRepositoryRemoteDataSourceImpl])
 void main() {
   MockApiRepositoryRemoteDataSourceImpl mockApiRepository =
       MockApiRepositoryRemoteDataSourceImpl();
