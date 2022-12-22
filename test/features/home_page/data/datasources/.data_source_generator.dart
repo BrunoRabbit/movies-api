@@ -3,5 +3,6 @@ import 'package:movies_api/features/home_page/data/datasources/api_repository_re
 
 @GenerateNiceMocks([
   MockSpec<ApiRepositoryRemoteDataSourceImpl>(),
+  MockSpec<ApiRepositoryRemoteDataSource>(),
 ])
 void main() {}

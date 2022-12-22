@@ -9,35 +9,36 @@ import '../models/.models_generator.mocks.dart';
 import '.data_source_generator.mocks.dart';
 
 void main() {
-  MockApiRepositoryRemoteDataSourceImpl mockApiRepository =
-      MockApiRepositoryRemoteDataSourceImpl();
-
-  final configModel = MockConfigModel();
-  final movieModel = MockMovieModel();
-  final trendingModel = MockTrendingModel();
-
   group(
     'grouped getConfigurationApi',
     () {
       test('should return ConfigModel if http call completes sucessfully',
           () async {
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        final tConfigModel = MockConfigModel();
+
         when(mockApiRepository.getConfigurationApi())
-            .thenAnswer((_) => Future.value(configModel));
+            .thenAnswer((_) async => tConfigModel);
 
-        expect(
-            await mockApiRepository.getConfigurationApi(), isA<ConfigModel>());
+        final result = await mockApiRepository.getConfigurationApi();
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getConfigurationApi());
+        verifyNoMoreInteractions(mockApiRepository);
+
+        expect(result, isA<ConfigModel>());
       });
       test('should return a ServerException if http call complete with error',
           () async {
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+
         when(mockApiRepository.getConfigurationApi())
-            .thenAnswer((_) => throw ServerException());
+            .thenThrow(ServerException());
 
         expect(() => mockApiRepository.getConfigurationApi(),
-            throwsA(isA<ServerException>()));
+            throwsA(predicate((e) => e is ServerException)));
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getConfigurationApi());
+        verifyNoMoreInteractions(mockApiRepository);
       });
     },
   );
@@ -46,22 +47,30 @@ void main() {
     () {
       test('should return MovieModel if http call completes sucessfully',
           () async {
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        final movieModel = MockMovieModel();
+
         when(mockApiRepository.getPopularMovies())
             .thenAnswer((_) => Future.value(movieModel));
 
-        expect(await mockApiRepository.getPopularMovies(), isA<MovieModel>());
+        final result = await mockApiRepository.getPopularMovies();
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getPopularMovies());
+        verifyNoMoreInteractions(mockApiRepository);
+
+        expect(result, isA<MovieModel>());
       });
       test('should return a ServerException if http call complete with error',
           () async {
-        when(mockApiRepository.getPopularMovies())
-            .thenAnswer((_) => throw ServerException());
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+
+        when(mockApiRepository.getPopularMovies()).thenThrow(ServerException());
 
         expect(() => mockApiRepository.getPopularMovies(),
-            throwsA(isA<ServerException>()));
+            throwsA(predicate((e) => e is ServerException)));
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getPopularMovies());
+        verifyNoMoreInteractions(mockApiRepository);
       });
     },
   );
@@ -70,31 +79,31 @@ void main() {
     () {
       test('should return TrendingModel if http call completes sucessfully',
           () async {
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        final trendingModel = MockTrendingModel();
+
         when(mockApiRepository.getTrendingApi())
             .thenAnswer((_) async => Future.value(trendingModel));
 
-        expect(await mockApiRepository.getTrendingApi(), isA<TrendingModel>());
+        final result = await mockApiRepository.getTrendingApi();
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getTrendingApi());
+        verifyNoMoreInteractions(mockApiRepository);
+
+        expect(result, isA<TrendingModel>());
       });
       test('should return a ServerException if http call complete with error',
           () async {
-        when(mockApiRepository.getTrendingApi())
-            .thenAnswer((_) => throw ServerException());
+        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+
+        when(mockApiRepository.getTrendingApi()).thenThrow(ServerException());
 
         expect(() => mockApiRepository.getTrendingApi(),
-            throwsA(isA<ServerException>()));
+            throwsA(predicate((e) => e is ServerException)));
 
-        verifyAndClearInterations(mock: mockApiRepository);
+        verify(mockApiRepository.getTrendingApi());
+        verifyNoMoreInteractions(mockApiRepository);
       });
     },
   );
-}
-
-/// Making sure interaction(s) never happened on mock with [verifyZeroInteractions] and
-/// finding redundant invocations with [verifyNoMoreInteractions]
-dynamic verifyAndClearInterations({dynamic mock}) {
-  clearInteractions(mock);
-  verifyZeroInteractions(mock);
-  verifyNoMoreInteractions(mock);
 }

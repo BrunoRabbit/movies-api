@@ -165,3 +165,76 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
         )),
       ) as _i7.Future<_i5.TrendingModel>);
 }
+
+/// A class which mocks [ApiRepositoryRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockApiRepositoryRemoteDataSource extends _i1.Mock
+    implements _i6.ApiRepositoryRemoteDataSource {
+  @override
+  _i7.Future<_i3.ConfigModel> getConfigurationApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getConfigurationApi,
+          [],
+        ),
+        returnValue: _i7.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+          this,
+          Invocation.method(
+            #getConfigurationApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+          this,
+          Invocation.method(
+            #getConfigurationApi,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i3.ConfigModel>);
+  @override
+  _i7.Future<_i4.MovieModel> getPopularMovies() => (super.noSuchMethod(
+        Invocation.method(
+          #getPopularMovies,
+          [],
+        ),
+        returnValue: _i7.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+          this,
+          Invocation.method(
+            #getPopularMovies,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+          this,
+          Invocation.method(
+            #getPopularMovies,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i4.MovieModel>);
+  @override
+  _i7.Future<_i5.TrendingModel> getTrendingApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getTrendingApi,
+          [],
+        ),
+        returnValue: _i7.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+          this,
+          Invocation.method(
+            #getTrendingApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+          this,
+          Invocation.method(
+            #getTrendingApi,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i5.TrendingModel>);
+}
