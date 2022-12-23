@@ -5,7 +5,7 @@ import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import '_models_generator.mocks.dart';
 
 void main() {
-  final tMovieModel = MockMovieModel();
+  late MockMovieModel tMovieModel;
   const String jsonString = "some json String";
   final tObjectMap = {
     "page": 0,
@@ -14,42 +14,46 @@ void main() {
     "totalResults": <Results>[],
   };
 
-  test('should be a subclass from Movie entity', () {
-    expect(tMovieModel, isA<Movie>());
-  });
-
-  group('Map', () {
-    test('should convert an object to a map', () {
-      when(tMovieModel.toMap()).thenReturn(tObjectMap);
-
-      expect(tMovieModel.toMap(), tObjectMap);
-
-      reset(tMovieModel);
+  group('MovieModel', () {
+    setUp(() {
+      tMovieModel = MockMovieModel();
     });
-
-    test('should convert a map to a object', () {
-      when(tMovieModel.wrapperFromMap(tObjectMap)).thenReturn(tMovieModel);
-
-      expect(tMovieModel.wrapperFromMap(tObjectMap), tMovieModel);
-
-      reset(tMovieModel);
+    test('should be a subclass from Movie entity', () {
+      expect(tMovieModel, isA<Movie>());
     });
-  });
-  group('Json', () {
-    test('check if is possible to convert an object to a json string', () {
-      when(tMovieModel.toJson()).thenReturn(jsonString);
+    group('map\'s method', () {
+      test('should convert an object to a map', () {
+        when(tMovieModel.toMap()).thenReturn(tObjectMap);
 
-      expect(tMovieModel.toJson(), jsonString);
+        expect(tMovieModel.toMap(), tObjectMap);
 
-      reset(tMovieModel);
+        reset(tMovieModel);
+      });
+
+      test('should convert a map to a object', () {
+        when(tMovieModel.wrapperFromMap(tObjectMap)).thenReturn(tMovieModel);
+
+        expect(tMovieModel.wrapperFromMap(tObjectMap), tMovieModel);
+
+        reset(tMovieModel);
+      });
     });
+    group('json\' method', () {
+      test('check if is possible to convert an object to a json string', () {
+        when(tMovieModel.toJson()).thenReturn(jsonString);
 
-    test('check if is possible to create an object using a json string', () {
-      when(tMovieModel.wrapperFromJson(jsonString)).thenReturn(tMovieModel);
+        expect(tMovieModel.toJson(), jsonString);
 
-      expect(tMovieModel.wrapperFromJson(jsonString), tMovieModel);
+        reset(tMovieModel);
+      });
 
-      reset(tMovieModel);
+      test('check if is possible to create an object using a json string', () {
+        when(tMovieModel.wrapperFromJson(jsonString)).thenReturn(tMovieModel);
+
+        expect(tMovieModel.wrapperFromJson(jsonString), tMovieModel);
+
+        reset(tMovieModel);
+      });
     });
   });
 }
