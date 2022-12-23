@@ -6,8 +6,8 @@ import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
 
 import '../../../../core/network/.network_generator.mocks.dart';
-import '../models/.models_generator.mocks.dart';
-import '.repositories_generator.mocks.dart';
+import '../models/_models_generator.mocks.dart';
+import '_repositories_generator.mocks.dart';
 
 void main() {
   void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) {

@@ -5,8 +5,8 @@ import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 
-import '../models/.models_generator.mocks.dart';
-import '.data_source_generator.mocks.dart';
+import '../models/_models_generator.mocks.dart';
+import '_data_source_generator.mocks.dart';
 
 void main() {
   group(

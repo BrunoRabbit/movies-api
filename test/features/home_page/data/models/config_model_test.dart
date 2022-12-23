@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 
-import '.models_generator.mocks.dart';
+import '_models_generator.mocks.dart';
 
 void main() {
   final tConfigModel = MockConfigModel();

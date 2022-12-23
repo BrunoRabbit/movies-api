@@ -4,7 +4,7 @@ import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_popular_movies.dart';
 
-import '.use_cases_generator.mocks.dart';
+import '_use_cases_generator.mocks.dart';
 
 void main() {
   MockApiRepository mockApiRepository = MockApiRepository();
