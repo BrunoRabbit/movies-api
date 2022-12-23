@@ -12,11 +12,16 @@ void main() {
   group(
     'grouped getConfigurationApi',
     () {
+      late MockApiRepositoryRemoteDataSourceImpl mockApiRepository;
+      late MockConfigModel tConfigModel;
+
+      setUp(() {
+        mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        tConfigModel = MockConfigModel();
+      });
+
       test('should return ConfigModel if http call completes sucessfully',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-        final tConfigModel = MockConfigModel();
-
         when(mockApiRepository.getConfigurationApi())
             .thenAnswer((_) async => tConfigModel);
 
@@ -29,8 +34,6 @@ void main() {
       });
       test('should return a ServerException if http call complete with error',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-
         when(mockApiRepository.getConfigurationApi())
             .thenThrow(ServerException());
 
@@ -45,11 +48,16 @@ void main() {
   group(
     'grouped getPopularMovies',
     () {
+      late MockApiRepositoryRemoteDataSourceImpl mockApiRepository;
+      late MockMovieModel movieModel;
+
+      setUp(() {
+        mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        movieModel = MockMovieModel();
+      });
+
       test('should return MovieModel if http call completes sucessfully',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-        final movieModel = MockMovieModel();
-
         when(mockApiRepository.getPopularMovies())
             .thenAnswer((_) => Future.value(movieModel));
 
@@ -62,8 +70,6 @@ void main() {
       });
       test('should return a ServerException if http call complete with error',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-
         when(mockApiRepository.getPopularMovies()).thenThrow(ServerException());
 
         expect(() => mockApiRepository.getPopularMovies(),
@@ -77,11 +83,16 @@ void main() {
   group(
     'grouped getTrendingApi',
     () {
+      late MockApiRepositoryRemoteDataSourceImpl mockApiRepository;
+      late MockTrendingModel trendingModel;
+
+      setUp(() {
+        mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+        trendingModel = MockTrendingModel();
+      });
+
       test('should return TrendingModel if http call completes sucessfully',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-        final trendingModel = MockTrendingModel();
-
         when(mockApiRepository.getTrendingApi())
             .thenAnswer((_) async => Future.value(trendingModel));
 
@@ -94,8 +105,6 @@ void main() {
       });
       test('should return a ServerException if http call complete with error',
           () async {
-        final mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-
         when(mockApiRepository.getTrendingApi()).thenThrow(ServerException());
 
         expect(() => mockApiRepository.getTrendingApi(),
