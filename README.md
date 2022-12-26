@@ -23,18 +23,9 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 `URL_MOVIES`
 
 Onde: 
-- `API_KEY` é a KEY gerada pelo [site Themoviedb](https://developers.themoviedb.org/3/getting-started/introduction).
+- `API_KEY` é a KEY gerada pelo site [TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
 - `URL` é a URL de determinada API, exemplo: Configuration API, Discover API..
 
 ## Link da API
 Consulte a
-[API-themoviedb](https://developers.themoviedb.org/3/getting-started/introduction).
-
-
-
-## Referência
-
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
-
+[API-TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
