@@ -2,38 +2,66 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
+import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_trending_api.dart';
 
 import '_use_cases_generator.mocks.dart';
 
+class MockTrending extends Mock implements Trending {}
+
 void main() {
-  MockApiRepository mockApiRepository = MockApiRepository();
-  GetTrendingApi usecase = GetTrendingApi(mockApiRepository);
+  late ApiRepository apiRepository;
+  late GetTrendingApi usecase;
 
-  const int? _kPage = 1;
-  const List<TrendingsDetails>? _kResults = <TrendingsDetails>[];
-  const int? _kTotalPages = 1;
-  const int? _kTotalResults = 1;
+  final Trending tTrending = MockTrending();
 
-  const tTrending = Trending(
-    page: _kPage,
-    results: _kResults,
-    totalPages: _kTotalPages,
-    totalResults: _kTotalResults,
-  );
+  setUp(() {
+    apiRepository = MockApiRepository();
+    usecase = GetTrendingApi(apiRepository);
+  });
 
-  test(
-    'Should return true if getTrendingApi is called',
-    () async {
-      when(mockApiRepository.getTrendingApi())
-          .thenAnswer((_) async => const Right(tTrending));
+  group('usecase GetTrendingApi', () {
+    test(
+      'when a successfull call occurs should return [Trending] entity',
+      () async {
+        when(apiRepository.getTrendingApi())
+            .thenAnswer((_) async => Right(tTrending));
+
+        final result = await usecase(NoParams());
+
+        verify(apiRepository.getTrendingApi());
+        verifyNoMoreInteractions(apiRepository);
+
+        expect(result, Right(tTrending));
+      },
+    );
+
+    test(
+        'call succeeds but generates an error, it should return [ServerFailure]',
+        () async {
+      when(apiRepository.getTrendingApi())
+          .thenAnswer((_) async => Left(ServerFailure()));
+
       final result = await usecase(NoParams());
 
-      expect(result, const Right(tTrending));
+      verify(apiRepository.getTrendingApi());
+      verifyNoMoreInteractions(apiRepository);
 
-      verify(mockApiRepository.getTrendingApi());
+      expect(result, Left(ServerFailure()));
+    });
 
-      verifyNoMoreInteractions(mockApiRepository);
-    },
-  );
+    test(
+        'call succeeds but generates an error, it should return [NoInternetConnection]',
+        () async {
+      when(apiRepository.getTrendingApi())
+          .thenAnswer((_) async => Left(NoInternetConnection()));
+
+      final result = await usecase(NoParams());
+
+      verify(apiRepository.getTrendingApi());
+      verifyNoMoreInteractions(apiRepository);
+
+      expect(result, Left(NoInternetConnection()));
+    });
+  });
 }

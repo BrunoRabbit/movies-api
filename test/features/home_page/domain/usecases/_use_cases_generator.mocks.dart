@@ -41,10 +41,6 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApiRepository extends _i1.Mock implements _i3.ApiRepository {
-  MockApiRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i4.Future<_i2.Either<_i2.Failure, _i5.Config>> getConfigurationApi() =>
       (super.noSuchMethod(
@@ -54,6 +50,15 @@ class MockApiRepository extends _i1.Mock implements _i3.ApiRepository {
         ),
         returnValue: _i4.Future<_i2.Either<_i2.Failure, _i5.Config>>.value(
             _FakeEither_0<_i2.Failure, _i5.Config>(
+          this,
+          Invocation.method(
+            #getConfigurationApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i2.Failure, _i5.Config>>.value(
+                _FakeEither_0<_i2.Failure, _i5.Config>(
           this,
           Invocation.method(
             #getConfigurationApi,
@@ -76,6 +81,15 @@ class MockApiRepository extends _i1.Mock implements _i3.ApiRepository {
             [],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i2.Failure, _i6.Movie>>.value(
+                _FakeEither_0<_i2.Failure, _i6.Movie>(
+          this,
+          Invocation.method(
+            #getPopularMovies,
+            [],
+          ),
+        )),
       ) as _i4.Future<_i2.Either<_i2.Failure, _i6.Movie>>);
   @override
   _i4.Future<_i2.Either<_i2.Failure, _i7.Trending>> getTrendingApi() =>
@@ -86,6 +100,15 @@ class MockApiRepository extends _i1.Mock implements _i3.ApiRepository {
         ),
         returnValue: _i4.Future<_i2.Either<_i2.Failure, _i7.Trending>>.value(
             _FakeEither_0<_i2.Failure, _i7.Trending>(
+          this,
+          Invocation.method(
+            #getTrendingApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i2.Failure, _i7.Trending>>.value(
+                _FakeEither_0<_i2.Failure, _i7.Trending>(
           this,
           Invocation.method(
             #getTrendingApi,

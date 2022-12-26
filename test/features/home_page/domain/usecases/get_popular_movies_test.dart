@@ -2,38 +2,66 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
+import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_popular_movies.dart';
 
 import '_use_cases_generator.mocks.dart';
 
+class MockMovie extends Mock implements Movie {}
+
 void main() {
-  MockApiRepository mockApiRepository = MockApiRepository();
-  GetPopularMovies usecase = GetPopularMovies(mockApiRepository);
+  late ApiRepository apiRepository;
+  late GetPopularMovies usecase;
 
-  const int? _kPage = 1;
-  const List<Results>? _kResults = <Results>[];
-  const int? _kTotalPages = 1;
-  const int? _kTotalResults = 1;
+  final Movie tMovie = MockMovie();
 
-  const tMovies = Movie(
-    page: _kPage,
-    results: _kResults,
-    totalPages: _kTotalPages,
-    totalResults: _kTotalResults,
-  );
+  setUp(() {
+    apiRepository = MockApiRepository();
+    usecase = GetPopularMovies(apiRepository);
+  });
 
-  test(
-    'Should return true if getPopularMovies is called',
-    () async {
-      when(mockApiRepository.getPopularMovies())
-          .thenAnswer((_) async => const Right(tMovies));
+  group('usecase GetPopularMovies', () {
+    test(
+      'when a successfull call occurs should return [Movie] entity',
+      () async {
+        when(apiRepository.getPopularMovies())
+            .thenAnswer((_) async => Right(tMovie));
+
+        final result = await usecase(NoParams());
+
+        verify(apiRepository.getPopularMovies());
+        verifyNoMoreInteractions(apiRepository);
+
+        expect(result, Right(tMovie));
+      },
+    );
+
+    test(
+        'call succeeds but generates an error, it should return [ServerFailure]',
+        () async {
+      when(apiRepository.getPopularMovies())
+          .thenAnswer((_) async => Left(ServerFailure()));
+
       final result = await usecase(NoParams());
 
-      expect(result, const Right(tMovies));
+      verify(apiRepository.getPopularMovies());
+      verifyNoMoreInteractions(apiRepository);
 
-      verify(mockApiRepository.getPopularMovies());
+      expect(result, Left(ServerFailure()));
+    });
 
-      verifyNoMoreInteractions(mockApiRepository);
-    },
-  );
+    test(
+        'call succeeds but generates an error, it should return [NoInternetConnection]',
+        () async {
+      when(apiRepository.getPopularMovies())
+          .thenAnswer((_) async => Left(NoInternetConnection()));
+
+      final result = await usecase(NoParams());
+
+      verify(apiRepository.getPopularMovies());
+      verifyNoMoreInteractions(apiRepository);
+
+      expect(result, Left(NoInternetConnection()));
+    });
+  });
 }
