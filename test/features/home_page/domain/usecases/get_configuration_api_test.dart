@@ -5,7 +5,7 @@ import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_configuration_api.dart';
 
-import '_use_cases_generator.mocks.dart';
+import 'use_cases_generator.mocks.dart';
 
 class MockConfig extends Mock implements Config {}
 

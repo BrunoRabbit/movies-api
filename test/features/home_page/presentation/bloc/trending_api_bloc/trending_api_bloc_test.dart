@@ -6,8 +6,8 @@ import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_trending_api.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
 
-import '../../../data/models/_models_generator.mocks.dart';
-import '../../../domain/usecases/_use_cases_generator.mocks.dart';
+import '../../../data/models/models_generator.mocks.dart';
+import '../../../domain/usecases/use_cases_generator.mocks.dart';
 
 void main() {
   //mock

@@ -6,8 +6,8 @@ import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_configuration_api.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 
-import '../../../data/models/_models_generator.mocks.dart';
-import '../../../domain/usecases/_use_cases_generator.mocks.dart';
+import '../../../data/models/models_generator.mocks.dart';
+import '../../../domain/usecases/use_cases_generator.mocks.dart';
 
 void main() {
   //mock
