@@ -3,11 +3,12 @@ import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
+import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
 
 import '../../../../core/network/.network_generator.mocks.dart';
-import '../models/_models_generator.mocks.dart';
-import '_repositories_generator.mocks.dart';
+import '../models/models_generator.mocks.dart';
+import 'repositories_generator.mocks.dart';
 
 void main() {
   void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) {
@@ -70,6 +71,7 @@ void main() {
       });
     });
   });
+
   //? [getPopularMovies] group
   group('getPopularMovies', () {
     //? has internet
@@ -89,6 +91,7 @@ void main() {
 
         expect(result, Right(tMovies));
       });
+
       test('call getPopularMovies and give error', () async {
         final repositoryImpl = MockApiRepositoryImpl();
 
@@ -121,6 +124,7 @@ void main() {
       });
     });
   });
+
   //? [getTrendingApi] group
   group('getTrendingApi', () {
     //? has internet
@@ -166,6 +170,58 @@ void main() {
         final result = await repositoryImpl.getTrendingApi();
 
         verify(repositoryImpl.getTrendingApi());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(NoInternetConnection()));
+      });
+    });
+  });
+
+  //? [getTopRated] group
+  group('getTopRated', () {
+    //? has internet
+    checkIfDeviceHasInternet(isHasInternet: true, () {
+      //! tests
+      test('test getTopRated when connected', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+        TopRated tTopRated = MockTopRatedModel();
+
+        when(repositoryImpl.getTopRated())
+            .thenAnswer((_) async => Right(tTopRated));
+
+        final result = await repositoryImpl.getTopRated();
+
+        verify(repositoryImpl.getTopRated()).called(1);
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Right(tTopRated));
+      });
+      test('call getTopRated and give error', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getTopRated())
+            .thenAnswer((_) async => Left(ServerFailure()));
+
+        final result = await repositoryImpl.getTopRated();
+
+        verify(repositoryImpl.getTopRated());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(ServerFailure()));
+      });
+    });
+    //? don't have internet
+    checkIfDeviceHasInternet(isHasInternet: false, () {
+      //! tests
+      test('call getTopRated when don\'t have internet', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getTopRated())
+            .thenAnswer((_) async => Left(NoInternetConnection()));
+
+        final result = await repositoryImpl.getTopRated();
+
+        verify(repositoryImpl.getTopRated());
         verifyNoMoreInteractions(repositoryImpl);
 
         expect(result, Left(NoInternetConnection()));
