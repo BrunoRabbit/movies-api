@@ -3,6 +3,7 @@ import 'package:movies_api/core/network/network_status.dart';
 import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
+import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 
@@ -52,6 +53,21 @@ class ApiRepositoryImpl implements ApiRepository {
         final trending = await remoteApiRepository.getTrendingApi();
 
         return Right(trending);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(NoInternetConnection());
+    }
+  }
+
+  @override
+  Future<Either<Failure, TopRated>> getTopRated() async {
+    if (await networkStatus.isConnected) {
+      try {
+        final topRated = await remoteApiRepository.getTopRatedApi();
+
+        return Right(topRated);
       } on ServerException {
         return Left(ServerFailure());
       }
