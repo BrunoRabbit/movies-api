@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -38,9 +38,9 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
           BlocBuilder<ConfigurateApiBloc, ConfigurateApiState>(
             builder: (context, confState) {
               if (confState is ConfigurateApiLoaded) {
-                return BlocBuilder<TrendingApiBloc, TrendingApiState>(
-                  builder: (context, trendState) {
-                    if (trendState is TrendingApiLoaded) {
+                return BlocBuilder<TopRatedBloc, TopRatedState>(
+                  builder: (context, topRatedState) {
+                    if (topRatedState is TopRatedLoaded) {
                       return CarouselSlider.builder(
                         options: CarouselOptions(
                             aspectRatio: 16 / 8.5,
@@ -59,8 +59,8 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                         itemCount: 5,
                         itemBuilder: (context, itemIndex, _) {
                           return Column(
-                            children:
-                                _buildSlider(trendState, confState, itemIndex),
+                            children: _buildSlider(
+                                topRatedState, confState, itemIndex),
                           );
                         },
                       );
@@ -92,11 +92,11 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   }
 
   List<Widget> _buildSlider(
-      TrendingApiLoaded trendState, ConfigurateApiLoaded confState, int index) {
+      TopRatedLoaded topRatedState, ConfigurateApiLoaded confState, int index) {
     List<Widget> listImages = List.empty(growable: true);
     String? _baseUrl = confState.config.images!.baseUrl;
     String? _size = confState.config.images!.logoSizes![5];
-    String? _path = trendState.trending.results![index].backdropPath;
+    String? _path = topRatedState.topRated.results![index].backdropPath;
 
     String? _url = _baseUrl! + _size + _path!;
 

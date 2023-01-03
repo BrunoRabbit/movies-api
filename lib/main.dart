@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'service_locator.dart' as di;
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
@@ -49,6 +50,9 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
           create: (_) => sl(),
         ),
         BlocProvider<TrendingApiBloc>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<TopRatedBloc>(
           create: (_) => sl(),
         ),
       ],
