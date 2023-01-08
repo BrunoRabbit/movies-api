@@ -37,42 +37,91 @@ class _BodyHomePageState extends State<BodyHomePage> {
       children: [
         const CarouselSliderWidget(),
         SizedBox(
-          height: 250,
+          height: 100,
           width: double.infinity,
-          // color: Colors.yellow,
-          child: Column(
-            children: const [
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemCount: movieImages.length,
-              //     itemBuilder: (context, index) {
-              //       return Container(
-              //         width: MediaQuery.of(context).size.width,
-              //         margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: NetworkImage(
-              //               movieImages[index],
-              //             ),
-              //           ),
-              //         ),
-              //       );
-              //       // return getPopularMovies(index);
-              //     },
-              //   ),
-              // ),
-              // Text(
-              //   widget.state.movie.results['title'] ?? 'leandro',
-              // ),
-              // Text(
-              //   state.Movie.accessibility!.toString(),
-              // ),
-              // Text(
-              //   state.Movie.participants.toString(),
-              // ),
+          child: Row(
+            children: [
+              const Text(
+                'Filmes Populares',
+              ),
+              Expanded(
+                // height: 100,
+                // width: double.infinity,
+                child: ListView.builder(itemBuilder: (context, index) {
+                  return Container(
+                    color: Colors.red,
+                  );
+                }),
+              ),
             ],
           ),
         ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 16),
+        //   child: SizedBox(
+        //     height: 100,
+        //     width: double.infinity,
+        //     // color: Colors.yellow,
+        //     child: Row(
+        //       children: [
+        //         Expanded(
+        //           child: Container(
+        //             color: Colors.red,
+        //           ),
+        //         ),
+        //         // SizedBox(
+        //         //   height: 160,
+        //         //   width: MediaQuery.of(context).size.width,
+        //         //   child: CachedNetworkImage(
+        //         //     imageUrl: _url,
+        //         //     imageBuilder: (context, imageProvider) => Container(
+        //         //       decoration: BoxDecoration(
+        //         //         borderRadius: BorderRadius.circular(10),
+        //         //         image: DecorationImage(
+        //         //           image: imageProvider,
+        //         //           fit: BoxFit.cover,
+        //         //         ),
+        //         //       ),
+        //         //     ),
+        //         //     placeholder: (context, url) =>
+        //         //         const Center(child: GradientCircularProgress()),
+        //         //     errorWidget: (context, url, error) => const Icon(Icons.error),
+        //         //   ),
+        //         // ),
+        //         // )
+        //         //           //NOVIDADES, TENDENCIAS,RECOMENDADOS, FAVORITOS
+        //         //           Expanded(
+        //         //             child: ListView.builder(
+        //         //               itemCount: movieImages.length,
+        //         //               itemBuilder: (context, index) {
+        //         //                 return Container(
+        //         //                   width: MediaQuery.of(context).size.width,
+        //         //                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
+        //         //                   decoration: BoxDecoration(
+        //         //                     image: DecorationImage(
+        //         //                       image: NetworkImage(
+        //         //                         movieImages[index],
+        //         //                       ),
+        //         //                     ),
+        //         //                   ),
+        //         //                 );
+        //         //                 // return getPopularMovies(index);
+        //         //               },
+        //         //             ),
+        //         //           ),
+        //         //           Text(
+        //         //             widget.state.movie.results['title'] ?? 'leandro',
+        //         //           ),
+        //         //           Text(
+        //         //             state.movie.accessibility!.toString(),
+        //         //           ),
+        //         //           Text(
+        //         //             state.movie.participants.toString(),
+        //         //           ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

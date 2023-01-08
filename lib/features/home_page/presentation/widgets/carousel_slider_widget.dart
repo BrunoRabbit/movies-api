@@ -72,9 +72,6 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
               return Container();
             },
           ),
-          const SizedBox(
-            height: 5,
-          ),
           AnimatedSmoothIndicator(
             activeIndex: currentIndex,
             duration: const Duration(milliseconds: 200),
