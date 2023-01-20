@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/widgets/slider_images_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:movies_api/core/utils/extensions/url_helper.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
   const CarouselSliderWidget({Key? key}) : super(key: key);
@@ -59,9 +61,23 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                         itemCount: 5,
                         itemBuilder: (context, itemIndex, _) {
                           return Column(
-                            children: _buildSlider(
-                                topRatedState, confState, itemIndex),
+                            children: List.generate(5, (index) {
+                              String? _baseUrl =
+                                  confState.config.images!.baseUrl;
+                              String? _size =
+                                  confState.config.images!.logoSizes![5];
+                              String? _path = topRatedState
+                                  .topRated.results![index].backdropPath;
+
+                              String? _url = _baseUrl?.concatUrl(_size, _path!);
+
+                              return SliderImagesWidget(url: _url!);
+                            }),
                           );
+                          // return Column(
+                          //   children: _buildSlider(
+                          //       topRatedState, confState, itemIndex),
+                          // );
                         },
                       );
                     }
@@ -86,37 +102,5 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
         ],
       ),
     );
-  }
-
-  List<Widget> _buildSlider(
-      TopRatedLoaded topRatedState, ConfigurateApiLoaded confState, int index) {
-    List<Widget> listImages = List.empty(growable: true);
-    String? _baseUrl = confState.config.images!.baseUrl;
-    String? _size = confState.config.images!.logoSizes![5];
-    String? _path = topRatedState.topRated.results![index].backdropPath;
-
-    String? _url = _baseUrl! + _size + _path!;
-
-    listImages.add(SizedBox(
-      height: 160,
-      width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: _url,
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        placeholder: (context, url) =>
-            const Center(child: GradientCircularProgress()),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
-    ));
-
-    return listImages;
   }
 }
