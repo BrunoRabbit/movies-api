@@ -19,17 +19,6 @@ class CarouselSliderWidget extends StatefulWidget {
 
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   int currentIndex = 0;
-  // late final SharedPreferences pref;
-
-  @override
-  void initState() {
-    super.initState();
-    // initializeSharedPref();
-  }
-
-  // void initializeSharedPref() async {
-  //   pref = await SharedPreferences.getInstance();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,42 +33,25 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                   builder: (context, topRatedState) {
                     if (topRatedState is TopRatedLoaded) {
                       return CarouselSlider.builder(
-                        options: CarouselOptions(
-                            aspectRatio: 16 / 8.5,
-                            autoPlay: true,
-                            autoPlayInterval: const Duration(seconds: 5),
-                            pauseAutoPlayOnManualNavigate: true,
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 200),
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.86,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                currentIndex = index;
-                              });
-                            }),
-                        itemCount: 5,
-                        itemBuilder: (context, itemIndex, _) {
-                          return Column(
-                            children: List.generate(5, (index) {
-                              String? _baseUrl =
-                                  confState.config.images!.baseUrl;
-                              String? _size =
-                                  confState.config.images!.logoSizes![5];
-                              String? _path = topRatedState
-                                  .topRated.results![index].backdropPath;
-
-                              String? _url = _baseUrl?.concatUrl(_size, _path!);
-
-                              return SliderImagesWidget(url: _url!);
-                            }),
-                          );
-                          // return Column(
-                          //   children: _buildSlider(
-                          //       topRatedState, confState, itemIndex),
-                          // );
-                        },
-                      );
+                          options: CarouselOptions(
+                              aspectRatio: 16 / 8.5,
+                              // autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 5),
+                              pauseAutoPlayOnManualNavigate: true,
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 200),
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.86,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  currentIndex = index;
+                                });
+                              }),
+                          itemCount: 5,
+                          itemBuilder: (context, itemIndex, _) {
+                            return _buildImages(
+                                confState, topRatedState, itemIndex);
+                          });
                     }
                     return Container();
                   },
@@ -88,19 +60,32 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
               return Container();
             },
           ),
-          AnimatedSmoothIndicator(
-            activeIndex: currentIndex,
-            duration: const Duration(milliseconds: 200),
-            count: 5,
-            effect: const WormEffect(
-              activeDotColor: Color(0xFF1E1432),
-              dotColor: Color(0xFF554B64),
-              dotHeight: 12,
-              dotWidth: 12,
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: AnimatedSmoothIndicator(
+              activeIndex: currentIndex,
+              duration: const Duration(milliseconds: 200),
+              count: 5,
+              effect: const WormEffect(
+                activeDotColor: Color(0xFF1E1432),
+                dotColor: Color(0xFF554B64),
+                dotHeight: 12,
+                dotWidth: 12,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  SliderImagesWidget _buildImages(confState, topRatedState, itemIndex) {
+    String? _baseUrl = confState.config.images!.baseUrl;
+    String? _size = confState.config.images!.logoSizes![5];
+    String? _path = topRatedState.topRated.results![itemIndex].backdropPath;
+
+    String? _url = _baseUrl?.concatUrl(_size!, _path!);
+
+    return SliderImagesWidget(url: _url!);
   }
 }

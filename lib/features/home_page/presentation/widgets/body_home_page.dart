@@ -40,19 +40,19 @@ class _BodyHomePageState extends State<BodyHomePage> {
           height: 100,
           width: double.infinity,
           child: Row(
-            children: [
-              const Text(
+            children: const [
+              Text(
                 'Filmes Populares',
               ),
-              Expanded(
-                // height: 100,
-                // width: double.infinity,
-                child: ListView.builder(itemBuilder: (context, index) {
-                  return Container(
-                    color: Colors.red,
-                  );
-                }),
-              ),
+              // Expanded(
+              //   // height: 100,
+              //   // width: double.infinity,
+              //   child: ListView.builder(itemBuilder: (context, index) {
+              //     return Container(
+              //       color: Colors.red,
+              //     );
+              //   }),
+              // ),
             ],
           ),
         ),
