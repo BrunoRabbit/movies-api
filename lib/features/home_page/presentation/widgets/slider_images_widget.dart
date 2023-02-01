@@ -33,12 +33,17 @@ class _SliderImagesWidgetState extends State<SliderImagesWidget> {
                 ),
               ),
             ),
-            placeholder: (context, url) =>
-              const Center(child: GradientCircularProgress()),
+            progressIndicatorBuilder: (context, _, downloadProgress) {
+              if (downloadProgress.downloaded == 0) isLoading = false;
+
+              return const Center(
+                child: GradientCircularProgress(),
+              );
+            },
             errorWidget: (context, url, error) => const Icon(Icons.error),
-            placeholderFadeInDuration: Duration(milliseconds: 600),
+            placeholderFadeInDuration: const Duration(milliseconds: 600),
           ),
-          isLoading
+          !isLoading
               ? Container(
                   width: MediaQuery.of(context).size.width / 2.5,
                   decoration: BoxDecoration(
