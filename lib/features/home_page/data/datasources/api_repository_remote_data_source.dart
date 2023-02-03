@@ -57,7 +57,7 @@ class ApiRepositoryRemoteDataSourceImpl
   @override
   Future<TrendingModel> getTrendingApi() async {
     final String url = dotenv.get("URL_TRENDING");
-    final String _url = url + key;
+    final String _url = '$url$key&language=pt-BR&page=1';
 
     response = await http.get(Uri.parse(_url));
 

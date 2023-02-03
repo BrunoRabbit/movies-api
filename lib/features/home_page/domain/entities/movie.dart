@@ -61,23 +61,23 @@ class Results extends Equatable {
   factory Results.fromMap(Map<String, dynamic> map) {
     return Results(
       adult: map['adult'] ?? false,
-      backdropPath: map['backdropPath'] ?? '' ?? '',
+      backdropPath: map['backdrop_path'] ?? '' ?? '',
       id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
-      originalLanguage: map['originalLanguage'] ?? '',
-      originalTitle: map['originalTitle'] ?? '',
+      originalLanguage: map['original_language'] ?? '',
+      originalTitle: map['original_title'] ?? '',
       overview: map['overview'] ?? '',
-      posterPath: map['posterPath'] ?? '',
-      mediaType: map['mediaType'] ?? '',
-      genreIds: map['genreIds'] != null
-          ? List<int>.from(map['genreIds'])
+      posterPath: map['poster_path'] ?? '',
+      mediaType: map['media_type'] ?? '',
+      genreIds: map['genre_ids'] != null
+          ? List<int>.from(map['genre_ids'])
           : [], // TODO- POSSIVEL CHANGE
       // genreIds: List<int>.from(map['genreIds']) ?? [],
       popularity: map['popularity']?.toDouble() ?? 0.0,
-      releaseDate: map['releaseDate'] ?? '',
+      releaseDate: map['release_date'] ?? '',
       video: map['video'] ?? false,
-      voteAverage: map['voteAverage']?.toDouble() ?? 0.0,
-      voteCount: map['voteCount']?.toInt() ?? 0,
+      voteAverage: map['vote_average']?.toDouble() ?? 0.0,
+      voteCount: map['vote_count']?.toInt() ?? 0,
     );
   }
 
@@ -88,7 +88,7 @@ class Results extends Equatable {
       result.addAll({'adult': adult});
     }
     if (backdropPath != null) {
-      result.addAll({'backdropPath': backdropPath});
+      result.addAll({'backdrop_path': backdropPath});
     }
     if (id != null) {
       result.addAll({'id': id});
@@ -97,37 +97,37 @@ class Results extends Equatable {
       result.addAll({'title': title});
     }
     if (originalLanguage != null) {
-      result.addAll({'originalLanguage': originalLanguage});
+      result.addAll({'original_language': originalLanguage});
     }
     if (originalTitle != null) {
-      result.addAll({'originalTitle': originalTitle});
+      result.addAll({'original_title': originalTitle});
     }
     if (overview != null) {
       result.addAll({'overview': overview});
     }
     if (posterPath != null) {
-      result.addAll({'posterPath': posterPath});
+      result.addAll({'poster_path': posterPath});
     }
     if (mediaType != null) {
-      result.addAll({'mediaType': mediaType});
+      result.addAll({'media_type': mediaType});
     }
     if (genreIds != null) {
-      result.addAll({'genreIds': genreIds});
+      result.addAll({'genre_ids': genreIds});
     }
     if (popularity != null) {
       result.addAll({'popularity': popularity});
     }
     if (releaseDate != null) {
-      result.addAll({'releaseDate': releaseDate});
+      result.addAll({'release_date': releaseDate});
     }
     if (video != null) {
       result.addAll({'video': video});
     }
     if (voteAverage != null) {
-      result.addAll({'voteAverage': voteAverage});
+      result.addAll({'vote_average': voteAverage});
     }
     if (voteCount != null) {
-      result.addAll({'voteCount': voteCount});
+      result.addAll({'vote_count': voteCount});
     }
 
     return result;
