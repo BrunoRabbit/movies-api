@@ -52,9 +52,7 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder<PopularApiBloc, PopularApiState>(
         builder: (context, state) {
           if (state is PopularApiLoaded) {
-            return BodyHomePage(
-              state: state,
-            );
+            return const BodyHomePage();
           }
           if (state is PopularApiLoading) {
             return const Center(

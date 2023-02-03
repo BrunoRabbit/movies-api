@@ -2,17 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/build_configurate_api.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/carousel_slider_widget.dart';
 
 class BodyHomePage extends StatefulWidget {
-  final PopularApiLoaded state;
+  const BodyHomePage({Key? key}) : super(key: key);
 
-  const BodyHomePage({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
   @override
   State<BodyHomePage> createState() => _BodyHomePageState();
 }

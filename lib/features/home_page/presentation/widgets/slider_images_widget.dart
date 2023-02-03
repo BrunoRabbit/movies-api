@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_api/core/themes/text_themes.dart';
-import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 
