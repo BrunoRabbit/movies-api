@@ -34,14 +34,14 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                     if (topRatedState is TopRatedLoaded) {
                       return CarouselSlider.builder(
                           options: CarouselOptions(
-                              aspectRatio: 16 / 8.5,
-                              // autoPlay: true,
+                              aspectRatio: 16 / 12,
+                              autoPlay: true,
                               autoPlayInterval: const Duration(seconds: 5),
                               pauseAutoPlayOnManualNavigate: true,
                               autoPlayAnimationDuration:
                                   const Duration(milliseconds: 200),
                               enlargeCenterPage: true,
-                              viewportFraction: 0.86,
+                              viewportFraction: 0.55,
                               onPageChanged: (index, reason) {
                                 setState(() {
                                   currentIndex = index;
@@ -79,13 +79,21 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
     );
   }
 
-  SliderImagesWidget _buildImages(confState, topRatedState, itemIndex) {
+  SliderImagesWidget _buildImages(ConfigurateApiLoaded confState,
+      TopRatedLoaded topRatedState, int itemIndex) {
+    // * Build Urls Logos
     String? _baseUrl = confState.config.images!.baseUrl;
-    String? _size = confState.config.images!.logoSizes![5];
-    String? _path = topRatedState.topRated.results![itemIndex].backdropPath;
+    // String? _size = confState.config.images!.logoSizes![5];
+    // String? _path = topRatedState.topRated.results![itemIndex].backdropPath;
 
-    String? _url = _baseUrl?.concatUrl(_size!, _path!);
+    // String? _url = _baseUrl?.concatUrl(_size, _path!);
 
-    return SliderImagesWidget(url: _url!);
+    // * Build Urls Poster
+    String? _posterSize = confState.config.images!.posterSizes![4];
+    String? _posterPath = topRatedState.topRated.results![itemIndex].posterPath;
+
+    String? _posterUrl = _baseUrl?.concatUrl(_posterSize, _posterPath!);
+
+    return SliderImagesWidget(url: _posterUrl!);
   }
 }
