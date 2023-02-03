@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movies_api/core/themes/text_themes.dart';
+import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/widgets/build_configurate_api.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/carousel_slider_widget.dart';
 
 class BodyHomePage extends StatefulWidget {
@@ -15,80 +18,36 @@ class BodyHomePage extends StatefulWidget {
 }
 
 class _BodyHomePageState extends State<BodyHomePage> {
-  // List<String> movieImages = [];
-  final String key = dotenv.get("API_KEY");
-
-  getLength() {
-    print(widget.state.movie.results!.length); //20
-  }
-
-  // getPopularMovies() {
-  //   int index = widget.state.movie.totalResults ?? 0;
-  //   String img = widget.state.movie.results![index].posterPath!;
-  //   final url = 'https://api.themoviedb.org/3/movie/popular?api_key=$key&/$img';
-
-  //   getLength();
-  //   print(widget.state.movie.page); //1
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const CarouselSliderWidget(),
-        SizedBox(
-          height: 100,
-          width: double.infinity,
-          child: Row(
-            children: const [
+        Padding(
+          padding: const EdgeInsets.only(left: 12, top: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
                 'Filmes Populares',
+                style: TextThemes.headline2.semiBold,
               ),
-              // Expanded(
-              //   // height: 100,
-              //   // width: double.infinity,
-              //   child: ListView.builder(itemBuilder: (context, index) {
-              //     return Container(
-              //       color: Colors.red,
-              //     );
-              //   }),
-              // ),
+              const SizedBox(
+                height: 12,
+              ),
+              SizedBox(
+                height: 24 * 11,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: const [
+                    // * Build Bloc's ConfigurateBloc and PopularBloc then Build ListView
+                    BuildConfigurateApi(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 16),
-        //   child: SizedBox(
-        //     height: 100,
-        //     width: double.infinity,
-        //     // color: Colors.yellow,
-        //     child: Row(
-        //       children: [
-        //         Expanded(
-        //           child: Container(
-        //             color: Colors.red,
-        //           ),
-        //         ),
-        //         // SizedBox(
-        //         //   height: 160,
-        //         //   width: MediaQuery.of(context).size.width,
-        //         //   child: CachedNetworkImage(
-        //         //     imageUrl: _url,
-        //         //     imageBuilder: (context, imageProvider) => Container(
-        //         //       decoration: BoxDecoration(
-        //         //         borderRadius: BorderRadius.circular(10),
-        //         //         image: DecorationImage(
-        //         //           image: imageProvider,
-        //         //           fit: BoxFit.cover,
-        //         //         ),
-        //         //       ),
-        //         //     ),
-        //         //     placeholder: (context, url) =>
-        //         //         const Center(child: GradientCircularProgress()),
-        //         //     errorWidget: (context, url, error) => const Icon(Icons.error),
-        //         //   ),
-        //         // ),
-        //         // )
         //         //           //NOVIDADES, TENDENCIAS,RECOMENDADOS, FAVORITOS
         //         //           Expanded(
         //         //             child: ListView.builder(
@@ -125,8 +84,4 @@ class _BodyHomePageState extends State<BodyHomePage> {
       ],
     );
   }
-
-  // getApiImages(TrendingApiLoaded state) {
-  //   print(state.config.images);
-  // }
 }
