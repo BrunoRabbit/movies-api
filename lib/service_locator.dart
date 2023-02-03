@@ -12,6 +12,7 @@ import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_counter/smooth_indicator_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
@@ -41,7 +42,12 @@ Future<void> setupLocator() async {
       getTopRated: sl(),
     ),
   );
-
+  
+  // Cubit
+  sl.registerFactory(
+    () => SmoothIndicatorCubit(),
+  );
+  
   // Use Cases
   sl.registerLazySingleton<GetConfigurationApi>(
       () => GetConfigurationApi(sl()));
