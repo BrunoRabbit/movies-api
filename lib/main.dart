@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
+import 'package:movies_api/register_blocs_cubits.dart';
 import 'service_locator.dart' as di;
-import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/pages/home_page.dart';
 import 'package:movies_api/core/themes/app_themes.dart';
-import 'package:movies_api/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,20 +38,7 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<PopularApiBloc>(
-          create: (_) => sl(),
-        ),
-        BlocProvider<ConfigurateApiBloc>(
-          create: (_) => sl(),
-        ),
-        BlocProvider<TrendingApiBloc>(
-          create: (_) => sl(),
-        ),
-        BlocProvider<TopRatedBloc>(
-          create: (_) => sl(),
-        ),
-      ],
+      providers: RegisterBlocsCubits.registerBlocsCubits(),
       child: MaterialApp(
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
