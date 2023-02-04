@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movies_api/core/observables/bloc_observable.dart';
+import 'package:movies_api/core/observables/cubit_observable.dart';
 import 'package:movies_api/register_blocs_cubits.dart';
 import 'service_locator.dart' as di;
 import 'package:movies_api/features/home_page/presentation/pages/home_page.dart';
@@ -11,6 +13,10 @@ Future<void> main() async {
 
   await dotenv.load(fileName: ".env");
   await di.setupLocator();
+
+  // * Uncommit these codes to see what is going on in Bloc's and Cubit's
+  // Bloc.observer = BlocObservable();
+  // Bloc.observer = CubitObservable();
 
   runApp(const Application());
 }
