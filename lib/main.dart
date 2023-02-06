@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movies_api/app_lifecycle_performance.dart';
 import 'package:movies_api/core/observables/bloc_observable.dart';
 import 'package:movies_api/core/observables/cubit_observable.dart';
 import 'package:movies_api/register_blocs_cubits.dart';
@@ -29,6 +30,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> with WidgetsBindingObserver {
+  
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -39,6 +41,12 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    AppLifecyclePerformance.measurePerformance(state);
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
