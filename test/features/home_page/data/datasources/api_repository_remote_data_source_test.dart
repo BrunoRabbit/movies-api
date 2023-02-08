@@ -1,14 +1,21 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/error/exceptions.dart';
+import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart';
 import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
+import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart';
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 
 import '../models/models_generator.mocks.dart';
-import 'data_source_generator.mocks.dart';
+import 'api_repository_remote_data_source_test.mocks.dart';
 
+@GenerateNiceMocks([
+  MockSpec<ApiRepositoryRemoteDataSourceImpl>(),
+  MockSpec<ApiRepositoryRemoteDataSource>(),
+])
 void main() {
   group(
     'grouped getConfigurationApi',
@@ -151,4 +158,37 @@ void main() {
       });
     },
   );
+
+  group('grouped getMoviesTheaters', () {
+    late MockApiRepositoryRemoteDataSourceImpl mockApiRepository;
+    late MockMovieTheaterModel tMovieTheaterModel;
+
+    setUp(() {
+      mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
+      tMovieTheaterModel = MockMovieTheaterModel();
+    });
+
+    test('should return MovieTheaterModel if http call completes sucessfully',
+        () async {
+      when(mockApiRepository.getMoviesTheaters())
+          .thenAnswer((_) async => tMovieTheaterModel);
+
+      final result = await mockApiRepository.getMoviesTheaters();
+
+      verify(mockApiRepository.getMoviesTheaters());
+      verifyNoMoreInteractions(mockApiRepository);
+
+      expect(result, isA<MovieTheaterModel>());
+    });
+    test('should return a ServerException if http call complete with error',
+        () async {
+      when(mockApiRepository.getMoviesTheaters()).thenThrow(ServerException());
+
+      expect(() => mockApiRepository.getMoviesTheaters(),
+          throwsA(predicate((e) => e is ServerException)));
+
+      verify(mockApiRepository.getMoviesTheaters());
+      verifyNoMoreInteractions(mockApiRepository);
+    });
+  });
 }
