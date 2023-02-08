@@ -8,6 +8,8 @@ import 'package:movies_api/features/home_page/data/models/config_model.dart'
     as _i2;
 import 'package:movies_api/features/home_page/data/models/movie_model.dart'
     as _i3;
+import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart'
+    as _i6;
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart'
     as _i5;
 import 'package:movies_api/features/home_page/data/models/trending_model.dart'
@@ -56,6 +58,17 @@ class _FakeTrendingModel_2 extends _i1.SmartFake implements _i4.TrendingModel {
 
 class _FakeTopRatedModel_3 extends _i1.SmartFake implements _i5.TopRatedModel {
   _FakeTopRatedModel_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMovieTheaterModel_4 extends _i1.SmartFake
+    implements _i6.MovieTheaterModel {
+  _FakeMovieTheaterModel_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -354,4 +367,77 @@ class MockTopRatedModel extends _i1.Mock implements _i5.TopRatedModel {
           ),
         ),
       ) as _i5.TopRatedModel);
+}
+
+/// A class which mocks [MovieTheaterModel].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMovieTheaterModel extends _i1.Mock implements _i6.MovieTheaterModel {
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+        returnValueForMissingStub: <Object?>[],
+      ) as List<Object?>);
+  @override
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+        returnValueForMissingStub: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+  @override
+  String toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  _i6.MovieTheaterModel wrapperFromMap(Map<String, dynamic>? map) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #wrapperFromMap,
+          [map],
+        ),
+        returnValue: _FakeMovieTheaterModel_4(
+          this,
+          Invocation.method(
+            #wrapperFromMap,
+            [map],
+          ),
+        ),
+        returnValueForMissingStub: _FakeMovieTheaterModel_4(
+          this,
+          Invocation.method(
+            #wrapperFromMap,
+            [map],
+          ),
+        ),
+      ) as _i6.MovieTheaterModel);
+  @override
+  _i6.MovieTheaterModel wrapperFromJson(String? source) => (super.noSuchMethod(
+        Invocation.method(
+          #wrapperFromJson,
+          [source],
+        ),
+        returnValue: _FakeMovieTheaterModel_4(
+          this,
+          Invocation.method(
+            #wrapperFromJson,
+            [source],
+          ),
+        ),
+        returnValueForMissingStub: _FakeMovieTheaterModel_4(
+          this,
+          Invocation.method(
+            #wrapperFromJson,
+            [source],
+          ),
+        ),
+      ) as _i6.MovieTheaterModel);
 }
