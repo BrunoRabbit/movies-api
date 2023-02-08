@@ -1,15 +1,21 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
+import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
+import 'package:movies_api/features/home_page/domain/entities/movie_theater.dart';
 import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
 
-import '../../../../core/network/.network_generator.mocks.dart';
+import '../../../../core/network/network_status_test.mocks.dart';
 import '../models/models_generator.mocks.dart';
-import 'repositories_generator.mocks.dart';
+import 'api_repository_impl_test.mocks.dart';
 
+@GenerateNiceMocks([
+  MockSpec<ApiRepositoryImpl>(),
+])
 void main() {
   void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) {
     MockNetworkStatusImpl networkStatusImpl = MockNetworkStatusImpl();
@@ -222,6 +228,58 @@ void main() {
         final result = await repositoryImpl.getTopRated();
 
         verify(repositoryImpl.getTopRated());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(NoInternetConnection()));
+      });
+    });
+  });
+
+//? [getMoviesTheaters] group
+  group('getMoviesTheaters', () {
+    //? has internet
+    checkIfDeviceHasInternet(isHasInternet: true, () {
+      //! tests
+      test('test getMoviesTheaters when connected', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+        MovieTheater tMovieTheater = MockMovieTheaterModel();
+
+        when(repositoryImpl.getMoviesTheaters())
+            .thenAnswer((_) async => Right(tMovieTheater));
+
+        final result = await repositoryImpl.getMoviesTheaters();
+
+        verify(repositoryImpl.getMoviesTheaters()).called(1);
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Right(tMovieTheater));
+      });
+      test('call getMoviesTheaters and give error', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getMoviesTheaters())
+            .thenAnswer((_) async => Left(ServerFailure()));
+
+        final result = await repositoryImpl.getMoviesTheaters();
+
+        verify(repositoryImpl.getMoviesTheaters());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(ServerFailure()));
+      });
+    });
+    //? don't have internet
+    checkIfDeviceHasInternet(isHasInternet: false, () {
+      //! tests
+      test('call getMoviesTheaters when don\'t have internet', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getMoviesTheaters())
+            .thenAnswer((_) async => Left(NoInternetConnection()));
+
+        final result = await repositoryImpl.getMoviesTheaters();
+
+        verify(repositoryImpl.getMoviesTheaters());
         verifyNoMoreInteractions(repositoryImpl);
 
         expect(result, Left(NoInternetConnection()));
