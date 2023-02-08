@@ -21,8 +21,8 @@ class MovieModel extends Movie {
       results: map['results'] != null
           ? List<Results>.from(map['results']?.map((x) => Results.fromMap(x)))
           : null,
-      totalPages: map['totalPages']?.toInt(),
-      totalResults: map['totalResults']?.toInt(),
+      totalPages: map['total_pages']?.toInt(),
+      totalResults: map['total_results']?.toInt(),
     );
   }
 
@@ -39,10 +39,10 @@ class MovieModel extends Movie {
       result.addAll({'results': results!.map((x) => x.toMap()).toList()});
     }
     if (totalPages != null) {
-      result.addAll({'totalPages': totalPages});
+      result.addAll({'total_pages': totalPages});
     }
     if (totalResults != null) {
-      result.addAll({'totalResults': totalResults});
+      result.addAll({'total_results': totalResults});
     }
 
     return result;
