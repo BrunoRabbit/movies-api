@@ -6,14 +6,17 @@ import 'package:movies_api/core/error/exceptions.dart';
 
 import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
+import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart';
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_movies_theaters.dart';
 
 abstract class ApiRepositoryRemoteDataSource {
   Future<ConfigModel> getConfigurationApi();
   Future<MovieModel> getPopularMovies();
   Future<TrendingModel> getTrendingApi();
   Future<TopRatedModel> getTopRatedApi();
+  Future<MovieTheaterModel> getMoviesTheaters();
 }
 
 class ApiRepositoryRemoteDataSourceImpl
@@ -81,6 +84,22 @@ class ApiRepositoryRemoteDataSourceImpl
 
     if (response.statusCode == 200) {
       return TopRatedModel.fromMap(activity);
+    } else {
+      throw ServerException();
+    }
+  }
+  
+  @override
+  Future<MovieTheaterModel> getMoviesTheaters() async {
+    final String url = dotenv.get("URL_NOW_PLAYING");
+    final String _url = '$url$key';
+
+    response = await http.get(Uri.parse(_url));
+
+    Map<String, dynamic> activity = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      return MovieTheaterModel.fromMap(activity);
     } else {
       throw ServerException();
     }
