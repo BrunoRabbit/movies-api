@@ -14,7 +14,7 @@ import 'package:movies_api/features/home_page/domain/entities/config.dart'
     as _i6;
 import 'package:movies_api/features/home_page/domain/entities/movie.dart'
     as _i7;
-import 'package:movies_api/features/home_page/domain/entities/movie_theater.dart'
+import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart'
     as _i10;
 import 'package:movies_api/features/home_page/domain/entities/top_rated.dart'
     as _i9;
@@ -193,29 +193,29 @@ class MockApiRepositoryImpl extends _i1.Mock implements _i4.ApiRepositoryImpl {
         )),
       ) as _i5.Future<_i2.Either<_i2.Failure, _i9.TopRated>>);
   @override
-  _i5.Future<_i2.Either<_i2.Failure, _i10.MovieTheater>> getMoviesTheaters() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getMoviesTheaters,
-          [],
-        ),
-        returnValue:
-            _i5.Future<_i2.Either<_i2.Failure, _i10.MovieTheater>>.value(
-                _FakeEither_2<_i2.Failure, _i10.MovieTheater>(
-          this,
-          Invocation.method(
-            #getMoviesTheaters,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i2.Failure, _i10.MovieTheater>>.value(
-                _FakeEither_2<_i2.Failure, _i10.MovieTheater>(
-          this,
-          Invocation.method(
-            #getMoviesTheaters,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.Either<_i2.Failure, _i10.MovieTheater>>);
+  _i5.Future<_i2.Either<_i2.Failure, _i10.MovieInTheater>>
+      getMoviesInTheaters() => (super.noSuchMethod(
+            Invocation.method(
+              #getMoviesInTheaters,
+              [],
+            ),
+            returnValue:
+                _i5.Future<_i2.Either<_i2.Failure, _i10.MovieInTheater>>.value(
+                    _FakeEither_2<_i2.Failure, _i10.MovieInTheater>(
+              this,
+              Invocation.method(
+                #getMoviesInTheaters,
+                [],
+              ),
+            )),
+            returnValueForMissingStub:
+                _i5.Future<_i2.Either<_i2.Failure, _i10.MovieInTheater>>.value(
+                    _FakeEither_2<_i2.Failure, _i10.MovieInTheater>(
+              this,
+              Invocation.method(
+                #getMoviesInTheaters,
+                [],
+              ),
+            )),
+          ) as _i5.Future<_i2.Either<_i2.Failure, _i10.MovieInTheater>>);
 }

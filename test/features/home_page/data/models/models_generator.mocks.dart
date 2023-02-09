@@ -6,10 +6,10 @@
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_api/features/home_page/data/models/config_model.dart'
     as _i2;
+import 'package:movies_api/features/home_page/data/models/movie_in_theater_model.dart'
+    as _i6;
 import 'package:movies_api/features/home_page/data/models/movie_model.dart'
     as _i3;
-import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart'
-    as _i6;
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart'
     as _i5;
 import 'package:movies_api/features/home_page/data/models/trending_model.dart'
@@ -66,9 +66,9 @@ class _FakeTopRatedModel_3 extends _i1.SmartFake implements _i5.TopRatedModel {
         );
 }
 
-class _FakeMovieTheaterModel_4 extends _i1.SmartFake
-    implements _i6.MovieTheaterModel {
-  _FakeMovieTheaterModel_4(
+class _FakeMovieInTheaterModel_4 extends _i1.SmartFake
+    implements _i6.MovieInTheaterModel {
+  _FakeMovieInTheaterModel_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -369,10 +369,11 @@ class MockTopRatedModel extends _i1.Mock implements _i5.TopRatedModel {
       ) as _i5.TopRatedModel);
 }
 
-/// A class which mocks [MovieTheaterModel].
+/// A class which mocks [MovieInTheaterModel].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieTheaterModel extends _i1.Mock implements _i6.MovieTheaterModel {
+class MockMovieInTheaterModel extends _i1.Mock
+    implements _i6.MovieInTheaterModel {
   @override
   List<Object?> get props => (super.noSuchMethod(
         Invocation.getter(#props),
@@ -398,46 +399,47 @@ class MockMovieTheaterModel extends _i1.Mock implements _i6.MovieTheaterModel {
         returnValueForMissingStub: '',
       ) as String);
   @override
-  _i6.MovieTheaterModel wrapperFromMap(Map<String, dynamic>? map) =>
+  _i6.MovieInTheaterModel wrapperFromMap(Map<String, dynamic>? map) =>
       (super.noSuchMethod(
         Invocation.method(
           #wrapperFromMap,
           [map],
         ),
-        returnValue: _FakeMovieTheaterModel_4(
+        returnValue: _FakeMovieInTheaterModel_4(
           this,
           Invocation.method(
             #wrapperFromMap,
             [map],
           ),
         ),
-        returnValueForMissingStub: _FakeMovieTheaterModel_4(
+        returnValueForMissingStub: _FakeMovieInTheaterModel_4(
           this,
           Invocation.method(
             #wrapperFromMap,
             [map],
           ),
         ),
-      ) as _i6.MovieTheaterModel);
+      ) as _i6.MovieInTheaterModel);
   @override
-  _i6.MovieTheaterModel wrapperFromJson(String? source) => (super.noSuchMethod(
+  _i6.MovieInTheaterModel wrapperFromJson(String? source) =>
+      (super.noSuchMethod(
         Invocation.method(
           #wrapperFromJson,
           [source],
         ),
-        returnValue: _FakeMovieTheaterModel_4(
+        returnValue: _FakeMovieInTheaterModel_4(
           this,
           Invocation.method(
             #wrapperFromJson,
             [source],
           ),
         ),
-        returnValueForMissingStub: _FakeMovieTheaterModel_4(
+        returnValueForMissingStub: _FakeMovieInTheaterModel_4(
           this,
           Invocation.method(
             #wrapperFromJson,
             [source],
           ),
         ),
-      ) as _i6.MovieTheaterModel);
+      ) as _i6.MovieInTheaterModel);
 }

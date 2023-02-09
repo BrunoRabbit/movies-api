@@ -5,7 +5,7 @@ import 'package:movies_api/core/error/exceptions.dart';
 import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart';
 import 'package:movies_api/features/home_page/data/models/config_model.dart';
 import 'package:movies_api/features/home_page/data/models/movie_model.dart';
-import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart';
+import 'package:movies_api/features/home_page/data/models/movie_in_theater_model.dart';
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart';
 import 'package:movies_api/features/home_page/data/models/trending_model.dart';
 
@@ -159,35 +159,35 @@ void main() {
     },
   );
 
-  group('grouped getMoviesTheaters', () {
+  group('grouped getMoviesInTheaters', () {
     late MockApiRepositoryRemoteDataSourceImpl mockApiRepository;
-    late MockMovieTheaterModel tMovieTheaterModel;
+    late MockMovieInTheaterModel tmovieInTheaterModel;
 
     setUp(() {
       mockApiRepository = MockApiRepositoryRemoteDataSourceImpl();
-      tMovieTheaterModel = MockMovieTheaterModel();
+      tmovieInTheaterModel = MockMovieInTheaterModel();
     });
 
-    test('should return MovieTheaterModel if http call completes sucessfully',
+    test('should return movieInTheaterModel if http call completes sucessfully',
         () async {
-      when(mockApiRepository.getMoviesTheaters())
-          .thenAnswer((_) async => tMovieTheaterModel);
+      when(mockApiRepository.getMoviesInTheaters())
+          .thenAnswer((_) async => tmovieInTheaterModel);
 
-      final result = await mockApiRepository.getMoviesTheaters();
+      final result = await mockApiRepository.getMoviesInTheaters();
 
-      verify(mockApiRepository.getMoviesTheaters());
+      verify(mockApiRepository.getMoviesInTheaters());
       verifyNoMoreInteractions(mockApiRepository);
 
-      expect(result, isA<MovieTheaterModel>());
+      expect(result, isA<MovieInTheaterModel>());
     });
     test('should return a ServerException if http call complete with error',
         () async {
-      when(mockApiRepository.getMoviesTheaters()).thenThrow(ServerException());
+      when(mockApiRepository.getMoviesInTheaters()).thenThrow(ServerException());
 
-      expect(() => mockApiRepository.getMoviesTheaters(),
+      expect(() => mockApiRepository.getMoviesInTheaters(),
           throwsA(predicate((e) => e is ServerException)));
 
-      verify(mockApiRepository.getMoviesTheaters());
+      verify(mockApiRepository.getMoviesInTheaters());
       verifyNoMoreInteractions(mockApiRepository);
     });
   });

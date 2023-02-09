@@ -5,12 +5,12 @@ import 'package:movies_api/features/home_page/data/datasources/api_repository_re
 import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_configuration_api.dart';
-import 'package:movies_api/features/home_page/domain/usecases/get_movies_theaters.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_movies_in_theaters.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_popular_movies.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_top_rated.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_trending_api.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_theaters_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
@@ -45,8 +45,8 @@ Future<void> setupLocator() async {
     ),
   );
   sl.registerFactory(
-    () => MoviesTheatersBloc(
-      getMoviesTheaters: sl(),
+    () => MoviesInTheatersBloc(
+      getMoviesInTheaters: sl(),
     ),
   );
   
@@ -61,7 +61,7 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton<GetPopularMovies>(() => GetPopularMovies(sl()));
   sl.registerLazySingleton<GetTrendingApi>(() => GetTrendingApi(sl()));
   sl.registerLazySingleton<GetTopRated>(() => GetTopRated(sl()));
-  sl.registerLazySingleton<GetMoviesTheaters>(() => GetMoviesTheaters(sl()));
+  sl.registerLazySingleton<GetMoviesInTheaters>(() => GetMoviesInTheaters(sl()));
 
   // Repository
   sl.registerLazySingleton<ApiRepository>(

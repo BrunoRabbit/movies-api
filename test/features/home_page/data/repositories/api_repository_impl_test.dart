@@ -5,7 +5,7 @@ import 'package:movies_api/core/utils/exports.dart';
 import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
-import 'package:movies_api/features/home_page/domain/entities/movie_theater.dart';
+import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
 import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
 
@@ -235,34 +235,34 @@ void main() {
     });
   });
 
-//? [getMoviesTheaters] group
-  group('getMoviesTheaters', () {
+//? [getMoviesInTheaters] group
+  group('getMoviesInTheaters', () {
     //? has internet
     checkIfDeviceHasInternet(isHasInternet: true, () {
       //! tests
-      test('test getMoviesTheaters when connected', () async {
+      test('test getMoviesInTheaters when connected', () async {
         final repositoryImpl = MockApiRepositoryImpl();
-        MovieTheater tMovieTheater = MockMovieTheaterModel();
+        MovieInTheater tmovieInTheater = MockMovieInTheaterModel();
 
-        when(repositoryImpl.getMoviesTheaters())
-            .thenAnswer((_) async => Right(tMovieTheater));
+        when(repositoryImpl.getMoviesInTheaters())
+            .thenAnswer((_) async => Right(tmovieInTheater));
 
-        final result = await repositoryImpl.getMoviesTheaters();
+        final result = await repositoryImpl.getMoviesInTheaters();
 
-        verify(repositoryImpl.getMoviesTheaters()).called(1);
+        verify(repositoryImpl.getMoviesInTheaters()).called(1);
         verifyNoMoreInteractions(repositoryImpl);
 
-        expect(result, Right(tMovieTheater));
+        expect(result, Right(tmovieInTheater));
       });
-      test('call getMoviesTheaters and give error', () async {
+      test('call getMoviesInTheaters and give error', () async {
         final repositoryImpl = MockApiRepositoryImpl();
 
-        when(repositoryImpl.getMoviesTheaters())
+        when(repositoryImpl.getMoviesInTheaters())
             .thenAnswer((_) async => Left(ServerFailure()));
 
-        final result = await repositoryImpl.getMoviesTheaters();
+        final result = await repositoryImpl.getMoviesInTheaters();
 
-        verify(repositoryImpl.getMoviesTheaters());
+        verify(repositoryImpl.getMoviesInTheaters());
         verifyNoMoreInteractions(repositoryImpl);
 
         expect(result, Left(ServerFailure()));
@@ -271,15 +271,15 @@ void main() {
     //? don't have internet
     checkIfDeviceHasInternet(isHasInternet: false, () {
       //! tests
-      test('call getMoviesTheaters when don\'t have internet', () async {
+      test('call getMoviesInTheaters when don\'t have internet', () async {
         final repositoryImpl = MockApiRepositoryImpl();
 
-        when(repositoryImpl.getMoviesTheaters())
+        when(repositoryImpl.getMoviesInTheaters())
             .thenAnswer((_) async => Left(NoInternetConnection()));
 
-        final result = await repositoryImpl.getMoviesTheaters();
+        final result = await repositoryImpl.getMoviesInTheaters();
 
-        verify(repositoryImpl.getMoviesTheaters());
+        verify(repositoryImpl.getMoviesInTheaters());
         verifyNoMoreInteractions(repositoryImpl);
 
         expect(result, Left(NoInternetConnection()));

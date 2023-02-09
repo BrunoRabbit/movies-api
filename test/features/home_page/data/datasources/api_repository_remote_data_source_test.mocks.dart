@@ -11,10 +11,10 @@ import 'package:movies_api/features/home_page/data/datasources/api_repository_re
     as _i8;
 import 'package:movies_api/features/home_page/data/models/config_model.dart'
     as _i3;
+import 'package:movies_api/features/home_page/data/models/movie_in_theater_model.dart'
+    as _i7;
 import 'package:movies_api/features/home_page/data/models/movie_model.dart'
     as _i4;
-import 'package:movies_api/features/home_page/data/models/movie_theater_model.dart'
-    as _i7;
 import 'package:movies_api/features/home_page/data/models/top_rated_model.dart'
     as _i6;
 import 'package:movies_api/features/home_page/data/models/trending_model.dart'
@@ -81,9 +81,9 @@ class _FakeTopRatedModel_4 extends _i1.SmartFake implements _i6.TopRatedModel {
         );
 }
 
-class _FakeMovieTheaterModel_5 extends _i1.SmartFake
-    implements _i7.MovieTheaterModel {
-  _FakeMovieTheaterModel_5(
+class _FakeMovieInTheaterModel_5 extends _i1.SmartFake
+    implements _i7.MovieInTheaterModel {
+  _FakeMovieInTheaterModel_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -212,28 +212,29 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
         )),
       ) as _i9.Future<_i6.TopRatedModel>);
   @override
-  _i9.Future<_i7.MovieTheaterModel> getMoviesTheaters() => (super.noSuchMethod(
+  _i9.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
+      (super.noSuchMethod(
         Invocation.method(
-          #getMoviesTheaters,
+          #getMoviesInTheaters,
           [],
         ),
-        returnValue:
-            _i9.Future<_i7.MovieTheaterModel>.value(_FakeMovieTheaterModel_5(
+        returnValue: _i9.Future<_i7.MovieInTheaterModel>.value(
+            _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
-            #getMoviesTheaters,
+            #getMoviesInTheaters,
             [],
           ),
         )),
-        returnValueForMissingStub:
-            _i9.Future<_i7.MovieTheaterModel>.value(_FakeMovieTheaterModel_5(
+        returnValueForMissingStub: _i9.Future<_i7.MovieInTheaterModel>.value(
+            _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
-            #getMoviesTheaters,
+            #getMoviesInTheaters,
             [],
           ),
         )),
-      ) as _i9.Future<_i7.MovieTheaterModel>);
+      ) as _i9.Future<_i7.MovieInTheaterModel>);
 }
 
 /// A class which mocks [ApiRepositoryRemoteDataSource].
@@ -330,26 +331,27 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
         )),
       ) as _i9.Future<_i6.TopRatedModel>);
   @override
-  _i9.Future<_i7.MovieTheaterModel> getMoviesTheaters() => (super.noSuchMethod(
+  _i9.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
+      (super.noSuchMethod(
         Invocation.method(
-          #getMoviesTheaters,
+          #getMoviesInTheaters,
           [],
         ),
-        returnValue:
-            _i9.Future<_i7.MovieTheaterModel>.value(_FakeMovieTheaterModel_5(
+        returnValue: _i9.Future<_i7.MovieInTheaterModel>.value(
+            _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
-            #getMoviesTheaters,
+            #getMoviesInTheaters,
             [],
           ),
         )),
-        returnValueForMissingStub:
-            _i9.Future<_i7.MovieTheaterModel>.value(_FakeMovieTheaterModel_5(
+        returnValueForMissingStub: _i9.Future<_i7.MovieInTheaterModel>.value(
+            _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
-            #getMoviesTheaters,
+            #getMoviesInTheaters,
             [],
           ),
         )),
-      ) as _i9.Future<_i7.MovieTheaterModel>);
+      ) as _i9.Future<_i7.MovieInTheaterModel>);
 }

@@ -1,29 +1,29 @@
 import 'dart:convert';
 
-import 'package:movies_api/features/home_page/domain/entities/movie_theater.dart';
+import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
 
-class MovieTheaterModel extends MovieTheater {
-  const MovieTheaterModel({
+class MovieInTheaterModel extends MovieInTheater {
+  const MovieInTheaterModel({
     required Dates super.dates,
     required int super.page,
-    required List<MovieTheaterResults> super.results,
+    required List<MovieInTheaterResults> super.results,
     required int super.totalPages,
     required int super.totalResults,
   });
 
-  factory MovieTheaterModel.fromMap(Map<String, dynamic> map) {
-    return MovieTheaterModel(
+  factory MovieInTheaterModel.fromMap(Map<String, dynamic> map) {
+    return MovieInTheaterModel(
       dates: Dates.fromMap(map['dates']),
       page: map['page']?.toInt(),
-      results: List<MovieTheaterResults>.from(
-          map['results'].map((x) => MovieTheaterResults.fromMap(x))),
+      results: List<MovieInTheaterResults>.from(
+          map['results'].map((x) => MovieInTheaterResults.fromMap(x))),
       totalPages: map['total_pages']?.toInt(),
       totalResults: map['total_results']?.toInt(),
     );
   }
 
-  factory MovieTheaterModel.fromJson(String source) =>
-      MovieTheaterModel.fromMap(json.decode(source));
+  factory MovieInTheaterModel.fromJson(String source) =>
+      MovieInTheaterModel.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -50,9 +50,9 @@ class MovieTheaterModel extends MovieTheater {
 
   String toJson() => json.encode(toMap());
 
-  MovieTheaterModel wrapperFromMap(Map<String, dynamic> map) =>
-      MovieTheaterModel.fromMap(map);
+  MovieInTheaterModel wrapperFromMap(Map<String, dynamic> map) =>
+      MovieInTheaterModel.fromMap(map);
 
-  MovieTheaterModel wrapperFromJson(String source) =>
-      MovieTheaterModel.fromJson(source);
+  MovieInTheaterModel wrapperFromJson(String source) =>
+      MovieInTheaterModel.fromJson(source);
 }

@@ -12,14 +12,14 @@ extension VerifyNull on dynamic {
   }
 }
 
-class MovieTheater extends Equatable {
+class MovieInTheater extends Equatable {
   final Dates? dates;
   final int? page;
-  final List<MovieTheaterResults>? results;
+  final List<MovieInTheaterResults>? results;
   final int? totalPages;
   final int? totalResults;
 
-  const MovieTheater({
+  const MovieInTheater({
     required this.dates,
     required this.page,
     required this.results,
@@ -37,7 +37,7 @@ class MovieTheater extends Equatable {
       ];
 }
 
-class MovieTheaterResults extends Equatable {
+class MovieInTheaterResults extends Equatable {
   final int? id;
   final int? voteCount;
   final bool? video;
@@ -53,7 +53,7 @@ class MovieTheaterResults extends Equatable {
   final double? voteAverage;
   final List<int>? genreIds;
 
-  const MovieTheaterResults({
+  const MovieInTheaterResults({
     required this.id,
     required this.voteCount,
     required this.adult,
@@ -70,8 +70,8 @@ class MovieTheaterResults extends Equatable {
     required this.genreIds,
   });
 
-  factory MovieTheaterResults.fromMap(Map<String, dynamic> map) {
-    return MovieTheaterResults(
+  factory MovieInTheaterResults.fromMap(Map<String, dynamic> map) {
+    return MovieInTheaterResults(
       id: map['id']?.toInt(),
       voteCount: map['vote_count']?.toInt(),
       video: map['video'],
@@ -140,8 +140,8 @@ class MovieTheaterResults extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory MovieTheaterResults.fromJson(String source) =>
-      MovieTheaterResults.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MovieInTheaterResults.fromJson(String source) =>
+      MovieInTheaterResults.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   List<Object?> get props => [

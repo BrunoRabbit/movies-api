@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_theaters_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
@@ -24,7 +24,7 @@ class RegisterBlocsCubits {
     BlocProvider<SmoothIndicatorCubit>(
       create: (_) => sl(),
     ),
-    BlocProvider<MoviesTheatersBloc>(
+    BlocProvider<MoviesInTheatersBloc>(
       create: (_) => sl(),
     ),
   ];

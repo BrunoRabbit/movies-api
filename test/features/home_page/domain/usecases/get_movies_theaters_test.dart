@@ -1,50 +1,50 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
-import 'package:movies_api/features/home_page/domain/entities/movie_theater.dart';
+import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
-import 'package:movies_api/features/home_page/domain/usecases/get_movies_theaters.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_movies_in_theaters.dart';
 
 import 'use_cases_generator.mocks.dart';
 
-class MockMovieTheater extends Mock implements MovieTheater {}
+class MockMovieInTheater extends Mock implements MovieInTheater {}
 
 void main() {
   late ApiRepository apiRepository;
-  late GetMoviesTheaters usecase;
+  late GetMoviesInTheaters usecase;
 
-  final MovieTheater tMovieTheater = MockMovieTheater();
+  final MovieInTheater tMovieInTheater = MockMovieInTheater();
 
   setUp(() {
     apiRepository = MockApiRepository();
-    usecase = GetMoviesTheaters(apiRepository);
+    usecase = GetMoviesInTheaters(apiRepository);
   });
 
   group('usecase GetMoviesTheaters', () {
     test(
-      'when a successfull call occurs should return [MovieTheater] entity',
+      'when a successfull call occurs should return [movieInTheater] entity',
       () async {
-        when(apiRepository.getMoviesTheaters())
-            .thenAnswer((_) async => Right(tMovieTheater));
+        when(apiRepository.getMoviesInTheaters())
+            .thenAnswer((_) async => Right(tMovieInTheater));
 
         final result = await usecase(NoParams());
 
-        verify(apiRepository.getMoviesTheaters());
+        verify(apiRepository.getMoviesInTheaters());
         verifyNoMoreInteractions(apiRepository);
 
-        expect(result, Right(tMovieTheater));
+        expect(result, Right(tMovieInTheater));
       },
     );
 
     test(
         'call succeeds but generates an error, it should return [ServerFailure]',
         () async {
-      when(apiRepository.getMoviesTheaters())
+      when(apiRepository.getMoviesInTheaters())
           .thenAnswer((_) async => Left(ServerFailure()));
 
       final result = await usecase(NoParams());
 
-      verify(apiRepository.getMoviesTheaters());
+      verify(apiRepository.getMoviesInTheaters());
       verifyNoMoreInteractions(apiRepository);
 
       expect(result, Left(ServerFailure()));
@@ -53,12 +53,12 @@ void main() {
     test(
         'call succeeds but generates an error, it should return [NoInternetConnection]',
         () async {
-      when(apiRepository.getMoviesTheaters())
+      when(apiRepository.getMoviesInTheaters())
           .thenAnswer((_) async => Left(NoInternetConnection()));
 
       final result = await usecase(NoParams());
 
-      verify(apiRepository.getMoviesTheaters());
+      verify(apiRepository.getMoviesInTheaters());
       verifyNoMoreInteractions(apiRepository);
 
       expect(result, Left(NoInternetConnection()));
