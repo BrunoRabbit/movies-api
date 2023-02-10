@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:movies_api/core/themes/text_themes.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/core/utils/extensions/url_helper.dart';
@@ -15,97 +17,156 @@ class MoviesTheatersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12, top: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Filmes em cartaz', // now playing api
-            style: TextThemes.headline2.semiBold,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          SizedBox(
-            height: 24 * 11,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
+    return BlocBuilder<ConfigurateApiBloc, ConfigurateApiState>(
+      builder: (context, confState) {
+        if (confState is ConfigurateApiLoaded) {
+          return BuildMoviesInTheatersBloc(confState);
+        }
+
+        return Container();
+      },
+    );
+  }
+}
+
+class BuildMoviesInTheatersBloc extends StatefulWidget {
+  final ConfigurateApiLoaded confState;
+
+  const BuildMoviesInTheatersBloc(this.confState, {Key? key}) : super(key: key);
+
+  @override
+  State<BuildMoviesInTheatersBloc> createState() =>
+      _BuildMoviesInTheatersBlocState();
+}
+
+class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
+  String url = "";
+  String releaseDate = "";
+  String title = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MoviesInTheatersBloc, MoviesInTheatersState>(
+      builder: (context, theaterState) {
+        if (theaterState is MoviesInTheatersLoaded) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 12, top: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                BlocBuilder<ConfigurateApiBloc, ConfigurateApiState>(
-                  builder: (context, confState) {
-                    if (confState is ConfigurateApiLoaded) {
-                      return BlocBuilder<MoviesInTheatersBloc,
-                          MoviesInTheatersState>(
-                        builder: (context, popularState) {
-                          if (popularState is MoviesInTheatersLoaded) {
-                            return Flexible(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                                  String? _baseUrl =
-                                      confState.config.images!.baseUrl;
-                                  String? _posterSize =
-                                      confState.config.images!.posterSizes![4];
+                Text(
+                  'Filmes em cartaz', // now playing api
+                  style: TextThemes.headline2.semiBold,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                SizedBox(
+                  height: 20 * 16,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      _getImagesFromApi(index, theaterState);
+                      _getImagesDetails(index, theaterState);
 
-                                  String poster = popularState
-                                      .movieInTheater.results![index].posterPath!;
-
-                                  final url =
-                                      _baseUrl!.concatUrl(_posterSize, poster);
-                                  return Padding(
-                                    padding:
-                                        const EdgeInsets.only(right: 24 / 2),
-                                    child: CachedNetworkImage(
-                                      width: 24 * 7,
-                                      imageUrl: url,
-                                      color: Colors.transparent,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black87,
-                                              blurRadius: 4,
-                                            )
-                                          ],
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) {
-                                        return const Center(
-                                          child: GradientCircularProgress(),
-                                        );
-                                      },
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
-                                      placeholderFadeInDuration:
-                                          const Duration(milliseconds: 600),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 24 / 2),
+                              child: CachedNetworkImage(
+                                imageUrl: url,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black87,
+                                        blurRadius: 4,
+                                      )
+                                    ],
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
                                     ),
+                                  ),
+                                ),
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) {
+                                  return const Center(
+                                    child: GradientCircularProgress(),
                                   );
                                 },
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                placeholderFadeInDuration:
+                                    const Duration(milliseconds: 600),
                               ),
-                            );
-                          }
-                          return Container();
-                        },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.38,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    title,
+                                    style: TextThemes.body2.semiBold,
+                                  ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.38,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  releaseDate,
+                                  style: TextThemes.subtitle1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       );
-                    }
-                    return Container();
-                  },
-                )
+                    },
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+        return Container();
+      },
     );
+  }
+
+  _getImagesFromApi(int index, MoviesInTheatersLoaded theaterState) {
+    String? baseUrl = widget.confState.config.images!.baseUrl;
+    String? posterSize = widget.confState.config.images!.posterSizes![4];
+
+    String poster = theaterState.movieInTheater.results![index].posterPath!;
+
+    url = baseUrl!.concatUrl(posterSize, poster);
+  }
+
+  _getImagesDetails(int index, MoviesInTheatersLoaded theaterState) {
+    // * get release_date
+    releaseDate = theaterState.movieInTheater.results![index].releaseDate!;
+
+    // * get title
+    title = theaterState.movieInTheater.results![index].title!;
   }
 }

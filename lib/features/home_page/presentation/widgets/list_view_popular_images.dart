@@ -31,9 +31,8 @@ class ListViewPopularImages extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(right: 24 / 2),
           child: CachedNetworkImage(
-            width: 24 * 7,
+            width: MediaQuery.of(context).size.height / 4.2,
             imageUrl: url,
-            color: Colors.transparent,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

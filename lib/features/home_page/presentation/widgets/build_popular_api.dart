@@ -18,7 +18,7 @@ class BuildPopularApi extends StatelessWidget {
     return BlocBuilder<PopularApiBloc, PopularApiState>(
       builder: (context, popularState) {
         if (popularState is PopularApiLoaded) {
-          return Flexible(
+          return Expanded(
             child: ListViewPopularImages(
               confState: confState,
               popularState: popularState,
