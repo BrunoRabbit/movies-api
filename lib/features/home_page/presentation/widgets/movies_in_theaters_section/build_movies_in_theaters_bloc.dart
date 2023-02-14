@@ -21,6 +21,7 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
   String url = "";
   String releaseDate = "";
   String title = "";
+  double rating = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,8 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
                   height: 12,
                 ),
                 SizedBox(
-                  height: 20 * 16,
+                  // height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.43,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -50,7 +52,12 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
                       _getImagesFromApi(index, theaterState);
                       _getImagesDetails(index, theaterState);
 
-                      return MovieInTheatesImages(url: url, title: title, releaseDate: releaseDate);
+                      return MovieInTheatesImages(
+                        url: url,
+                        title: title,
+                        releaseDate: releaseDate,
+                        rating: rating,
+                      );
                     },
                   ),
                 ),
@@ -78,5 +85,8 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
 
     // * get title
     title = theaterState.movieInTheater.results![index].title!;
+
+    // * get rating
+    rating = theaterState.movieInTheater.results![index].voteAverage!;
   }
 }
