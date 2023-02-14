@@ -5,7 +5,7 @@ import 'package:movies_api/core/themes/text_themes.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/widgets/carousel_slider_widget.dart';
+import 'package:movies_api/features/home_page/presentation/widgets/carousel/carousel_slider_widget.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/movies_theaters_section.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/popular_movie_section.dart';
 
