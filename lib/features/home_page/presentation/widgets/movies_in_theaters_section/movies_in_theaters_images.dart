@@ -28,8 +28,7 @@ class MovieInTheatesImages extends StatelessWidget {
             padding: const EdgeInsets.only(right: 24 / 2),
             child: CachedNetworkImage(
               imageUrl: url,
-              imageBuilder: (context, imageProvider) =>
-                  Container(
+              imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: const [
@@ -44,16 +43,13 @@ class MovieInTheatesImages extends StatelessWidget {
                   ),
                 ),
               ),
-              progressIndicatorBuilder:
-                  (context, url, downloadProgress) {
+              progressIndicatorBuilder: (context, url, downloadProgress) {
                 return const Center(
                   child: GradientCircularProgress(),
                 );
               },
-              errorWidget: (context, url, error) =>
-                  const Icon(Icons.error),
-              placeholderFadeInDuration:
-                  const Duration(milliseconds: 600),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholderFadeInDuration: const Duration(milliseconds: 600),
             ),
           ),
         ),
@@ -62,27 +58,19 @@ class MovieInTheatesImages extends StatelessWidget {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.38,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  title,
-                  style: TextThemes.body2.semiBold,
-                ),
-            ],
+          child: Text(
+            title,
+            style: TextThemes.body2.semiBold,
+            textAlign: TextAlign.start,
           ),
         ),
         const Spacer(),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.38,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                releaseDate,
-                style: TextThemes.subtitle1,
-              ),
-            ],
+          child: Text(
+            releaseDate,
+            style: TextThemes.subtitle1,
+            textAlign: TextAlign.start,
           ),
         ),
       ],
