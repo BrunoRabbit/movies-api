@@ -50,33 +50,6 @@ class _SliderImagesWidgetState extends State<SliderImagesWidget> {
             errorWidget: (context, url, error) => const Icon(Icons.error),
             placeholderFadeInDuration: const Duration(milliseconds: 600),
           ),
-          // _loadingStatus.values.every((status) => status == true)
-          //     ? Container(
-          //         width: MediaQuery.of(context).size.width / 2.5,
-          //         decoration: BoxDecoration(
-          //           borderRadius: const BorderRadius.only(
-          //             topLeft: Radius.circular(10),
-          //             bottomLeft: Radius.circular(10),
-          //           ),
-          //           gradient: LinearGradient(
-          //             begin: FractionalOffset.topRight,
-          //             end: const FractionalOffset(0.9, 0),
-          //             colors: [
-          //               Colors.grey.withOpacity(0.0),
-          //               Colors.black.withOpacity(0.25),
-          //             ],
-          //             stops: const [0.0, 1.0],
-          //           ),
-          //         ),
-          //       )
-          //     : Container(),
-          // Container(
-          //   width: MediaQuery.of(context).size.width / 3,
-          //   child: Text(
-          //     widget.title,
-          //     style: TextThemes.body1.semiBold,
-          //   ),
-          // ),
         ],
       ),
     );
