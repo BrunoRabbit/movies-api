@@ -25,6 +25,7 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
   double rating = 0.0;
   late double sectionHeigth;
   late double sectionWidth;
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -59,20 +60,26 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
                 SizedBox(
                   height: sectionHeigth,
                   width: sectionWidth,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      _getImagesFromApi(index, theaterState);
-                      _getImagesDetails(index, theaterState);
-
-                      return MovieInTheatesImages(
-                        url: url,
-                        title: title,
-                        releaseDate: releaseDate,
-                        rating: rating,
-                      );
-                    },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            _getImagesFromApi(index, theaterState);
+                            _getImagesDetails(index, theaterState);
+                      
+                            return MovieInTheatesImages(
+                              url: url,
+                              title: title,
+                              releaseDate: releaseDate,
+                              rating: rating,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
