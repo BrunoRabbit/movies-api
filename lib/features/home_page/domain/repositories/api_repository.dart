@@ -4,6 +4,7 @@ import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
 import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
+import 'package:movies_api/features/home_page/domain/entities/upcoming_movie.dart';
 
 abstract class ApiRepository {
   Future<Either<Failure, Config>> getConfigurationApi();
@@ -11,4 +12,5 @@ abstract class ApiRepository {
   Future<Either<Failure, Trending>> getTrendingApi();
   Future<Either<Failure, TopRated>> getTopRated();
   Future<Either<Failure, MovieInTheater>> getMoviesInTheaters();
+  Future<Either<Failure, UpcomingMovie>> getUpcomingApi();
 }
