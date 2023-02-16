@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/core/widgets/gradient_scaffold.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_upcoming_api.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/body_home_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     getTrendingApi();
     getTopRated();
     getMoviesTheater();
+    getUpcomingApi();
   }
 
   void getConfigurateApi() {
@@ -48,8 +51,12 @@ class _HomePageState extends State<HomePage> {
     BlocProvider.of<TopRatedBloc>(context).add(TopRatedLoad());
   }
 
-   void getMoviesTheater() {
+  void getMoviesTheater() {
     BlocProvider.of<MoviesInTheatersBloc>(context).add(MoviesInTheatersLoad());
+  }
+
+  void getUpcomingApi() {
+    BlocProvider.of<UpcomingApiBloc>(context).add(UpcomingApiLoad());
   }
 
   @override

@@ -1,14 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/carousel/carousel_slider_widget.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/movies_in_theaters_section/movies_theaters_section.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/popular_section/popular_movie_section.dart';
-import 'package:movies_api/features/home_page/presentation/widgets/popular_section/popular_movie_section.dart';
+import 'package:movies_api/features/home_page/presentation/widgets/upcoming_section/upcoming_section.dart';
 
 class BodyHomePage extends StatefulWidget {
   const BodyHomePage({Key? key}) : super(key: key);
@@ -27,18 +27,15 @@ class _BodyHomePageState extends State<BodyHomePage> {
       onRefresh: () => _refreshPosterMovies(),
       child: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             // * The following components are displayed in the following order on the screen:
             // * Carousel: CarouselSlider on top on the screen
             // * PopularMovieSection: show in the middle of the screen several popular movies
             // * MoviesTheatersSection: show a section containing movies in theaters
-            const CarouselSliderWidget(),
-            const PopularMovieSection(),
-            const MoviesTheatersSection(),
-            Text(
-              'Chegando em breve', // upcoming api
-              style: TextThemes.headline2.semiBold,
-            ),
+            CarouselSliderWidget(),
+            PopularMovieSection(),
+            MoviesTheatersSection(),
+            UpcomingSection(),
           ],
         ),
       ),
@@ -63,5 +60,4 @@ class _BodyHomePageState extends State<BodyHomePage> {
     // BlocProvider.of<TopRatedBloc>(context).add(TopRatedLoad());
   }
 }
-
 
