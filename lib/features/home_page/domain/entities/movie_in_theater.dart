@@ -1,16 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-
-extension VerifyNull on dynamic {
-  T? notNull<T>() {
-    if (this != null) {
-      return this;
-    }
-    return null;
-  }
-}
+import 'package:movies_api/core/utils/extensions/verify_null.dart';
 
 class MovieInTheater extends Equatable {
   final Dates? dates;
@@ -141,7 +132,8 @@ class MovieInTheaterResults extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory MovieInTheaterResults.fromJson(String source) =>
-      MovieInTheaterResults.fromMap(json.decode(source) as Map<String, dynamic>);
+      MovieInTheaterResults.fromMap(
+          json.decode(source) as Map<String, dynamic>);
 
   @override
   List<Object?> get props => [

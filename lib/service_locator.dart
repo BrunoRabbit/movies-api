@@ -9,11 +9,13 @@ import 'package:movies_api/features/home_page/domain/usecases/get_movies_in_thea
 import 'package:movies_api/features/home_page/domain/usecases/get_popular_movies.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_top_rated.dart';
 import 'package:movies_api/features/home_page/domain/usecases/get_trending_api.dart';
+import 'package:movies_api/features/home_page/domain/usecases/get_upcoming_api.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
+import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_counter/smooth_indicator_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,6 +51,11 @@ Future<void> setupLocator() async {
       getMoviesInTheaters: sl(),
     ),
   );
+  sl.registerFactory(
+    () => UpcomingApiBloc(
+      getUpcomingApi: sl(),
+    ),
+  );
   
   // Cubit
   sl.registerFactory(
@@ -62,6 +69,7 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton<GetTrendingApi>(() => GetTrendingApi(sl()));
   sl.registerLazySingleton<GetTopRated>(() => GetTopRated(sl()));
   sl.registerLazySingleton<GetMoviesInTheaters>(() => GetMoviesInTheaters(sl()));
+  sl.registerLazySingleton<GetUpcomingApi>(() => GetUpcomingApi(sl()));
 
   // Repository
   sl.registerLazySingleton<ApiRepository>(
