@@ -6,6 +6,7 @@ import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
 import 'package:movies_api/features/home_page/domain/entities/top_rated.dart';
 import 'package:movies_api/features/home_page/domain/entities/trending.dart';
+import 'package:movies_api/features/home_page/domain/entities/upcoming_movie.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
@@ -84,6 +85,21 @@ class ApiRepositoryImpl implements ApiRepository {
         final movieInTheater = await remoteApiRepository.getMoviesInTheaters();
 
         return Right(movieInTheater);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(NoInternetConnection());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpcomingMovie>> getUpcomingApi() async {
+   if (await networkStatus.isConnected) {
+      try {
+        final upComingMovie = await remoteApiRepository.getUpcomingApi();
+
+        return Right(upComingMovie);
       } on ServerException {
         return Left(ServerFailure());
       }
