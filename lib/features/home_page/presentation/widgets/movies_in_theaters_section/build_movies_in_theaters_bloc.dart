@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/core/utils/extensions/url_helper.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
@@ -22,6 +23,20 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
   String releaseDate = "";
   String title = "";
   double rating = 0.0;
+  late double sectionHeigth;
+  late double sectionWidth;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    sectionHeigth = context.getSize(
+      MediaQuery.of(context).size.width / 2,
+      MediaQuery.of(context).size.height * 0.43,
+    );
+    sectionWidth = context.getSize(
+      MediaQuery.of(context).size.width,
+      MediaQuery.of(context).size.height,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +57,8 @@ class _BuildMoviesInTheatersBlocState extends State<BuildMoviesInTheatersBloc> {
                   height: 12,
                 ),
                 SizedBox(
-                  // height: MediaQuery.of(context).size.height * 0.6,
-                  height: MediaQuery.of(context).size.height * 0.43,
-                  width: MediaQuery.of(context).size.width,
+                  height: sectionHeigth,
+                  width: sectionWidth,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
