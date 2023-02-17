@@ -179,8 +179,12 @@ class _UpcomingMovieImageState extends State<UpcomingMovieImage> {
   }
 
   String _convertStringToDateTime() {
-    DateTime dateTime = DateFormat('yyyy-MM-dd').parse(widget.releaseDate);
+    if (widget.releaseDate == "TBA") {
+      return "To Be Announced";
+    } else {
+      DateTime dateTime = DateFormat('yyyy-MM-dd').parse(widget.releaseDate);
 
-    return DateFormat('dd/MM/yyyy').format(dateTime);
+      return DateFormat('dd/MM/yyyy').format(dateTime);
+    }
   }
 }

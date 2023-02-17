@@ -100,7 +100,14 @@ class _BuildUpcomingApiState extends State<BuildUpcomingApi> {
 
   _getImagesDetails(int index, UpcomingApiLoaded upcomingState) {
     // * get release_date
-    releaseDate = upcomingState.upcomingMovie.results![index].releaseDate!;
+    DateTime? releaseDateTime = DateTime.tryParse(
+        upcomingState.upcomingMovie.results![index].releaseDate!);
+        
+    if (releaseDateTime != null && releaseDateTime.isBefore(DateTime.now())) {
+      releaseDate = upcomingState.upcomingMovie.results![index].releaseDate!;
+    } else {
+      releaseDate = "TBA";
+    }
 
     // * get title
     title = upcomingState.upcomingMovie.results![index].title!;
