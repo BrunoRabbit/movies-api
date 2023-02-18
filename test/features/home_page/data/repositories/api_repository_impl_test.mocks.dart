@@ -20,6 +20,8 @@ import 'package:movies_api/features/home_page/domain/entities/top_rated.dart'
     as _i9;
 import 'package:movies_api/features/home_page/domain/entities/trending.dart'
     as _i8;
+import 'package:movies_api/features/home_page/domain/entities/upcoming_movie.dart'
+    as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -218,4 +220,30 @@ class MockApiRepositoryImpl extends _i1.Mock implements _i4.ApiRepositoryImpl {
               ),
             )),
           ) as _i5.Future<_i2.Either<_i2.Failure, _i10.MovieInTheater>>);
+  @override
+  _i5.Future<_i2.Either<_i2.Failure, _i11.UpcomingMovie>> getUpcomingApi() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUpcomingApi,
+          [],
+        ),
+        returnValue:
+            _i5.Future<_i2.Either<_i2.Failure, _i11.UpcomingMovie>>.value(
+                _FakeEither_2<_i2.Failure, _i11.UpcomingMovie>(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i2.Either<_i2.Failure, _i11.UpcomingMovie>>.value(
+                _FakeEither_2<_i2.Failure, _i11.UpcomingMovie>(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i2.Failure, _i11.UpcomingMovie>>);
 }

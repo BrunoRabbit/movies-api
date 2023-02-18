@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_api/core/utils/exports.dart';
+import 'package:movies_api/features/home_page/data/models/upcoming_movie_model.dart';
 import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
@@ -235,7 +236,7 @@ void main() {
     });
   });
 
-//? [getMoviesInTheaters] group
+  //? [getMoviesInTheaters] group
   group('getMoviesInTheaters', () {
     //? has internet
     checkIfDeviceHasInternet(isHasInternet: true, () {
@@ -280,6 +281,58 @@ void main() {
         final result = await repositoryImpl.getMoviesInTheaters();
 
         verify(repositoryImpl.getMoviesInTheaters());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(NoInternetConnection()));
+      });
+    });
+  });
+  
+  //? [getUpcomingApi] group
+  group('getUpcomingApi', () {
+    //? has internet
+    checkIfDeviceHasInternet(isHasInternet: true, () {
+      //! tests
+      test('test getUpcomingApi when connected', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+        UpcomingMovieModel tUpcomingMovieModel = MockUpcomingMovieModel();
+
+        when(repositoryImpl.getUpcomingApi())
+            .thenAnswer((_) async => Right(tUpcomingMovieModel));
+
+        final result = await repositoryImpl.getUpcomingApi();
+
+        verify(repositoryImpl.getUpcomingApi()).called(1);
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Right(tUpcomingMovieModel));
+      });
+      test('call getUpcomingApi and give error', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getUpcomingApi())
+            .thenAnswer((_) async => Left(ServerFailure()));
+
+        final result = await repositoryImpl.getUpcomingApi();
+
+        verify(repositoryImpl.getUpcomingApi());
+        verifyNoMoreInteractions(repositoryImpl);
+
+        expect(result, Left(ServerFailure()));
+      });
+    });
+    //? don't have internet
+    checkIfDeviceHasInternet(isHasInternet: false, () {
+      //! tests
+      test('call getUpcomingApi when don\'t have internet', () async {
+        final repositoryImpl = MockApiRepositoryImpl();
+
+        when(repositoryImpl.getUpcomingApi())
+            .thenAnswer((_) async => Left(NoInternetConnection()));
+
+        final result = await repositoryImpl.getUpcomingApi();
+
+        verify(repositoryImpl.getUpcomingApi());
         verifyNoMoreInteractions(repositoryImpl);
 
         expect(result, Left(NoInternetConnection()));
