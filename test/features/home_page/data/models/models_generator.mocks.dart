@@ -14,6 +14,8 @@ import 'package:movies_api/features/home_page/data/models/top_rated_model.dart'
     as _i5;
 import 'package:movies_api/features/home_page/data/models/trending_model.dart'
     as _i4;
+import 'package:movies_api/features/home_page/data/models/upcoming_movie_model.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -69,6 +71,17 @@ class _FakeTopRatedModel_3 extends _i1.SmartFake implements _i5.TopRatedModel {
 class _FakeMovieInTheaterModel_4 extends _i1.SmartFake
     implements _i6.MovieInTheaterModel {
   _FakeMovieInTheaterModel_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUpcomingMovieModel_5 extends _i1.SmartFake
+    implements _i7.UpcomingMovieModel {
+  _FakeUpcomingMovieModel_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -442,4 +455,78 @@ class MockMovieInTheaterModel extends _i1.Mock
           ),
         ),
       ) as _i6.MovieInTheaterModel);
+}
+
+/// A class which mocks [UpcomingMovieModel].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpcomingMovieModel extends _i1.Mock
+    implements _i7.UpcomingMovieModel {
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+        returnValueForMissingStub: <Object?>[],
+      ) as List<Object?>);
+  @override
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+        returnValueForMissingStub: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+  @override
+  String toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
+  _i7.UpcomingMovieModel wrapperFromMap(Map<String, dynamic>? map) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #wrapperFromMap,
+          [map],
+        ),
+        returnValue: _FakeUpcomingMovieModel_5(
+          this,
+          Invocation.method(
+            #wrapperFromMap,
+            [map],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUpcomingMovieModel_5(
+          this,
+          Invocation.method(
+            #wrapperFromMap,
+            [map],
+          ),
+        ),
+      ) as _i7.UpcomingMovieModel);
+  @override
+  _i7.UpcomingMovieModel wrapperFromJson(String? source) => (super.noSuchMethod(
+        Invocation.method(
+          #wrapperFromJson,
+          [source],
+        ),
+        returnValue: _FakeUpcomingMovieModel_5(
+          this,
+          Invocation.method(
+            #wrapperFromJson,
+            [source],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUpcomingMovieModel_5(
+          this,
+          Invocation.method(
+            #wrapperFromJson,
+            [source],
+          ),
+        ),
+      ) as _i7.UpcomingMovieModel);
 }

@@ -3,12 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i10;
 
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart'
-    as _i8;
+    as _i9;
 import 'package:movies_api/features/home_page/data/models/config_model.dart'
     as _i3;
 import 'package:movies_api/features/home_page/data/models/movie_in_theater_model.dart'
@@ -19,6 +19,8 @@ import 'package:movies_api/features/home_page/data/models/top_rated_model.dart'
     as _i6;
 import 'package:movies_api/features/home_page/data/models/trending_model.dart'
     as _i5;
+import 'package:movies_api/features/home_page/data/models/upcoming_movie_model.dart'
+    as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -92,11 +94,22 @@ class _FakeMovieInTheaterModel_5 extends _i1.SmartFake
         );
 }
 
+class _FakeUpcomingMovieModel_6 extends _i1.SmartFake
+    implements _i8.UpcomingMovieModel {
+  _FakeUpcomingMovieModel_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [ApiRepositoryRemoteDataSourceImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
-    implements _i8.ApiRepositoryRemoteDataSourceImpl {
+    implements _i9.ApiRepositoryRemoteDataSourceImpl {
   @override
   String get key => (super.noSuchMethod(
         Invocation.getter(#key),
@@ -124,12 +137,12 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i9.Future<_i3.ConfigModel> getConfigurationApi() => (super.noSuchMethod(
+  _i10.Future<_i3.ConfigModel> getConfigurationApi() => (super.noSuchMethod(
         Invocation.method(
           #getConfigurationApi,
           [],
         ),
-        returnValue: _i9.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+        returnValue: _i10.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
           this,
           Invocation.method(
             #getConfigurationApi,
@@ -137,21 +150,21 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+            _i10.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
           this,
           Invocation.method(
             #getConfigurationApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i3.ConfigModel>);
+      ) as _i10.Future<_i3.ConfigModel>);
   @override
-  _i9.Future<_i4.MovieModel> getPopularMovies() => (super.noSuchMethod(
+  _i10.Future<_i4.MovieModel> getPopularMovies() => (super.noSuchMethod(
         Invocation.method(
           #getPopularMovies,
           [],
         ),
-        returnValue: _i9.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+        returnValue: _i10.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
           this,
           Invocation.method(
             #getPopularMovies,
@@ -159,21 +172,21 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+            _i10.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
           this,
           Invocation.method(
             #getPopularMovies,
             [],
           ),
         )),
-      ) as _i9.Future<_i4.MovieModel>);
+      ) as _i10.Future<_i4.MovieModel>);
   @override
-  _i9.Future<_i5.TrendingModel> getTrendingApi() => (super.noSuchMethod(
+  _i10.Future<_i5.TrendingModel> getTrendingApi() => (super.noSuchMethod(
         Invocation.method(
           #getTrendingApi,
           [],
         ),
-        returnValue: _i9.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+        returnValue: _i10.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
           this,
           Invocation.method(
             #getTrendingApi,
@@ -181,21 +194,21 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+            _i10.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
           this,
           Invocation.method(
             #getTrendingApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i5.TrendingModel>);
+      ) as _i10.Future<_i5.TrendingModel>);
   @override
-  _i9.Future<_i6.TopRatedModel> getTopRatedApi() => (super.noSuchMethod(
+  _i10.Future<_i6.TopRatedModel> getTopRatedApi() => (super.noSuchMethod(
         Invocation.method(
           #getTopRatedApi,
           [],
         ),
-        returnValue: _i9.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
+        returnValue: _i10.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
           this,
           Invocation.method(
             #getTopRatedApi,
@@ -203,22 +216,22 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
+            _i10.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
           this,
           Invocation.method(
             #getTopRatedApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i6.TopRatedModel>);
+      ) as _i10.Future<_i6.TopRatedModel>);
   @override
-  _i9.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
+  _i10.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
       (super.noSuchMethod(
         Invocation.method(
           #getMoviesInTheaters,
           [],
         ),
-        returnValue: _i9.Future<_i7.MovieInTheaterModel>.value(
+        returnValue: _i10.Future<_i7.MovieInTheaterModel>.value(
             _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
@@ -226,7 +239,7 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
             [],
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i7.MovieInTheaterModel>.value(
+        returnValueForMissingStub: _i10.Future<_i7.MovieInTheaterModel>.value(
             _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
@@ -234,21 +247,44 @@ class MockApiRepositoryRemoteDataSourceImpl extends _i1.Mock
             [],
           ),
         )),
-      ) as _i9.Future<_i7.MovieInTheaterModel>);
+      ) as _i10.Future<_i7.MovieInTheaterModel>);
+  @override
+  _i10.Future<_i8.UpcomingMovieModel> getUpcomingApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getUpcomingApi,
+          [],
+        ),
+        returnValue:
+            _i10.Future<_i8.UpcomingMovieModel>.value(_FakeUpcomingMovieModel_6(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i8.UpcomingMovieModel>.value(_FakeUpcomingMovieModel_6(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+      ) as _i10.Future<_i8.UpcomingMovieModel>);
 }
 
 /// A class which mocks [ApiRepositoryRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApiRepositoryRemoteDataSource extends _i1.Mock
-    implements _i8.ApiRepositoryRemoteDataSource {
+    implements _i9.ApiRepositoryRemoteDataSource {
   @override
-  _i9.Future<_i3.ConfigModel> getConfigurationApi() => (super.noSuchMethod(
+  _i10.Future<_i3.ConfigModel> getConfigurationApi() => (super.noSuchMethod(
         Invocation.method(
           #getConfigurationApi,
           [],
         ),
-        returnValue: _i9.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+        returnValue: _i10.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
           this,
           Invocation.method(
             #getConfigurationApi,
@@ -256,21 +292,21 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
+            _i10.Future<_i3.ConfigModel>.value(_FakeConfigModel_1(
           this,
           Invocation.method(
             #getConfigurationApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i3.ConfigModel>);
+      ) as _i10.Future<_i3.ConfigModel>);
   @override
-  _i9.Future<_i4.MovieModel> getPopularMovies() => (super.noSuchMethod(
+  _i10.Future<_i4.MovieModel> getPopularMovies() => (super.noSuchMethod(
         Invocation.method(
           #getPopularMovies,
           [],
         ),
-        returnValue: _i9.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+        returnValue: _i10.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
           this,
           Invocation.method(
             #getPopularMovies,
@@ -278,21 +314,21 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
+            _i10.Future<_i4.MovieModel>.value(_FakeMovieModel_2(
           this,
           Invocation.method(
             #getPopularMovies,
             [],
           ),
         )),
-      ) as _i9.Future<_i4.MovieModel>);
+      ) as _i10.Future<_i4.MovieModel>);
   @override
-  _i9.Future<_i5.TrendingModel> getTrendingApi() => (super.noSuchMethod(
+  _i10.Future<_i5.TrendingModel> getTrendingApi() => (super.noSuchMethod(
         Invocation.method(
           #getTrendingApi,
           [],
         ),
-        returnValue: _i9.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+        returnValue: _i10.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
           this,
           Invocation.method(
             #getTrendingApi,
@@ -300,21 +336,21 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
+            _i10.Future<_i5.TrendingModel>.value(_FakeTrendingModel_3(
           this,
           Invocation.method(
             #getTrendingApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i5.TrendingModel>);
+      ) as _i10.Future<_i5.TrendingModel>);
   @override
-  _i9.Future<_i6.TopRatedModel> getTopRatedApi() => (super.noSuchMethod(
+  _i10.Future<_i6.TopRatedModel> getTopRatedApi() => (super.noSuchMethod(
         Invocation.method(
           #getTopRatedApi,
           [],
         ),
-        returnValue: _i9.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
+        returnValue: _i10.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
           this,
           Invocation.method(
             #getTopRatedApi,
@@ -322,22 +358,22 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
+            _i10.Future<_i6.TopRatedModel>.value(_FakeTopRatedModel_4(
           this,
           Invocation.method(
             #getTopRatedApi,
             [],
           ),
         )),
-      ) as _i9.Future<_i6.TopRatedModel>);
+      ) as _i10.Future<_i6.TopRatedModel>);
   @override
-  _i9.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
+  _i10.Future<_i7.MovieInTheaterModel> getMoviesInTheaters() =>
       (super.noSuchMethod(
         Invocation.method(
           #getMoviesInTheaters,
           [],
         ),
-        returnValue: _i9.Future<_i7.MovieInTheaterModel>.value(
+        returnValue: _i10.Future<_i7.MovieInTheaterModel>.value(
             _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
@@ -345,7 +381,7 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
             [],
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i7.MovieInTheaterModel>.value(
+        returnValueForMissingStub: _i10.Future<_i7.MovieInTheaterModel>.value(
             _FakeMovieInTheaterModel_5(
           this,
           Invocation.method(
@@ -353,5 +389,28 @@ class MockApiRepositoryRemoteDataSource extends _i1.Mock
             [],
           ),
         )),
-      ) as _i9.Future<_i7.MovieInTheaterModel>);
+      ) as _i10.Future<_i7.MovieInTheaterModel>);
+  @override
+  _i10.Future<_i8.UpcomingMovieModel> getUpcomingApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getUpcomingApi,
+          [],
+        ),
+        returnValue:
+            _i10.Future<_i8.UpcomingMovieModel>.value(_FakeUpcomingMovieModel_6(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i10.Future<_i8.UpcomingMovieModel>.value(_FakeUpcomingMovieModel_6(
+          this,
+          Invocation.method(
+            #getUpcomingApi,
+            [],
+          ),
+        )),
+      ) as _i10.Future<_i8.UpcomingMovieModel>);
 }
