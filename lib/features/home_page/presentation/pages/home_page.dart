@@ -1,82 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_api/core/utils/api_service.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/core/widgets/gradient_scaffold.dart';
-import 'package:movies_api/features/home_page/domain/usecases/get_upcoming_api.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/body_home_page.dart';
 
 class HomePage extends StatefulWidget {
-  final BuildContext context;
-
-  const HomePage(
-    this.context, {
-    Key? key,
-  }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late PageController pageController;
+
   @override
   void initState() {
     super.initState();
-    getConfigurateApi();
-    getPopularApi();
-    getTrendingApi();
-    getTopRated();
-    getMoviesTheater();
-    getUpcomingApi();
-  }
+    ApiService.loadAllApis(context);
 
-  void getConfigurateApi() {
-    BlocProvider.of<ConfigurateApiBloc>(context).add(ConfigurateApiLoad());
-  }
-
-  void getPopularApi() {
-    BlocProvider.of<PopularApiBloc>(context).add(PopularApiLoad());
-  }
-
-  void getTrendingApi() {
-    BlocProvider.of<TrendingApiBloc>(context).add(TrendingApiLoad());
-  }
-
-  void getTopRated() {
-    BlocProvider.of<TopRatedBloc>(context).add(TopRatedLoad());
-  }
-
-  void getMoviesTheater() {
-    BlocProvider.of<MoviesInTheatersBloc>(context).add(MoviesInTheatersLoad());
-  }
-
-  void getUpcomingApi() {
-    BlocProvider.of<UpcomingApiBloc>(context).add(UpcomingApiLoad());
+    pageController = PageController(
+      initialPage: 0,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return GradientScaffold(
-      body: BlocBuilder<PopularApiBloc, PopularApiState>(
-        builder: (context, state) {
-          if (state is PopularApiLoaded) {
-            return const BodyHomePage();
-          }
-          if (state is PopularApiLoading) {
-            return const Center(
-              child: GradientCircularProgress(),
-            );
-          }
-          if (state is PopularApiError) {
-            return Text("error: " + state.error);
-          }
-          return Container();
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (index) {
+          setState(() {
+            pageController.jumpToPage(index);
+          });
         },
+        children: [
+          //! Home page
+          BlocBuilder<PopularApiBloc, PopularApiState>(
+            builder: (context, state) {
+              if (state is PopularApiLoaded) {
+                return const BodyHomePage();
+              }
+              if (state is PopularApiLoading) {
+                return const Center(
+                  child: GradientCircularProgress(),
+                );
+              }
+              if (state is PopularApiError) {
+                return Text("error: " + state.error);
+              }
+              return Container();
+            },
+          ),
+          // ! Search page
+          Text('data1'),
+
+          // ! Settings page
+          Text('data2'),
+        ],
+      ),
+      bottomNavBar: BottomNavigationBar(
+        currentIndex: pageController.page!.toInt(),
+        
+        items: const [
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(Icons.home_rounded),
+          ),
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(Icons.search_rounded),
+          ),
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(Icons.settings_rounded),
+          ),
+        ],
       ),
     );
   }
