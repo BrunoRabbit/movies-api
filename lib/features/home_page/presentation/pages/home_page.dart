@@ -62,8 +62,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavBar: BottomNavigationBar(
-        currentIndex: pageController.page!.toInt(),
-        
+        onTap: (index) {
+          setState(() {
+            pageController.jumpToPage(index);
+          });
+        },
+        currentIndex: pageController.hasClients
+            ? pageController.page!.toInt()
+            : pageController.initialPage,
         items: const [
           BottomNavigationBarItem(
             label: "",
