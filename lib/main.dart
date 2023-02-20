@@ -56,8 +56,7 @@ class _ApplicationState extends State<Application> with WidgetsBindingObserver {
       child: MaterialApp(
         theme: darkTheme,
         debugShowCheckedModeBanner: false,
-        // home: HomePage(),
-        builder: (context, child) => HomePage(context),
+        home: const HomePage(),
       ),
     );
   }
