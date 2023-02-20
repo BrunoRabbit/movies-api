@@ -1,31 +1,30 @@
 
 # movies_api
+A project for study using the TheMovieDb API and using the software development process, Test-Driven Development (TDD)
 
-Um projeto para estudo utilizando a API do TheMovieDb e utilizando o processo de desenvolvimento de software, o Test-Driven Development (TDD)
-## Funcionalidades
+## Functionalities
 
-- Temas dark e light(em breve)
-- Buscar filmes
-- Salvar configuracoes de usuario
-- Adicionar aos favoritos
-- Mais testes
+- Dark and light themes (coming soon)
+- Search movies
+- Save user settings
+- Add to Favorites
+- More tests
 
 ## Variáveis de Ambiente
+To run this project, you will need to add the following environment variables to your .env
 
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+`API_KEY` -> you can generate an api key on [TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction) website
 
-`API_KEY`
+- For everything that starts with `URL`, it is the URL of certain API, example: Configuration API, Discover API...
+- You can see on the official page of the movie db website for [developers](https://developers.themoviedb.org/3)
 
-`URL_CONFIG`
+`URL_CONFIG` 
 
 `URL_TRENDING`
 
 `URL_MOVIES`
 
-Onde: 
-- `API_KEY` é a KEY gerada pelo site [TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
-- `URL` é a URL de determinada API, exemplo: Configuration API, Discover API..
+## API link
 
-## Link da API
-Consulte a
-[API-TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
+
+refer to [API-TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
