@@ -17,6 +17,11 @@ import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/t
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_counter/smooth_indicator_cubit.dart';
+import 'package:movies_api/features/search_page/data/datasources/search_remote_datasources.dart';
+import 'package:movies_api/features/search_page/data/repositories/search_repository_impl.dart';
+import 'package:movies_api/features/search_page/domain/repositories/search_api_repository.dart';
+import 'package:movies_api/features/search_page/domain/usecases/get_search_query.dart';
+import 'package:movies_api/features/search_page/presentation/search_api_bloc/search_api_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
@@ -56,19 +61,20 @@ Future<void> setupLocator() async {
       getUpcomingApi: sl(),
     ),
   );
-  
+
   // Cubit
   sl.registerFactory(
     () => SmoothIndicatorCubit(),
   );
-  
+
   // Use Cases
   sl.registerLazySingleton<GetConfigurationApi>(
       () => GetConfigurationApi(sl()));
   sl.registerLazySingleton<GetPopularMovies>(() => GetPopularMovies(sl()));
   sl.registerLazySingleton<GetTrendingApi>(() => GetTrendingApi(sl()));
   sl.registerLazySingleton<GetTopRated>(() => GetTopRated(sl()));
-  sl.registerLazySingleton<GetMoviesInTheaters>(() => GetMoviesInTheaters(sl()));
+  sl.registerLazySingleton<GetMoviesInTheaters>(
+      () => GetMoviesInTheaters(sl()));
   sl.registerLazySingleton<GetUpcomingApi>(() => GetUpcomingApi(sl()));
 
   // Repository
@@ -87,6 +93,29 @@ Future<void> setupLocator() async {
   // sl.registerLazySingleton<ApiRepositoryLocalDataSource>(
   //   () => ApiRepositoryLocalDataSourceImpl(),
   // );
+
+  //! Feature - SearchPage
+  // Bloc
+  sl.registerFactory(
+    () => SearchApiBloc(
+      getSearchQuery: sl(),
+    ),
+  );
+
+  //Use Cases
+  sl.registerLazySingleton<GetSearchQuery>(() => GetSearchQuery(sl()));
+
+  // Repositories
+  sl.registerLazySingleton<SearchApiRepository>(
+    () => SearchRepositoryImpl(
+      networkStatus: sl(),
+      searchRemoteDatasources: sl(),
+    ),
+  );
+   // Data sources
+  sl.registerLazySingleton<SearchRemoteDatasources>(
+    () => SearchRemoteDatasourcesImpl(),
+  );
 
   // Core
   sl.registerLazySingleton<NetworkStatus>(
