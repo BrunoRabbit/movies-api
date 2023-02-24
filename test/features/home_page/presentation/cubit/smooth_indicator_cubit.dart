@@ -16,10 +16,29 @@ void main() {
     blocTest<SmoothIndicatorCubit, SmoothIndicatorState>(
       'should change [SmothIndicatorState] value',
       build: () => smoothIndicatorCubit,
+      act: (cubit) => cubit.counter(0),
+      expect: () => <SmoothIndicatorState>[SmoothIndicatorState(value: 0)],
+    );
+    
+    blocTest<SmoothIndicatorCubit, SmoothIndicatorState>(
+      'should change [SmothIndicatorState] value',
+      build: () => smoothIndicatorCubit,
       act: (cubit) => cubit.counter(1),
       expect: () => <SmoothIndicatorState>[SmoothIndicatorState(value: 1)],
     );
-    
+    blocTest<SmoothIndicatorCubit, SmoothIndicatorState>(
+      'should change [SmothIndicatorState] value',
+      build: () => smoothIndicatorCubit,
+      act: (cubit) => cubit.counter(2),
+      expect: () => <SmoothIndicatorState>[SmoothIndicatorState(value: 2)],
+    );
+    blocTest<SmoothIndicatorCubit, SmoothIndicatorState>(
+      'should change [SmothIndicatorState] value',
+      build: () => smoothIndicatorCubit,
+      act: (cubit) => cubit.counter(3),
+      expect: () => <SmoothIndicatorState>[SmoothIndicatorState(value: 3)],
+    );
+
     blocTest<SmoothIndicatorCubit, SmoothIndicatorState>(
       'should change [SmothIndicatorState] value',
       build: () => smoothIndicatorCubit,
