@@ -21,7 +21,7 @@ import 'package:movies_api/features/search_page/data/datasources/search_remote_d
 import 'package:movies_api/features/search_page/data/repositories/search_repository_impl.dart';
 import 'package:movies_api/features/search_page/domain/repositories/search_api_repository.dart';
 import 'package:movies_api/features/search_page/domain/usecases/get_search_query.dart';
-import 'package:movies_api/features/search_page/presentation/search_api_bloc/search_api_bloc.dart';
+import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;

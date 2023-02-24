@@ -6,7 +6,7 @@ import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/t
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_counter/smooth_indicator_cubit.dart';
-import 'package:movies_api/features/search_page/presentation/search_api_bloc/search_api_bloc.dart';
+import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
 import 'package:movies_api/service_locator.dart';
 
 class RegisterBlocsCubits {
