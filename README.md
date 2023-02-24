@@ -1,6 +1,6 @@
 
 # movies_api
-A project for study using the TheMovieDb API and using the software development process, Test-Driven Development (TDD)
+A project for study using the The Movie Database API and using the software development process, Test-Driven Development (TDD)
 
 ## Functionalities
 
@@ -13,7 +13,7 @@ A project for study using the TheMovieDb API and using the software development 
 ## Variáveis de Ambiente
 To run this project, you will need to add the following environment variables to your .env
 
-`API_KEY` -> you can generate an api key on [TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction) website
+`API_KEY` -> you can generate an api key on [The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction) website
 
 - For everything that starts with `URL`, it is the URL of certain API, example: Configuration API, Discover API...
 - You can see on the official page of the movie db website for [developers](https://developers.themoviedb.org/3)
@@ -27,4 +27,4 @@ To run this project, you will need to add the following environment variables to
 ## API link
 
 
-refer to [API-TheMovieDb](https://developers.themoviedb.org/3/getting-started/introduction).
+refer to [API - The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction).
