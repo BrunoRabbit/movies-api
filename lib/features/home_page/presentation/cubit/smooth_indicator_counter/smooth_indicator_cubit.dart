@@ -7,6 +7,6 @@ class SmoothIndicatorCubit extends Cubit<SmoothIndicatorState> {
   SmoothIndicatorCubit() : super(SmoothIndicatorState(value: 0));
 
   void counter(int index) {
-    emit(SmoothIndicatorState(value: state.value = index));
+    emit(SmoothIndicatorState(value: index));
   }
 }
