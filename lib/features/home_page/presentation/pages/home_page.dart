@@ -5,6 +5,7 @@ import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/core/widgets/gradient_scaffold.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/body_home_page.dart';
+import 'package:movies_api/features/search_page/presentation/pages/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,10 +56,10 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           // ! Search page
-          Text('data1'),
+          const SearchPage(),
 
           // ! Settings page
-          Text('data2'),
+          const Text('data2'),
         ],
       ),
       bottomNavBar: BottomNavigationBar(
