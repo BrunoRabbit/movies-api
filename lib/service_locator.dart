@@ -16,7 +16,7 @@ import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/trending_api_bloc/trending_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_counter/smooth_indicator_cubit.dart';
+import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_cubit/smooth_indicator_cubit.dart';
 import 'package:movies_api/features/search_page/data/datasources/search_remote_datasources.dart';
 import 'package:movies_api/features/search_page/data/repositories/search_repository_impl.dart';
 import 'package:movies_api/features/search_page/domain/repositories/search_api_repository.dart';
