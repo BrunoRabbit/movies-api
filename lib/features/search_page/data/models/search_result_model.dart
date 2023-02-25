@@ -41,6 +41,7 @@ class SearchResultModel extends SearchResult {
 
     return result;
   }
+  String toJson() => json.encode(toMap());
 
   SearchResultModel wrapperFromMap(Map<String, dynamic> map) =>
       SearchResultModel.fromMap(map);
