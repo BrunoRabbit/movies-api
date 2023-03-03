@@ -1,8 +1,18 @@
 
 # movies_api
-- Study Project
-- applying Test Driven Development (TDD)
-- Using The Movie Database API
+
+## Objectives
+- This is a study Project
+- I use Test Driven Development (TDD)
+- Applying a API from The Movie Database
+
+## What i used
+:iphone: __For App:__
+- Flutter, Dart, BloC, Clean Architecture, TDD, http, dependency injection, dotenv, Equatable,  
+ - Injectable, DartZ, SharedPreferences, internet connection checker  
+ 
+:test_tube: __For Test:__
+- Mockito, BuildRunner, Bloc_Test, flutter_test
 
 ## Features
 
@@ -34,6 +44,9 @@ To run this project, you will need to add the following environment variables to
 
 refer to [API - The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction).
 
+## Notes
+ - *if you are going to download the project in vscode, i recommend that you use the BetterComments extension*
+ 
 ## Folders
  __Lib folder__
  ```bash
