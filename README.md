@@ -22,6 +22,10 @@
 :black_square_button: Add to Favorites  
 :white_check_mark: Unit test  
 
+## Tests
+
+![tests](https://cdn.discordapp.com/attachments/1080670144751206511/1080686640760115330/image.png)
+
 ## Environment variables
 To run this project, you will need to add the following environment variables to your .env
 
@@ -35,10 +39,6 @@ To run this project, you will need to add the following environment variables to
 `URL_TRENDING`
 
 `URL_MOVIES`
-
-## Tests
-
-![tests](https://cdn.discordapp.com/attachments/1080670144751206511/1080686640760115330/image.png)
 
 ## API link
 
