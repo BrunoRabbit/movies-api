@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_api/core/themes/text_themes.dart';
-import 'package:movies_api/core/utils/extensions/size_helper.dart';
-import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/carousel/carousel_slider_widget.dart';

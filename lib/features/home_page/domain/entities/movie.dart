@@ -71,8 +71,7 @@ class Results extends Equatable {
       mediaType: map['media_type'] ?? '',
       genreIds: map['genre_ids'] != null
           ? List<int>.from(map['genre_ids'])
-          : [], // TODO- POSSIVEL CHANGE
-      // genreIds: List<int>.from(map['genreIds']) ?? [],
+          : [],
       popularity: map['popularity']?.toDouble() ?? 0.0,
       releaseDate: map['release_date'] ?? '',
       video: map['video'] ?? false,
