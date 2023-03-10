@@ -127,6 +127,9 @@ class MovieItem extends StatelessWidget {
 
                             // ! date
                             Text(
+                              searchResult.results![index].releaseDate!.isEmpty 
+                              ? "To Be Announced"
+                              :
                               _convertStringToDateTime(
                                   searchResult.results![index].releaseDate!),
                               style: TextThemes.subtitle1,
