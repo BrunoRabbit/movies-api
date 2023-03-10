@@ -50,11 +50,15 @@ class _FakeResponse_1 extends _i1.SmartFake implements _i3.Response {
 class MockSearchRemoteDatasources extends _i1.Mock
     implements _i4.SearchRemoteDatasources {
   @override
-  _i5.Future<_i2.SearchResultModel> getSearchQuery(String? name) =>
+  _i5.Future<_i2.SearchResultModel> getSearchQuery(
+    String? name, {
+    int? page = 1,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSearchQuery,
           [name],
+          {#page: page},
         ),
         returnValue:
             _i5.Future<_i2.SearchResultModel>.value(_FakeSearchResultModel_0(
@@ -62,6 +66,7 @@ class MockSearchRemoteDatasources extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
         returnValueForMissingStub:
@@ -70,6 +75,7 @@ class MockSearchRemoteDatasources extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
       ) as _i5.Future<_i2.SearchResultModel>);
@@ -107,11 +113,15 @@ class MockSearchRemoteDatasourcesImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<_i2.SearchResultModel> getSearchQuery(String? name) =>
+  _i5.Future<_i2.SearchResultModel> getSearchQuery(
+    String? name, {
+    int? page = 1,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSearchQuery,
           [name],
+          {#page: page},
         ),
         returnValue:
             _i5.Future<_i2.SearchResultModel>.value(_FakeSearchResultModel_0(
@@ -119,6 +129,7 @@ class MockSearchRemoteDatasourcesImpl extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
         returnValueForMissingStub:
@@ -127,6 +138,7 @@ class MockSearchRemoteDatasourcesImpl extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
       ) as _i5.Future<_i2.SearchResultModel>);

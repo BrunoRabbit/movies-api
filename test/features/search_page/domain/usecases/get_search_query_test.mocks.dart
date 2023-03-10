@@ -41,11 +41,14 @@ class MockSearchApiRepository extends _i1.Mock
     implements _i3.SearchApiRepository {
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.SearchResult>> getSearchQuery(
-          String? name) =>
+    String? name, {
+    int? page = 1,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSearchQuery,
           [name],
+          {#page: page},
         ),
         returnValue:
             _i4.Future<_i2.Either<_i5.Failure, _i6.SearchResult>>.value(
@@ -54,6 +57,7 @@ class MockSearchApiRepository extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
         returnValueForMissingStub:
@@ -63,6 +67,7 @@ class MockSearchApiRepository extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.SearchResult>>);

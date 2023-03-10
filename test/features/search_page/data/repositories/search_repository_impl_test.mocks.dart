@@ -90,11 +90,14 @@ class MockSearchRepositoryImpl extends _i1.Mock
       ) as _i3.SearchRemoteDatasources);
   @override
   _i6.Future<_i4.Either<_i7.Failure, _i8.SearchResult>> getSearchQuery(
-          String? name) =>
+    String? name, {
+    int? page = 1,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSearchQuery,
           [name],
+          {#page: page},
         ),
         returnValue:
             _i6.Future<_i4.Either<_i7.Failure, _i8.SearchResult>>.value(
@@ -103,6 +106,7 @@ class MockSearchRepositoryImpl extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
         returnValueForMissingStub:
@@ -112,6 +116,7 @@ class MockSearchRepositoryImpl extends _i1.Mock
           Invocation.method(
             #getSearchQuery,
             [name],
+            {#page: page},
           ),
         )),
       ) as _i6.Future<_i4.Either<_i7.Failure, _i8.SearchResult>>);
