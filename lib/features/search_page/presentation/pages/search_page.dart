@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage>
                                 }
                               });
                             },
-                            child: Text('data'),
+                            child: Text('filtro'),
                           ),
                           const Spacer(),
                           Align(
@@ -101,7 +101,7 @@ class _SearchPageState extends State<SearchPage>
                                   if (_controller.text.isNotEmpty) {
                                     errorText = null;
                                     BlocProvider.of<SearchApiBloc>(context).add(
-                                      SearchQueryLoad(name: _controller.text),
+                                      SearchQueryLoad(name: _controller.text, page: 1),
                                     );
                                   } else {
                                     setState(() {
@@ -137,7 +137,7 @@ class _SearchPageState extends State<SearchPage>
                 state is! SearchApiInitial
                     ? Expanded(
                         flex: 2,
-                        child: SearchSection(state),
+                        child: SearchSection(state, _controller.text),
                       )
                     : Container(),
               ],

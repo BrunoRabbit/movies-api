@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import 'package:dartz/dartz.dart';
 import 'package:movies_api/core/error/exceptions.dart';
 
@@ -13,17 +12,21 @@ import 'package:movies_api/features/search_page/domain/repositories/search_api_r
 class SearchRepositoryImpl implements SearchApiRepository {
   final NetworkStatus networkStatus;
   final SearchRemoteDatasources searchRemoteDatasources;
-  
+
   SearchRepositoryImpl({
     required this.networkStatus,
     required this.searchRemoteDatasources,
   });
 
   @override
-  Future<Either<Failure, SearchResult>> getSearchQuery(String name) async {
+  Future<Either<Failure, SearchResult>> getSearchQuery(String name,
+      {int page = 1}) async {
     if (await networkStatus.isConnected) {
       try {
-        final searchResult = await searchRemoteDatasources.getSearchQuery(name);
+        final searchResult = await searchRemoteDatasources.getSearchQuery(
+          name,
+          page: page,
+        );
 
         return Right(searchResult);
       } on ServerException {
@@ -33,5 +36,4 @@ class SearchRepositoryImpl implements SearchApiRepository {
       return Left(NoInternetConnection());
     }
   }
-  
 }

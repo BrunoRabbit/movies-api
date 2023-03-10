@@ -14,10 +14,12 @@ class SearchApiBloc extends Bloc<SearchApiEvent, SearchApiState> {
   SearchApiBloc({required this.getSearchQuery}) : super(SearchApiInitial()) {
     on<SearchQueryLoad>(_onSearchQueryLoad);
   }
+
   void _onSearchQueryLoad(
       SearchQueryLoad event, Emitter<SearchApiState> emit) async {
     emit(SearchApiLoading());
-    final errorOrSearchResult = await getSearchQuery(event.name);
+    final errorOrSearchResult =
+        await getSearchQuery(event.name, page: event.page);
 
     errorOrSearchResult.fold((error) {
       emit(SearchApiError(error.toString()));

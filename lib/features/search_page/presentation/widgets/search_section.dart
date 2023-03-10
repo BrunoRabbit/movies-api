@@ -8,8 +8,9 @@ import 'package:movies_api/features/search_page/presentation/widgets/movie_item.
 
 class SearchSection extends StatefulWidget {
   final SearchApiState state;
+  final String name;
 
-  const SearchSection(this.state, {Key? key}) : super(key: key);
+  const SearchSection(this.state, this.name,{Key? key}) : super(key: key);
 
   @override
   State<SearchSection> createState() => _SearchSectionState();
@@ -17,6 +18,7 @@ class SearchSection extends StatefulWidget {
 
 class _SearchSectionState extends State<SearchSection> {
   String posterUrl = "";
+  int currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,6 @@ class _SearchSectionState extends State<SearchSection> {
 
                 if (index == 19 && searchResult.totalResults! > 19) {
                   return ElevatedButton(
-                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -51,6 +52,14 @@ class _SearchSectionState extends State<SearchSection> {
                             .colorScheme!
                             .background),
                     child: const Text('Ver mais'),
+                    onPressed: () {
+                      setState(() {
+                         currentPage++;
+                      });
+                      BlocProvider.of<SearchApiBloc>(context).add(
+                        SearchQueryLoad(name: widget.name, page: currentPage),
+                      );
+                    },
                   );
                 } else if (index < 20) {
                   // ! this is the component that shows the search result

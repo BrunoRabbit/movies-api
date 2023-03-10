@@ -8,7 +8,7 @@ class GetSearchQuery extends UseCase<SearchResult, String> {
   GetSearchQuery(this.repository);
 
   @override
-  Future<Either<Failure, SearchResult>> call(String params) async {
-    return await repository.getSearchQuery(params);
+  Future<Either<Failure, SearchResult>> call(String params, {int page = 1}) async {
+    return await repository.getSearchQuery(params, page: page);
   }
 }
