@@ -4,13 +4,18 @@ import 'package:movies_api/core/utils/extensions/url_helper.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/search_page/domain/entities/search_result.dart';
 import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/search_cubit.dart';
 import 'package:movies_api/features/search_page/presentation/widgets/movie_item.dart';
 
 class SearchSection extends StatefulWidget {
   final SearchApiState state;
   final String name;
 
-  const SearchSection(this.state, this.name,{Key? key}) : super(key: key);
+  const SearchSection(
+    this.state,
+    this.name, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SearchSection> createState() => _SearchSectionState();
@@ -18,7 +23,13 @@ class SearchSection extends StatefulWidget {
 
 class _SearchSectionState extends State<SearchSection> {
   String posterUrl = "";
-  int currentPage = 1;
+  final cubit = SearchCubit();
+
+  @override
+  void dispose() {
+    cubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +53,37 @@ class _SearchSectionState extends State<SearchSection> {
                 );
 
                 if (index == 19 && searchResult.totalResults! > 19) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        primary: Theme.of(context)
-                            .buttonTheme
-                            .colorScheme!
-                            .background),
-                    child: const Text('Ver mais'),
-                    onPressed: () {
-                      setState(() {
-                         currentPage++;
-                      });
-                      BlocProvider.of<SearchApiBloc>(context).add(
-                        SearchQueryLoad(name: widget.name, page: currentPage),
-                      );
-                    },
+                  return Row(
+                    children: [
+                      TextButton(
+                        child: const Text('Anterior'),
+                        onPressed: () {
+                          if (cubit.state != 1) {
+                            cubit.decrementIndex();
+
+                            BlocProvider.of<SearchApiBloc>(context).add(
+                              SearchQueryLoad(
+                                name: widget.name,
+                                page: cubit.state,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Próxima'),
+                        onPressed: () {
+                          cubit.incrementIndex();
+
+                          BlocProvider.of<SearchApiBloc>(context).add(
+                            SearchQueryLoad(
+                              name: widget.name,
+                              page: cubit.state,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   );
                 } else if (index < 20) {
                   // ! this is the component that shows the search result

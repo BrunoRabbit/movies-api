@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
   }
@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage>
                                 }
                               });
                             },
-                            child: Text('filtro'),
+                            child: const Icon(Icons.filter_alt_rounded),
                           ),
                           const Spacer(),
                           Align(
@@ -92,7 +92,7 @@ class _SearchPageState extends State<SearchPage>
                                         10,
                                       ),
                                     ),
-                                    primary: Theme.of(context)
+                                    backgroundColor: Theme.of(context)
                                         .buttonTheme
                                         .colorScheme!
                                         .background),
