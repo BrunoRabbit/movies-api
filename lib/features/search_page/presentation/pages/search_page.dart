@@ -11,21 +11,9 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  bool isVisible = false;
+class _SearchPageState extends State<SearchPage> {
   final _controller = TextEditingController();
   String? errorText;
-
-  @override
-  void initState() {
-    super.initState();
-    animationController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
-  }
 
   // * I envisioned this search screen as an aid to filtering.
   // * First the person searches for the movie and clicking on the filter icon,
@@ -66,19 +54,6 @@ class _SearchPageState extends State<SearchPage>
                       ),
                       Row(
                         children: [
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                isVisible = !isVisible;
-                                if (isVisible) {
-                                  animationController.forward();
-                                } else {
-                                  animationController.reverse();
-                                }
-                              });
-                            },
-                            child: const Icon(Icons.filter_alt_rounded),
-                          ),
                           const Spacer(),
                           Align(
                             alignment: Alignment.topRight,
@@ -87,21 +62,23 @@ class _SearchPageState extends State<SearchPage>
                               width: 150,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                        10,
-                                      ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      10,
                                     ),
-                                    backgroundColor: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .background),
+                                  ),
+                                  backgroundColor: Theme.of(context)
+                                      .buttonTheme
+                                      .colorScheme!
+                                      .background,
+                                ),
                                 child: const Text("Procurar"),
                                 onPressed: () {
                                   if (_controller.text.isNotEmpty) {
                                     errorText = null;
                                     BlocProvider.of<SearchApiBloc>(context).add(
-                                      SearchQueryLoad(name: _controller.text, page: 1),
+                                      SearchQueryLoad(
+                                          name: _controller.text, page: 1),
                                     );
                                   } else {
                                     setState(() {
@@ -117,22 +94,6 @@ class _SearchPageState extends State<SearchPage>
                       ),
                     ],
                   ),
-                ),
-                AnimatedBuilder(
-                  animation: animationController,
-                  builder: (context, child) {
-                    return SingleChildScrollView(
-                      child: SizedBox(
-                        height: animationController.value * 150,
-                        child: Opacity(
-                          opacity: animationController.value,
-                          child: Container(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
                 ),
                 state is! SearchApiInitial
                     ? Expanded(

@@ -54,6 +54,7 @@ class _SearchSectionState extends State<SearchSection> {
 
                 if (index == 19 && searchResult.totalResults! > 19) {
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextButton(
                         child: const Text('Anterior'),
