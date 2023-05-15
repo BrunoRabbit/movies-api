@@ -8,6 +8,8 @@ import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_blo
 import 'package:movies_api/features/home_page/presentation/cubit/page_navigator_cubit/page_navigator_cubit.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_cubit/smooth_indicator_cubit.dart';
 import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/history_movie.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/page_search_cubit.dart';
 import 'package:movies_api/service_locator.dart';
 
 class RegisterBlocsCubits {
@@ -37,6 +39,12 @@ class RegisterBlocsCubits {
           create: (_) => sl(),
         ),
         BlocProvider<PageNavigatorCubit>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<HistoryMovieCubit>(
+          create: (_) => sl(),
+        ),
+        BlocProvider<PageSearchCubit>(
           create: (_) => sl(),
         ),
       ];

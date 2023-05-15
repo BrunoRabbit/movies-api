@@ -4,7 +4,7 @@ import 'package:movies_api/core/utils/extensions/url_helper.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/search_page/domain/entities/search_result.dart';
 import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
-import 'package:movies_api/features/search_page/presentation/cubit/search_cubit.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/page_search_cubit.dart';
 import 'package:movies_api/features/search_page/presentation/widgets/movie_item.dart';
 
 class SearchSection extends StatefulWidget {
@@ -23,7 +23,7 @@ class SearchSection extends StatefulWidget {
 
 class _SearchSectionState extends State<SearchSection> {
   String posterUrl = "";
-  final cubit = SearchCubit();
+  final cubit = PageSearchCubit();
 
   @override
   void dispose() {

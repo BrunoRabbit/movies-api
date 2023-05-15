@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-class SearchCubit extends Cubit<int> {
-  SearchCubit() : super(1);
+class PageSearchCubit extends Cubit<int> {
+  PageSearchCubit() : super(1);
 
   void incrementIndex() {
     emit(state + 1);
