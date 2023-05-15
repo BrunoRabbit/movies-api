@@ -23,6 +23,8 @@ import 'package:movies_api/features/search_page/data/repositories/search_reposit
 import 'package:movies_api/features/search_page/domain/repositories/search_api_repository.dart';
 import 'package:movies_api/features/search_page/domain/usecases/get_search_query.dart';
 import 'package:movies_api/features/search_page/presentation/bloc/search_api_bloc/search_api_bloc.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/history_movie.dart';
+import 'package:movies_api/features/search_page/presentation/cubit/page_search_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
@@ -106,7 +108,15 @@ Future<void> setupLocator() async {
     ),
   );
 
-  //Use Cases
+  // Cubit
+  sl.registerFactory(
+    () => HistoryMovieCubit(),
+  );
+  sl.registerFactory(
+    () => PageSearchCubit(),
+  );
+
+  // Use Cases
   sl.registerLazySingleton<GetSearchQuery>(() => GetSearchQuery(sl()));
 
   // Repositories
@@ -116,7 +126,7 @@ Future<void> setupLocator() async {
       searchRemoteDatasources: sl(),
     ),
   );
-   // Data sources
+  // Data sources
   sl.registerLazySingleton<SearchRemoteDatasources>(
     () => SearchRemoteDatasourcesImpl(),
   );
