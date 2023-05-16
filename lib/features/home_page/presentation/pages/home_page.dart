@@ -7,6 +7,7 @@ import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc
 import 'package:movies_api/features/home_page/presentation/cubit/page_navigator_cubit/page_navigator_cubit.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/body_home_page.dart';
 import 'package:movies_api/features/search_page/presentation/pages/search_page.dart';
+import 'package:movies_api/features/settings_page/pages/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               const SearchPage(),
 
               // ! Settings page
-              const Text('data2'),
+              const SettingsPage(),
             ],
           ),
           bottomNavBar: BottomNavigationBar(
