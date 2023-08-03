@@ -49,7 +49,6 @@ class _PopularMovieSectionState extends State<PopularMovieSection> {
             width: sectionWidth,
             child: Row(
               children: const [
-                // * Build Bloc's ConfigurateBloc and PopularBloc then Build ListView
                 BuildConfigurateApi(),
               ],
             ),

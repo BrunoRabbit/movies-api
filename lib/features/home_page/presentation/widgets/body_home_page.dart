@@ -25,10 +25,6 @@ class _BodyHomePageState extends State<BodyHomePage> {
       child: SingleChildScrollView(
         child: Column(
           children: const [
-            // * The following components are displayed in the following order on the screen:
-            // * Carousel: CarouselSlider on top on the screen
-            // * PopularMovieSection: show in the middle of the screen several popular movies
-            // * MoviesTheatersSection: show a section containing movies in theaters
             CarouselSliderWidget(),
             PopularMovieSection(),
             MoviesTheatersSection(),
@@ -57,4 +53,3 @@ class _BodyHomePageState extends State<BodyHomePage> {
     // BlocProvider.of<TopRatedBloc>(context).add(TopRatedLoad());
   }
 }
-

@@ -87,10 +87,7 @@ class _SearchSectionState extends State<SearchSection> {
                     ],
                   );
                 } else if (index < 20) {
-                  // ! this is the component that shows the search result
-                  // ? what happens to it is that instead of using Card + ListTile,
-                  // ? I created my custom one without using them
-                  return MovieItem(
+                   return MovieItem(
                     posterUrl: posterUrl,
                     searchResult: searchResult,
                     index: index,

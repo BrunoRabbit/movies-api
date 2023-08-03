@@ -46,21 +46,22 @@ class _BuildPopularApiState extends State<BuildPopularApi> {
       builder: (context, popularState) {
         if (popularState is PopularApiLoaded) {
           return Expanded(
-              child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              _getImages(index, popularState);
-              _getImagesDetails(index, popularState);
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                _getImages(index, popularState);
+                _getImagesDetails(index, popularState);
 
-              return PopularMoviesImages(
-                url: url,
-                title: title,
-                releaseDate: releaseDate,
-                rating: rating,
-              );
-            },
-          ));
+                return PopularMoviesImages(
+                  url: url,
+                  title: title,
+                  releaseDate: releaseDate,
+                  rating: rating,
+                );
+              },
+            ),
+          );
         }
         return Container();
       },
@@ -87,4 +88,3 @@ class _BuildPopularApiState extends State<BuildPopularApi> {
     rating = popularState.movie.results![index].voteAverage!;
   }
 }
-
