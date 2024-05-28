@@ -17,7 +17,7 @@ void main() {
     MockNetworkStatusImpl networkStatusImpl = MockNetworkStatusImpl();
 
     when(networkStatusImpl.isConnected)
-        .thenAnswer((_) async => isHasInternet ? true : false);
+        .thenAnswer((_) => isHasInternet ? true : false);
 
     body();
   }
@@ -26,7 +26,7 @@ void main() {
   group('getSearchQuery', () {
     late String name;
 
-    setUp((){
+    setUp(() {
       name = "Jorje";
     });
     //? has internet
