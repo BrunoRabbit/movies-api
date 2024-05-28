@@ -1,14 +1,32 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class NetworkStatus {
-  Future<bool> get isConnected;
+  bool get isConnected;
 }
 
 class NetworkStatusImpl implements NetworkStatus {
-  final InternetConnectionChecker connectionChecker;
+  final Connectivity connectivity;
+  bool _hasConnection = false;
 
-  NetworkStatusImpl(this.connectionChecker);
+  NetworkStatusImpl(this.connectivity) {
+    init();
+  }
+
+  init() async {
+    connectivity.onConnectivityChanged.listen(updateConnectionStatus);
+    await connectivity.checkConnectivity().then(updateConnectionStatus);
+  }
+
+  void updateConnectionStatus(List<ConnectivityResult>? event) {
+    final hasNoneConnection = event!.contains(ConnectivityResult.none);
+
+    if (hasNoneConnection) {
+      _hasConnection = false;
+    }
+
+    _hasConnection = true;
+  }
 
   @override
-  Future<bool> get isConnected => connectionChecker.hasConnection;
+  bool get isConnected => _hasConnection;
 }
