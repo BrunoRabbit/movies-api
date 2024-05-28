@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_api/core/widgets/custom_drawer/custom_drawer_cubit.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
@@ -45,6 +46,9 @@ class RegisterBlocsCubits {
           create: (_) => sl(),
         ),
         BlocProvider<PageSearchCubit>(
+          create: (_) => sl(),
+        ),
+         BlocProvider<CustomDrawerCubit>(
           create: (_) => sl(),
         ),
       ];

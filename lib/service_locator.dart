@@ -1,6 +1,7 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:movies_api/core/network/network_status.dart';
+import 'package:movies_api/core/widgets/custom_drawer/custom_drawer_cubit.dart';
 import 'package:movies_api/features/home_page/data/datasources/api_repository_remote_data_source.dart';
 import 'package:movies_api/features/home_page/data/repositories/api_repository_impl.dart';
 import 'package:movies_api/features/home_page/domain/repositories/api_repository.dart';
@@ -133,7 +134,12 @@ Future<void> setupLocator() async {
 
   // Core
   sl.registerLazySingleton<NetworkStatus>(
-    () => NetworkStatusImpl(sl()),
+    () => NetworkStatusImpl(sl<Connectivity>()),
+  );
+
+  // ! Widgets cubit
+  sl.registerFactory(
+    () => CustomDrawerCubit(),
   );
 
   //! External
@@ -141,5 +147,5 @@ Future<void> setupLocator() async {
       await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton(() => Connectivity());
 }
