@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_api/core/models/device.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
 import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
@@ -14,20 +15,16 @@ class PopularMovieSection extends StatefulWidget {
 }
 
 class _PopularMovieSectionState extends State<PopularMovieSection> {
-  late double sectionHeigth;
-  late double sectionWidth;
-  
+  late double sectionHeight;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    sectionHeigth = context.getSize(
-      MediaQuery.of(context).size.width / 2,
-      MediaQuery.of(context).size.height * 0.43,
-    );
-    sectionWidth = context.getSize(
-      MediaQuery.of(context).size.width,
-      MediaQuery.of(context).size.height,
-    );
+    final size = MediaQuery.sizeOf(context);
+
+    sectionHeight = !Device.isWeb
+        ? context.getSize(size.width / 2, size.height * 0.43)
+        : 250;
   }
 
   @override
@@ -45,13 +42,8 @@ class _PopularMovieSectionState extends State<PopularMovieSection> {
             height: 12,
           ),
           SizedBox(
-            height: sectionHeigth,
-            width: sectionWidth,
-            child: Row(
-              children: const [
-                BuildConfigurateApi(),
-              ],
-            ),
+            height: sectionHeight,
+            child: const BuildConfigurateApi(),
           ),
         ],
       ),
