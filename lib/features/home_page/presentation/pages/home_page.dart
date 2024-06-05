@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/core/utils/api_service.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
+import 'package:movies_api/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/core/widgets/gradient_scaffold.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
@@ -27,6 +29,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isWebSize = SizeHelper.isWebSize(context);
+
     return BlocBuilder<PageNavigatorCubit, int>(
       builder: (context, pageIndex) {
         pageController = PageController(
@@ -34,63 +38,74 @@ class _HomePageState extends State<HomePage> {
         );
 
         return GradientScaffold(
-          body: PageView(
-            controller: pageController,
-            onPageChanged: (index) {
-              BlocProvider.of<PageNavigatorCubit>(context).changePage(index);
-            },
+          body: Row(
             children: [
-              //! Home page
-              BlocBuilder<PopularApiBloc, PopularApiState>(
-                builder: (context, state) {
-                  if (state is PopularApiLoaded) {
-                    return const BodyHomePage();
-                  }
-                  if (state is PopularApiLoading) {
-                    return const Center(
-                      child: GradientCircularProgress(),
+              !isWebSize ? const SizedBox() : const CustomDrawer(),
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    BlocProvider.of<PageNavigatorCubit>(context)
+                        .changePage(index);
+                  },
+                  children: [
+                    //! Home page
+                    BlocBuilder<PopularApiBloc, PopularApiState>(
+                      builder: (context, state) {
+                        if (state is PopularApiLoaded) {
+                          return const BodyHomePage();
+                        }
+                        if (state is PopularApiLoading) {
+                          return const Center(
+                            child: GradientCircularProgress(),
+                          );
+                        }
+                        if (state is PopularApiError) {
+                          return Text("error: " + state.error);
+                        }
+                        return Container();
+                      },
+                    ),
+                    // ! Search page
+                    const SearchPage(),
+                
+                    // ! Settings page
+                    const SettingsPage(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          bottomNavBar: isWebSize
+              ? null
+              : BottomNavigationBar(
+                  onTap: (index) {
+                    BlocProvider.of<PageNavigatorCubit>(context)
+                        .changePage(index);
+                    pageController.animateToPage(
+                      index,
+                      curve: Curves.linear,
+                      duration: const Duration(milliseconds: 150),
                     );
-                  }
-                  if (state is PopularApiError) {
-                    return Text("error: " + state.error);
-                  }
-                  return Container();
-                },
-              ),
-              // ! Search page
-              const SearchPage(),
-
-              // ! Settings page
-              const SettingsPage(),
-            ],
-          ),
-          bottomNavBar: BottomNavigationBar(
-            onTap: (index) {
-              BlocProvider.of<PageNavigatorCubit>(context).changePage(index);
-              pageController.animateToPage(
-                index,
-                curve: Curves.linear,
-                duration: const Duration(milliseconds: 150),
-              );
-            },
-            currentIndex: pageController.hasClients
-                ? pageController.page!.toInt()
-                : pageController.initialPage,
-            items: const [
-              BottomNavigationBarItem(
-                label: "",
-                icon: Icon(Icons.home_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: "",
-                icon: Icon(Icons.search_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: "",
-                icon: Icon(Icons.settings_rounded),
-              ),
-            ],
-          ),
+                  },
+                  currentIndex: pageController.hasClients
+                      ? pageController.page!.toInt()
+                      : pageController.initialPage,
+                  items: const [
+                    BottomNavigationBarItem(
+                      label: "",
+                      icon: Icon(Icons.home_rounded),
+                    ),
+                    BottomNavigationBarItem(
+                      label: "",
+                      icon: Icon(Icons.search_rounded),
+                    ),
+                    BottomNavigationBarItem(
+                      label: "",
+                      icon: Icon(Icons.settings_rounded),
+                    ),
+                  ],
+                ),
         );
       },
     );

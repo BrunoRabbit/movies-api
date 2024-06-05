@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_api/core/models/device.dart';
+import 'package:flutter/widgets.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
 import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
@@ -20,11 +20,10 @@ class _PopularMovieSectionState extends State<PopularMovieSection> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final size = MediaQuery.sizeOf(context);
+    final isWeb = SizeHelper.isWebSize(context);
 
-    sectionHeight = !Device.isWeb
-        ? context.getSize(size.width / 2, size.height * 0.43)
-        : 250;
+    sectionHeight = !isWeb ? context.getSizeOrientation(350, 350) : 350;
+    // ? context.getSize(size.width / 2, size.height * 0.55)
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:movies_api/core/error/exceptions.dart';
-import 'package:movies_api/core/models/device.dart';
 import 'package:movies_api/core/network/network_status.dart';
 import 'package:movies_api/core/utils/exports.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/features/home_page/domain/entities/config.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie.dart';
 import 'package:movies_api/features/home_page/domain/entities/movie_in_theater.dart';
@@ -21,7 +21,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, Config>> getConfigurationApi() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final config = await remoteApiRepository.getConfigurationApi();
 
@@ -36,7 +36,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, Movie>> getPopularMovies() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final movie = await remoteApiRepository.getPopularMovies();
 
@@ -51,7 +51,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, Trending>> getTrendingApi() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final trending = await remoteApiRepository.getTrendingApi();
 
@@ -66,7 +66,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, TopRated>> getTopRated() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final topRated = await remoteApiRepository.getTopRatedApi();
 
@@ -81,7 +81,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, MovieInTheater>> getMoviesInTheaters() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final movieInTheater = await remoteApiRepository.getMoviesInTheaters();
 
@@ -96,7 +96,7 @@ class ApiRepositoryImpl implements ApiRepository {
 
   @override
   Future<Either<Failure, UpcomingMovie>> getUpcomingApi() async {
-    if (Device.isWeb || networkStatus.isConnected) {
+    if (SizeHelper.isWeb || networkStatus.isConnected) {
       try {
         final upComingMovie = await remoteApiRepository.getUpcomingApi();
 
