@@ -22,15 +22,13 @@ class _BodyHomePageState extends State<BodyHomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => _refreshPosterMovies(),
-      child: SingleChildScrollView(
-        child: Column(
-          children: const [
-            CarouselSliderWidget(),
-            PopularMovieSection(),
-            MoviesTheatersSection(),
-            UpcomingSection(),
-          ],
-        ),
+      child: ListView(
+        children: const [
+          CarouselSliderWidget(),
+          PopularMovieSection(),
+          // MoviesTheatersSection(),
+          // UpcomingSection(),
+        ],
       ),
     );
   }
