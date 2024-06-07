@@ -1,16 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
+import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/top_rated_bloc/top_rated_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/smooth_indicator_cubit/smooth_indicator_cubit.dart';
-import 'package:movies_api/features/home_page/presentation/widgets/carousel/slider_images_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:movies_api/core/utils/extensions/url_helper.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
-  const CarouselSliderWidget({Key? key}) : super(key: key);
+  const CarouselSliderWidget({super.key});
 
   @override
   State<CarouselSliderWidget> createState() => _CarouselSliderWidgetState();
@@ -28,6 +30,8 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final isWeb = SizeHelper.isWebSize(context);
+
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: Column(
@@ -40,23 +44,27 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                     if (topRatedState is TopRatedLoaded) {
                       return CarouselSlider.builder(
                         options: CarouselOptions(
-                            aspectRatio: 16 / 12,
+                            aspectRatio: isWeb ? 35 / 8 : 19 / 14,
                             autoPlay: true,
                             autoPlayInterval: const Duration(seconds: 5),
                             pauseAutoPlayOnManualNavigate: true,
                             autoPlayAnimationDuration:
                                 const Duration(milliseconds: 200),
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.55,
+                            enlargeCenterPage: isWeb ? false : true,
+                            viewportFraction: isWeb ? .18 : .55,
                             onPageChanged: (index, reason) {
-                                cubit.counter(index);
+                              cubit.counter(index);
                             }),
                         itemCount: totalItemCount,
                         itemBuilder: (context, itemIndex, _) {
-                          return BuildImages(
-                            confState: confState,
-                            topRatedState: topRatedState,
-                            itemIndex: itemIndex,
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: BuildImages(
+                              confState: confState,
+                              topRatedState: topRatedState,
+                              itemIndex: itemIndex,
+                            ),
                           );
                         },
                       );
@@ -115,6 +123,33 @@ class BuildImages extends StatelessWidget {
 
     String? _posterUrl = _baseUrl?.concatUrl(_posterSize, _posterPath!);
 
-    return SliderImagesWidget(url: _posterUrl!);
+    return CachedNetworkImage(
+      // width: constraints.maxWidth,
+      // height: constraints.maxHeight,
+      imageUrl: _posterUrl!,
+      color: Colors.transparent,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black87,
+              blurRadius: 4,
+            )
+          ],
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+      progressIndicatorBuilder: (context, url, downloadProgress) {
+        return const Center(
+          child: GradientCircularProgress(),
+        );
+      },
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      placeholderFadeInDuration: const Duration(milliseconds: 600),
+    );
   }
 }

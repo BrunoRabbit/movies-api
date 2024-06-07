@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/carousel/carousel_slider_widget.dart';
-import 'package:movies_api/features/home_page/presentation/widgets/movies_in_theaters_section/movies_theaters_section.dart';
+import 'package:movies_api/features/home_page/presentation/widgets/movies_in_theaters_section/movies_in_theaters_section.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/popular_section/popular_movie_section.dart';
 import 'package:movies_api/features/home_page/presentation/widgets/upcoming_section/upcoming_section.dart';
 
 class BodyHomePage extends StatefulWidget {
-  const BodyHomePage({Key? key}) : super(key: key);
+  const BodyHomePage({super.key});
 
   @override
   State<BodyHomePage> createState() => _BodyHomePageState();
@@ -26,8 +26,8 @@ class _BodyHomePageState extends State<BodyHomePage> {
         children: const [
           CarouselSliderWidget(),
           PopularMovieSection(),
-          // MoviesTheatersSection(),
-          // UpcomingSection(),
+          MoviesInTheatersSection(),
+          UpcomingSection(),
         ],
       ),
     );
