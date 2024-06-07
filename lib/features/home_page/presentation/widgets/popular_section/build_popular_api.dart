@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movies_api/core/utils/extensions/url_helper.dart';
+import 'package:movies_api/core/widgets/theater_component.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/popular_api_bloc/popular_api_bloc.dart';
-import 'package:movies_api/features/home_page/presentation/widgets/popular_section/popular_movies_images.dart';
 
 class BuildPopularApi extends StatefulWidget {
   final ConfigurateApiLoaded confState;
@@ -35,7 +35,7 @@ class _BuildPopularApiState extends State<BuildPopularApi> {
               _getImages(index, popularState);
               _getImagesDetails(index, popularState);
 
-              return PopularMoviesImages(
+              return TheaterComponent(
                 url: url,
                 title: title,
                 releaseDate: releaseDate,
