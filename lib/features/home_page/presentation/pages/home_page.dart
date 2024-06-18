@@ -40,7 +40,11 @@ class _HomePageState extends State<HomePage> {
         return GradientScaffold(
           body: Row(
             children: [
-              !isWebSize ? const SizedBox() : const CustomDrawer(),
+              !isWebSize
+                  ? const SizedBox()
+                  : CustomDrawer(
+                      pageController: pageController,
+                    ),
               Expanded(
                 child: PageView(
                   controller: pageController,
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // ! Search page
                     const SearchPage(),
-                
+
                     // ! Settings page
                     const SettingsPage(),
                   ],

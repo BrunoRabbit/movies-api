@@ -11,11 +11,7 @@ class SearchSection extends StatefulWidget {
   final SearchApiState state;
   final String name;
 
-  const SearchSection(
-    this.state,
-    this.name, {
-    Key? key,
-  }) : super(key: key);
+  const SearchSection(this.state, this.name, {super.key});
 
   @override
   State<SearchSection> createState() => _SearchSectionState();
@@ -41,41 +37,44 @@ class _SearchSectionState extends State<SearchSection> {
                 (widget.state as SearchApiLoaded).searchResult;
 
             return ListView.builder(
-              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: searchResult.totalResults! > 19
                   ? 20
                   : searchResult.totalResults,
               itemBuilder: (context, index) {
-                posterUrl = _loadMovieItemsDetails(
+                posterUrl = _createPosterUrl(
                   confState,
                   searchResult,
                   index,
                 );
-
+            
                 if (index == 19 && searchResult.totalResults! > 19) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TextButton(
-                        child: const Text('Anterior'),
-                        onPressed: () {
-                          if (cubit.state != 1) {
-                            cubit.decrementIndex();
-
-                            BlocProvider.of<SearchApiBloc>(context).add(
-                              SearchQueryLoad(
-                                name: widget.name,
-                                page: cubit.state,
-                              ),
-                            );
-                          }
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: TextButton(
+                          child: const Text('Anterior'),
+                          onPressed: () {
+                            if (cubit.state != 1) {
+                              cubit.decrementIndex();
+            
+                              BlocProvider.of<SearchApiBloc>(context).add(
+                                SearchQueryLoad(
+                                  name: widget.name,
+                                  page: cubit.state,
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                       TextButton(
                         child: const Text('Próxima'),
                         onPressed: () {
                           cubit.incrementIndex();
-
+            
                           BlocProvider.of<SearchApiBloc>(context).add(
                             SearchQueryLoad(
                               name: widget.name,
@@ -87,7 +86,7 @@ class _SearchSectionState extends State<SearchSection> {
                     ],
                   );
                 } else if (index < 20) {
-                   return MovieItem(
+                  return MovieItem(
                     posterUrl: posterUrl,
                     searchResult: searchResult,
                     index: index,
@@ -117,7 +116,7 @@ class _SearchSectionState extends State<SearchSection> {
     return Container();
   }
 
-  String _loadMovieItemsDetails(
+  String _createPosterUrl(
       ConfigurateApiLoaded confState, SearchResult searchResult, int index) {
     String? _baseUrl = confState.config.images!.baseUrl;
 

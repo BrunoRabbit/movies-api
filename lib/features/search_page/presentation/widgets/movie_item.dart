@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,17 +5,18 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 import 'package:movies_api/core/themes/text_themes.dart';
+import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 import 'package:movies_api/features/search_page/domain/entities/search_result.dart';
 
 class MovieItem extends StatelessWidget {
   const MovieItem({
-    Key? key,
+    super.key,
     required this.posterUrl,
     required this.searchResult,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String? posterUrl;
   final SearchResult searchResult;
@@ -25,6 +25,8 @@ class MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isWeb = SizeHelper.isWebSize(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Container(
@@ -40,7 +42,7 @@ class MovieItem extends StatelessWidget {
             ),
           ],
         ),
-        height: 175,
+        height: !isWeb ? context.getSizeOrientation(200, 200) : 250,
         child: Row(
           children: [
             // ! Image
@@ -58,7 +60,7 @@ class MovieItem extends StatelessWidget {
                           ),
                           image: DecorationImage(
                             image: imageProvider,
-                            fit: BoxFit.cover,
+                            fit: isWeb ? BoxFit.cover : BoxFit.fill,
                           ),
                         ),
                       ),
@@ -94,7 +96,7 @@ class MovieItem extends StatelessWidget {
 
             // ! description section(title, date and info)
             Expanded(
-              flex: 2,
+              flex: isWeb ? 5 : 2,
               child: Container(
                 color: Colors.grey[100],
                 child: Padding(
@@ -127,11 +129,10 @@ class MovieItem extends StatelessWidget {
 
                             // ! date
                             Text(
-                              searchResult.results![index].releaseDate!.isEmpty 
-                              ? "To Be Announced"
-                              :
-                              _convertStringToDateTime(
-                                  searchResult.results![index].releaseDate!),
+                              searchResult.results![index].releaseDate!.isEmpty
+                                  ? "To Be Announced"
+                                  : _convertStringToDateTime(searchResult
+                                      .results![index].releaseDate!),
                               style: TextThemes.subtitle1,
                               overflow: TextOverflow.ellipsis,
                             ),
