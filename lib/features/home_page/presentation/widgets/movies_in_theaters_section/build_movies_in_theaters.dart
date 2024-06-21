@@ -4,6 +4,7 @@ import 'package:movies_api/core/utils/extensions/url_helper.dart';
 import 'package:movies_api/core/widgets/theater_component.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/movies_theaters_bloc/movies_in_theaters_bloc.dart';
+import 'package:movies_api/features/movie_overview_page/movie_overview_page.dart';
 
 class BuildMoviesInTheaters extends StatefulWidget {
   final ConfigurateApiLoaded confState;
@@ -15,7 +16,6 @@ class BuildMoviesInTheaters extends StatefulWidget {
 }
 
 class _BuildMoviesInTheatersState extends State<BuildMoviesInTheaters> {
-  String url = "";
   String releaseDate = "";
   String title = "";
   double rating = 0.0;
@@ -31,14 +31,31 @@ class _BuildMoviesInTheatersState extends State<BuildMoviesInTheaters> {
             shrinkWrap: true,
             separatorBuilder: (context, index) => const SizedBox(width: 20),
             itemBuilder: (context, index) {
-              _getImagesFromApi(index, theaterState);
+              String url = _getImagesFromApi(index, theaterState);
               _getImagesDetails(index, theaterState);
 
-              return TheaterComponent(
-                url: url,
-                title: title,
-                releaseDate: releaseDate,
-                rating: rating,
+              return GestureDetector(
+                onTap: () {
+                  final result = theaterState.movieInTheater.results![index];
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MovieOverviewPage(
+                        url: url,
+                        title: result.title!,
+                        rating: rating,
+                        results: result,
+                        releaseDate: releaseDate,
+                      ),
+                    ),
+                  );
+                },
+                child: TheaterComponent(
+                  url: url,
+                  title: title,
+                  releaseDate: releaseDate,
+                  rating: rating,
+                ),
               );
             },
           );
@@ -54,7 +71,7 @@ class _BuildMoviesInTheatersState extends State<BuildMoviesInTheaters> {
 
     String poster = theaterState.movieInTheater.results![index].posterPath!;
 
-    url = baseUrl!.concatUrl(posterSize, poster);
+    return baseUrl!.concatUrl(posterSize, poster);
   }
 
   _getImagesDetails(int index, MoviesInTheatersLoaded theaterState) {

@@ -9,13 +9,73 @@ import 'package:movies_api/core/widgets/custom_drawer/custom_drawer_cubit.dart';
 import 'package:movies_api/core/widgets/custom_drawer/custom_drawer_cubit_state.dart';
 import 'package:movies_api/features/home_page/presentation/cubit/page_navigator_cubit/page_navigator_cubit.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
     super.key,
     required this.pageController,
   });
 
   final PageController pageController;
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  int durationMiliseconds = 500;
+
+  List<Map<String, dynamic>> get icons => [
+        {
+          "iconData": Icons.home_rounded,
+          "duration": Duration(milliseconds: durationMiliseconds),
+        },
+        {
+          "iconData": Icons.search_rounded,
+          "duration": Duration(milliseconds: durationMiliseconds + 50),
+        },
+        {
+          "iconData": Icons.settings_rounded,
+          "duration": Duration(milliseconds: durationMiliseconds + 100),
+        },
+      ];
+
+  List<Widget> drawerButtons(state) {
+    int durationMilliseconds = 500;
+    List<Widget> buttons = [
+      StadiumButton(
+        widget.pageController,
+        0,
+        Icons.home_rounded,
+        'Início',
+        isOpen: state.isOpen,
+      ),
+      StadiumButton(
+        widget.pageController,
+        1,
+        Icons.search_rounded,
+        'Buscar',
+        isOpen: state.isOpen,
+      ),
+      StadiumButton(
+        widget.pageController,
+        2,
+        Icons.settings_rounded,
+        'Configurações',
+        isOpen: state.isOpen,
+      ),
+    ];
+
+    return buttons.map((e) {
+      final widget = FadeInLeft(
+        duration: Duration(milliseconds: durationMilliseconds),
+        curve: Curves.easeInOut,
+        child: e,
+      );
+
+      durationMilliseconds += 50;
+      return widget;
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,31 +116,16 @@ class CustomDrawer extends StatelessWidget {
                     : MainAxisAlignment.start,
                 children: [
                   if (isDrawerOpen) ...[
-                    FadeInLeft(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                      child: const RoundedIconButton(
-                        Icons.home_rounded,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    FadeInLeft(
-                      duration: const Duration(milliseconds: 550),
-                      curve: Curves.easeInOut,
-                      child: const RoundedIconButton(
-                        Icons.search_rounded,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    FadeInLeft(
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.easeInOut,
-                      child: const RoundedIconButton(
-                        Icons.settings_rounded,
+                    ...icons.map(
+                      (icon) => Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: FadeInLeft(
+                          duration: icon['duration'],
+                          curve: Curves.easeInOut,
+                          child: RoundedIconButton(
+                            icon['iconData'],
+                          ),
+                        ),
                       ),
                     ),
                   ] else ...[
@@ -92,7 +137,9 @@ class CustomDrawer extends StatelessWidget {
                       child: Column(
                         children: [
                           FadeInLeft(
-                            duration: const Duration(milliseconds: 500),
+                            duration: Duration(
+                              milliseconds: durationMiliseconds,
+                            ),
                             curve: Curves.easeInOut,
                             child: Align(
                               alignment: Alignment.topLeft,
@@ -102,39 +149,7 @@ class CustomDrawer extends StatelessWidget {
                               ),
                             ),
                           ),
-                          FadeInLeft(
-                            duration: const Duration(milliseconds: 550),
-                            curve: Curves.easeInOut,
-                            child: StadiumButton(
-                              pageController,
-                              0,
-                              Icons.home_rounded,
-                              'Início',
-                              isOpen: state.isOpen,
-                            ),
-                          ),
-                          FadeInLeft(
-                            curve: Curves.easeInOut,
-                            duration: const Duration(milliseconds: 600),
-                            child: StadiumButton(
-                              pageController,
-                              1,
-                              Icons.search_rounded,
-                              'Buscar',
-                              isOpen: state.isOpen,
-                            ),
-                          ),
-                          FadeInLeft(
-                            curve: Curves.easeInOut,
-                            duration: const Duration(milliseconds: 650),
-                            child: StadiumButton(
-                              pageController,
-                              2,
-                              Icons.settings_rounded,
-                              'Configurações',
-                              isOpen: state.isOpen,
-                            ),
-                          ),
+                          ...drawerButtons(state),
                         ],
                       ),
                     ),
@@ -189,12 +204,12 @@ class StadiumButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        BlocProvider.of<PageNavigatorCubit>(context).changePage(index);
         pageController.animateToPage(
           index,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 150),
         );
+        BlocProvider.of<PageNavigatorCubit>(context).changePage(index);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(

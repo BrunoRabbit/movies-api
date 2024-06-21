@@ -5,17 +5,17 @@ import 'package:movies_api/core/network/network_status.dart';
 
 import 'network_status_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<NetworkStatusImpl>()])
+@GenerateNiceMocks([MockSpec<NetworkStatus>()])
 void main() {
   test('should check the call DataConnectionChecker', () async {
-    final networkStatusImpl = MockNetworkStatusImpl();
+    final networkStatus = MockNetworkStatus();
 
-    when(networkStatusImpl.isConnected).thenAnswer((_) => true);
+    when(await networkStatus.isConnected).thenAnswer((_) => true);
 
-    final result = networkStatusImpl.isConnected;
+    final result = await networkStatus.isConnected;
 
-    verify(networkStatusImpl.isConnected).called(1);
-    verifyNoMoreInteractions(networkStatusImpl);
+    verify(await networkStatus.isConnected).called(1);
+    verifyNoMoreInteractions(networkStatus);
 
     expect(result, true);
   });

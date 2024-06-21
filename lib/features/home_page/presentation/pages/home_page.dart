@@ -25,7 +25,35 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     ApiService.loadAllApis(context);
+    pageController = PageController(
+      initialPage: context.read<PageNavigatorCubit>().state,
+    );
   }
+
+  List<Widget> pages = [
+    //! Home page
+    BlocBuilder<PopularApiBloc, PopularApiState>(
+      builder: (context, state) {
+        if (state is PopularApiLoaded) {
+          return const BodyHomePage();
+        }
+        if (state is PopularApiLoading) {
+          return const Center(
+            child: GradientCircularProgress(),
+          );
+        }
+        if (state is PopularApiError) {
+          return Text("error: " + state.error);
+        }
+        return Container();
+      },
+    ),
+    // ! Search page
+    const SearchPage(),
+
+    // ! Settings page
+    const SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +61,6 @@ class _HomePageState extends State<HomePage> {
 
     return BlocBuilder<PageNavigatorCubit, int>(
       builder: (context, pageIndex) {
-        pageController = PageController(
-          initialPage: pageIndex,
-        );
-
         return GradientScaffold(
           body: Row(
             children: [
@@ -46,36 +70,15 @@ class _HomePageState extends State<HomePage> {
                       pageController: pageController,
                     ),
               Expanded(
-                child: PageView(
+                child: PageView.builder(
                   controller: pageController,
                   onPageChanged: (index) {
                     BlocProvider.of<PageNavigatorCubit>(context)
                         .changePage(index);
                   },
-                  children: [
-                    //! Home page
-                    BlocBuilder<PopularApiBloc, PopularApiState>(
-                      builder: (context, state) {
-                        if (state is PopularApiLoaded) {
-                          return const BodyHomePage();
-                        }
-                        if (state is PopularApiLoading) {
-                          return const Center(
-                            child: GradientCircularProgress(),
-                          );
-                        }
-                        if (state is PopularApiError) {
-                          return Text("error: " + state.error);
-                        }
-                        return Container();
-                      },
-                    ),
-                    // ! Search page
-                    const SearchPage(),
-
-                    // ! Settings page
-                    const SettingsPage(),
-                  ],
+                  itemBuilder: (context, index) {
+                    return pages[index];
+                  },
                 ),
               ),
             ],

@@ -13,10 +13,10 @@ import 'search_repository_impl_test.mocks.dart';
   MockSpec<SearchRepositoryImpl>(),
 ])
 void main() {
-  void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) {
-    MockNetworkStatusImpl networkStatusImpl = MockNetworkStatusImpl();
+  void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) async {
+    MockNetworkStatus networkStatus = MockNetworkStatus();
 
-    when(networkStatusImpl.isConnected)
+    when(await networkStatus.isConnected)
         .thenAnswer((_) => isHasInternet ? true : false);
 
     body();

@@ -7,6 +7,7 @@ import 'package:movies_api/core/utils/extensions/url_helper.dart';
 import 'package:movies_api/core/widgets/theater_component.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/configurate_api_bloc/configurate_api_bloc.dart';
 import 'package:movies_api/features/home_page/presentation/bloc/upcoming_api_bloc/upcoming_api_bloc.dart';
+import 'package:movies_api/features/movie_overview_page/movie_overview_page.dart';
 
 class BuildUpcomingApi extends StatefulWidget {
   final ConfigurateApiLoaded confState;
@@ -18,7 +19,6 @@ class BuildUpcomingApi extends StatefulWidget {
 }
 
 class _BuildUpcomingApiState extends State<BuildUpcomingApi> {
-  String url = "";
   String releaseDate = "";
   String title = "";
   double rating = 0.0;
@@ -58,14 +58,32 @@ class _BuildUpcomingApiState extends State<BuildUpcomingApi> {
                         const SizedBox(width: 20),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      _getImagesFromApi(index, upcomingState);
+                      String url = _getImagesFromApi(index, upcomingState);
                       _getImagesDetails(index, upcomingState);
 
-                      return TheaterComponent(
-                        url: url,
-                        title: title,
-                        releaseDate: releaseDate,
-                        rating: rating,
+                      return GestureDetector(
+                        onTap: () {
+                          final result =
+                              upcomingState.upcomingMovie.results![index];
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MovieOverviewPage(
+                                url: url,
+                                title: result.title!,
+                                rating: rating,
+                                results: result,
+                                releaseDate: releaseDate,
+                              ),
+                            ),
+                          );
+                        },
+                        child: TheaterComponent(
+                          url: url,
+                          title: title,
+                          releaseDate: releaseDate,
+                          rating: rating,
+                        ),
                       );
                     },
                   ),
@@ -85,7 +103,7 @@ class _BuildUpcomingApiState extends State<BuildUpcomingApi> {
 
     String poster = upcomingState.upcomingMovie.results![index].posterPath!;
 
-    url = baseUrl!.concatUrl(posterSize, poster);
+    return baseUrl!.concatUrl(posterSize, poster);
   }
 
   _getImagesDetails(int index, UpcomingApiLoaded upcomingState) {

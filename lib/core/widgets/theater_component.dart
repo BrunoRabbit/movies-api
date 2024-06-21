@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movies_api/core/themes/text_themes.dart';
-import 'package:movies_api/core/utils/extensions/size_helper.dart';
 import 'package:movies_api/core/utils/extensions/text_extensions.dart';
 import 'package:movies_api/core/widgets/gradient_circular_progress.dart';
 
@@ -35,16 +34,8 @@ class _TheaterComponentState extends State<TheaterComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final isWebSize = SizeHelper.isWebSize(context);
-    final isTabletSize = SizeHelper.isTabletSize(context);
-
     return SizedBox(
       width: 150,
-      // width: isTabletSize
-      //     ? MediaQuery.sizeOf(context).width * .20
-      //     : isWebSize
-      //         ? MediaQuery.sizeOf(context).width * .14
-      //         : MediaQuery.sizeOf(context).width * .35,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -95,55 +86,9 @@ class _TheaterComponentState extends State<TheaterComponent> {
           Positioned.fill(
             top: 210,
             left: 2,
-            child: Stack(
-              children: [
-                CircularProgressIndicator(
-                  value: _value,
-                  backgroundColor: Colors.red[800],
-                  valueColor: const AlwaysStoppedAnimation<Color>(
-                    Colors.green,
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  height: 35,
-                  width: 35,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff1E1432),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            widget.rating != null
-                                ? (_value! * 100).toStringAsFixed(0)
-                                : "NR",
-                            style: TextThemes.subtitle2
-                                .copyWith(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const Positioned(
-                        right: 5,
-                        top: 4,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "%",
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            child: CircleRating(
+              rating: widget.rating,
+              value: _value,
             ),
           ),
         ],
@@ -159,5 +104,67 @@ class _TheaterComponentState extends State<TheaterComponent> {
 
       return DateFormat('dd/MM/yyyy').format(dateTime);
     }
+  }
+}
+
+class CircleRating extends StatelessWidget {
+  const CircleRating({
+    required this.value,
+    required this.rating,
+    super.key,
+  });
+
+  final double? value;
+  final double? rating;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        CircularProgressIndicator(
+          value: value,
+          backgroundColor: Colors.red[800],
+          valueColor: const AlwaysStoppedAnimation<Color>(
+            Colors.green,
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomRight,
+          height: 35,
+          width: 35,
+          decoration: const BoxDecoration(
+            color: Color(0xff1E1432),
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    rating != null ? (value! * 100).toStringAsFixed(0) : "NR",
+                    style: TextThemes.subtitle2.copyWith(color: Colors.white),
+                  ),
+                ),
+              ),
+              const Positioned(
+                right: 5,
+                top: 4,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "%",
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

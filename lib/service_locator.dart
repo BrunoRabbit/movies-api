@@ -134,7 +134,7 @@ Future<void> setupLocator() async {
 
   // Core
   sl.registerLazySingleton<NetworkStatus>(
-    () => NetworkStatusImpl(sl<Connectivity>()),
+    () => NetworkStatus(sl<Connectivity>()),
   );
 
   // ! Widgets cubit

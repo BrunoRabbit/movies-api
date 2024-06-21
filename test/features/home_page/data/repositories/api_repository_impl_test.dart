@@ -18,10 +18,10 @@ import 'api_repository_impl_test.mocks.dart';
   MockSpec<ApiRepositoryImpl>(),
 ])
 void main() {
-  void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) {
-    MockNetworkStatusImpl networkStatusImpl = MockNetworkStatusImpl();
+  void checkIfDeviceHasInternet(Function body, {bool isHasInternet = true}) async {
+    MockNetworkStatus networkStatusImpl = MockNetworkStatus();
 
-    when(networkStatusImpl.isConnected)
+    when(await networkStatusImpl.isConnected)
         .thenAnswer((_) => isHasInternet ? true : false);
 
     body();

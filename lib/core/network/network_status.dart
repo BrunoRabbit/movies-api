@@ -1,32 +1,19 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-abstract class NetworkStatus {
-  bool get isConnected;
-}
-
-class NetworkStatusImpl implements NetworkStatus {
+class NetworkStatus {
   final Connectivity connectivity;
-  bool _hasConnection = false;
+  Future<bool> isConnected = Future.value(false);
 
-  NetworkStatusImpl(this.connectivity) {
-    init();
+  NetworkStatus(this.connectivity) {
+    isConnected = init();
   }
 
-  init() async {
-    connectivity.onConnectivityChanged.listen(updateConnectionStatus);
-    await connectivity.checkConnectivity().then(updateConnectionStatus);
+  Future<bool> init() async {
+    var initialStatus = await connectivity.checkConnectivity();
+    return updateConnectionStatus(initialStatus);
   }
 
-  void updateConnectionStatus(List<ConnectivityResult>? event) {
-    final hasNoneConnection = event!.contains(ConnectivityResult.none);
-
-    if (hasNoneConnection) {
-      _hasConnection = false;
-    }
-
-    _hasConnection = true;
+  bool updateConnectionStatus(List<ConnectivityResult>? event) {
+    return event!.any((result) => result != ConnectivityResult.none);
   }
-
-  @override
-  bool get isConnected => _hasConnection;
 }

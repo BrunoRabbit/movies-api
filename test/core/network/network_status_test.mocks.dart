@@ -3,6 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i4;
+
 import 'package:connectivity_plus/connectivity_plus.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_api/core/network/network_status.dart' as _i3;
@@ -30,10 +32,10 @@ class _FakeConnectivity_0 extends _i1.SmartFake implements _i2.Connectivity {
         );
 }
 
-/// A class which mocks [NetworkStatusImpl].
+/// A class which mocks [NetworkStatus].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkStatusImpl extends _i1.Mock implements _i3.NetworkStatusImpl {
+class MockNetworkStatus extends _i1.Mock implements _i3.NetworkStatus {
   @override
   _i2.Connectivity get connectivity => (super.noSuchMethod(
         Invocation.getter(#connectivity),
@@ -48,26 +50,39 @@ class MockNetworkStatusImpl extends _i1.Mock implements _i3.NetworkStatusImpl {
       ) as _i2.Connectivity);
 
   @override
-  bool get isConnected => (super.noSuchMethod(
+  _i4.Future<bool> get isConnected => (super.noSuchMethod(
         Invocation.getter(#isConnected),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  bool get isWeb => (super.noSuchMethod(
-        Invocation.getter(#isWeb),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  set isConnected(_i4.Future<bool>? _isConnected) => super.noSuchMethod(
+        Invocation.setter(
+          #isConnected,
+          _isConnected,
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  void updateConnectionStatus(List<_i2.ConnectivityResult>? event) =>
-      super.noSuchMethod(
+  _i4.Future<bool> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  bool updateConnectionStatus(List<_i2.ConnectivityResult>? event) =>
+      (super.noSuchMethod(
         Invocation.method(
           #updateConnectionStatus,
           [event],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 }
