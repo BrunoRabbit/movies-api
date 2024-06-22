@@ -7,10 +7,10 @@ import 'network_status_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<NetworkStatus>()])
 void main() {
-  test('should check the call DataConnectionChecker', () async {
+  test('should check if has internet', () async {
     final networkStatus = MockNetworkStatus();
 
-    when(await networkStatus.isConnected).thenAnswer((_) => true);
+    when(networkStatus.isConnected).thenAnswer((_) => Future.value(true));
 
     final result = await networkStatus.isConnected;
 
@@ -18,5 +18,17 @@ void main() {
     verifyNoMoreInteractions(networkStatus);
 
     expect(result, true);
+  });
+  test('should check if not has internet', () async {
+    final networkStatus = MockNetworkStatus();
+
+    when(networkStatus.isConnected).thenAnswer((_) => Future.value(false));
+
+    final result = await networkStatus.isConnected;
+
+    verify(await networkStatus.isConnected).called(1);
+    verifyNoMoreInteractions(networkStatus);
+
+    expect(result, false);
   });
 }
